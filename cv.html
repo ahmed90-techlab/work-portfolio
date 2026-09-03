@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhaz Ahmed | Business Development & Foreign Trade</title>
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
+            --accent-hover: #0284c7;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header / Brand Section */
+        header {
+            background: var(--card-bg);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .title {
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .summary {
+            color: var(--text-secondary);
+            max-width: 750px;
+            margin: 0 auto 1.5rem auto;
+            font-size: 0.95rem;
+        }
+
+        .contact-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-bar a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact-bar a:hover {
+            text-decoration: underline;
+        }
+
+        .action-btns {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: #0f172a;
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            color: #fff;
+        }
+
+        /* Main Content Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        section {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+
+        section h2 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.4rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Experience Timeline */
+        .job {
+            margin-bottom: 1.5rem;
+        }
+
+        .job:last-child {
+            margin-bottom: 0;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.3rem;
+        }
+
+        .job-title {
+            font-weight: bold;
+            font-size: 1.05rem;
+        }
+
+        .company {
+            color: var(--accent);
+            font-size: 0.95rem;
+        }
+
+        .job-date {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .job-location {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-details {
+            list-style-type: disc;
+            padding-left: 1.2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .job-details li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Tags & Pills */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: #334155;
+            color: #f1f5f9;
+            padding: 0.3rem 0.7rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Sidebar Specifics */
+        .sidebar-item {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .degree {
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .institution {
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        .edu-date {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .job-header {
+                flex-direction: column;
+            }
+            body {
+                padding: 1rem 0.5rem;
+            }
+        }
+
+        /* Print Styling */
+        @media print {
+            body { background: white; color: black; }
+            section, header { background: white; border: none; box-shadow: none; }
+            .btn { display: none; }
+            .title, .company, section h2 { color: #000; }
+            .tag { background: #eee; color: #000; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- HEADER / BRANDING -->
+    <header>
+        <h1>Minhaz Ahmed</h1>
+        <div class="title">Business Development & Foreign Trade</div>
+        <p class="summary">
+            Co-founder of DeepOcean Technology Co.; Experienced in IoT Smart Home/Games industry with expertise in global BD, market research, user experience surveys, data analysis, and content/digital marketing. Proven social skills, global mindset, and multilingual proficiency.
+        </p>
+        
+        <div class="contact-bar">
+            <span>📍 Hangzhou, PRC</span>
+            <span>📞 +86-18758052724</span>
+            <span>✉️ ahmed.broadlink@gmail.com</span>
+            <span>🔗 <a href="https://linkedin.com/in/ahmed3814" target="_blank">linkedin.com/in/ahmed3814</a></span>
+        </div>
+
+        <div class="action-btns">
+            <a href="mailto:ahmed.broadlink@gmail.com" class="btn">Contact Me</a>
+            <button onclick="window.print()" class="btn" style="background:#334155; color:#fff;">Print / Download PDF</button>
+        </div>
+    </header>
+
+    <!-- MAIN BODY GRID -->
+    <div class="grid">
+        
+        <!-- LEFT COLUMN: EXPERIENCE & RESEARCH -->
+        <main>
+            <section>
+                <h2>Work Experience</h2>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Foreign Trade Manager</div>
+                            <div class="company">Hangzhou YUNLV Technology Co.</div>
+                        </div>
+                        <div class="job-date">04/2024 – Present</div>
+                    </div>
+                    <div class="job-location">Hangzhou, China</div>
+                    <ul class="job-details">
+                        <li>Manage international sales & business development; developed new markets in South Asia for mobile gadgets/electronics.</li>
+                        <li>Conduct in-depth research to identify new markets and customers; build strong relationships with clients & distributors.</li>
+                        <li>Oversee export process, ensure compliance/documentation requirements; manage logistics & coordinate with freight forwarders.</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Business Development & Marketing</div>
+                            <div class="company">Hangzhou Zhangteng Technology Co.</div>
+                        </div>
+                        <div class="job-date">09/2020 – 08/2021</div>
+                    </div>
+                    <div class="job-location">Hangzhou, China</div>
+                    <ul class="job-details">
+                        <li>Researched India's Gaming/Entertainment/Crypto market & regulations; managed business registration & payment gateways.</li>
+                        <li>Copywriting & digital content across multiple platforms; drove user engagement/retention through gamification strategies.</li>
+                        <li>Conducted user surveys & data analysis to enhance and optimize user experience (UX); competitive product analysis/SWOT.</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Senior Business Development</div>
+                            <div class="company">BroadLink International</div>
+                        </div>
+                        <div class="job-date">09/2018 – 06/2019</div>
+                    </div>
+                    <div class="job-location">Hangzhou, China</div>
+                    <ul class="job-details">
+                        <li>Supported BD in SEA region to drive IoT Smart Home market; built strategic partnerships with key INDIA clients (Amazon India, Airtel, Croma) and SINGAPORE retailers (Courts, Challenger).</li>
+                        <li>Guided product direction for Singapore + India markets based on B2B partner requirements.</li>
+                        <li>Executed GTM plan, outbound strategy, social-media marketing, and email campaigns.</li>
+                        <li>Coordinated BroadLink's integration into the IFTTT platform and managed CRM customer solutions for India.</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Business Development Internship</div>
+                            <div class="company">Hangzhou Medoxygen Technology Ltd.</div>
+                        </div>
+                        <div class="job-date">03/2018 – 08/2018</div>
+                    </div>
+                    <div class="job-location">Hangzhou, China</div>
+                    <ul class="job-details">
+                        <li>Gained early-stage startup experience in product/entrepreneurial MGT, financing, and patents.</li>
+                        <li>Developed marketing plans & digital content for Tudou and WeChat official accounts.</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Research Analyst</div>
+                            <div class="company">Institute of Apparel Research & Tech, BKMEA</div>
+                        </div>
+                        <div class="job-date">09/2011 – 08/2012</div>
+                    </div>
+                    <div class="job-location">Dhaka, Bangladesh</div>
+                    <ul class="job-details">
+                        <li>Conducted international apparel market research and maintained trade databases.</li>
+                        <li>Coordinated trade delegations to Russia & Japan exhibitions and managed GIZ-funded projects.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>Publication & Conferences</h2>
+                <div class="job">
+                    <div class="job-title">Does Emission Trading Policy Restrain Economy? A County-scale Empirical Assessment from Zhejiang Province of China (2022)</div>
+                    <div class="company"><a href="https://doi.org/10.1016/j.enpol.2022.113138" target="_blank" style="color:var(--accent);">DOI Link (Energy Policy)</a></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- RIGHT COLUMN: SKILLS, EDUCATION, DETAILS -->
+        <aside>
+            <section>
+                <h2>Skills</h2>
+                <div class="tags">
+                    <span class="tag">Business Development</span>
+                    <span class="tag">Foreign Trade</span>
+                    <span class="tag">Marketing & Sales</span>
+                    <span class="tag">Digital Marketing</span>
+                    <span class="tag">Copywriting</span>
+                    <span class="tag">Market Research</span>
+                    <span class="tag">SPSS / R / SmartPLS</span>
+                    <span class="tag">Tableau / BI</span>
+                    <span class="tag">MS Office / Photoshop</span>
+                </div>
+            </section>
+
+            <section>
+                <h2>Education</h2>
+                
+                <div class="sidebar-item">
+                    <div class="degree">PhD in Management</div>
+                    <div class="institution">Zhejiang University</div>
+                    <div class="edu-date">2014 – 2021</div>
+                </div>
+
+                <div class="sidebar-item">
+                    <div class="degree">Master in International Business</div>
+                    <div class="institution">Southeast University</div>
+                    <div class="edu-date">2012 – 2014</div>
+                </div>
+
+                <div class="sidebar-item">
+                    <div class="degree">MBA</div>
+                    <div class="institution">University of Dhaka</div>
+                    <div class="edu-date">2009 – 2011</div>
+                </div>
+
+                <div class="sidebar-item">
+                    <div class="degree">BBA</div>
+                    <div class="institution">University of Dhaka</div>
+                    <div class="edu-date">2005 – 2009</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Languages</h2>
+                <div class="sidebar-item">
+                    <strong>English:</strong> IELTS 8 (Full Professional)
+                </div>
+                <div class="sidebar-item">
+                    <strong>Bengali:</strong> Native / Bilingual
+                </div>
+                <div class="sidebar-item">
+                    <strong>Hindi:</strong> Professional Working
+                </div>
+                <div class="sidebar-item">
+                    <strong>Chinese:</strong> Elementary Proficiency
+                </div>
+            </section>
+
+            <section>
+                <h2>Certifications</h2>
+                <ul style="font-size:0.85rem; color:var(--text-secondary); padding-left:1rem;">
+                    <li>Data Analysis with R Programming (2022)</li>
+                    <li>Qualitative Research with NVivo (2022)</li>
+                    <li>Project Management (IBA, Univ of Dhaka)</li>
+                </ul>
+            </section>
+        </aside>
+
+    </div>
+</div>
+
+</body>
+</html>
