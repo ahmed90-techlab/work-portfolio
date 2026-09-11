@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Draft Proposal – Building Direct Market Connections in Africa | 提案草稿 – 建立非洲直接市场联系</title>
+<style>
+    :root {
+        --navy: #0f2b46;
+        --navy-light: #1c4a75;
+        --accent: #c8102e;
+        --text: #1f2937;
+        --muted: #64748b;
+        --line: #e2e8f0;
+        --bg-soft: #f7f9fc;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: "Segoe UI", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+        background: #eef2f6;
+        color: var(--text);
+        line-height: 1.6;
+        padding: 28px 16px 60px;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .toolbar {
+        max-width: 900px;
+        margin: 0 auto 16px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .lang-toggle {
+        display: inline-flex;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(15,43,70,.06);
+    }
+
+    .lang-toggle button {
+        border: none;
+        background: transparent;
+        padding: 9px 20px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: .4px;
+        color: var(--muted);
+        cursor: pointer;
+        transition: all .2s;
+        font-family: inherit;
+    }
+
+    .lang-toggle button:hover { color: var(--navy); background: var(--bg-soft); }
+
+    .lang-toggle button.active {
+        background: var(--navy);
+        color: #fff;
+    }
+
+    .print-btn {
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--navy);
+        padding: 9px 18px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all .2s;
+        box-shadow: 0 2px 6px rgba(15,43,70,.06);
+        font-family: inherit;
+    }
+
+    .print-btn:hover { background: var(--navy); color: #fff; }
+
+    .page {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(15,43,70,.10);
+        overflow: hidden;
+    }
+
+    .doc-header {
+        background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+        color: #fff;
+        padding: 26px 36px 22px;
+        position: relative;
+    }
+
+    .doc-header::after {
+        content: "";
+        position: absolute;
+        left: 0; bottom: 0;
+        width: 100%; height: 4px;
+        background: var(--accent);
+    }
+
+    .doc-kicker {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #9fc3e8;
+        margin-bottom: 6px;
+    }
+
+    .doc-title {
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: .3px;
+        margin-bottom: 4px;
+    }
+
+    .doc-subtitle {
+        font-size: 14px;
+        color: #cfe0f0;
+        font-weight: 500;
+    }
+
+    .meta-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0;
+        background: var(--bg-soft);
+        border-bottom: 1px solid var(--line);
+    }
+
+    .meta-item {
+        flex: 1 1 50%;
+        padding: 10px 20px;
+        border-right: 1px solid var(--line);
+        font-size: 12.5px;
+    }
+
+    .meta-item:last-child { border-right: none; }
+
+    .meta-label {
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 1px;
+    }
+
+    .meta-value { font-weight: 700; color: var(--navy); }
+
+    .doc-body { padding: 26px 36px 32px; }
+
+    .section { margin-bottom: 22px; }
+
+    .section:last-child { margin-bottom: 0; }
+
+    .section-title {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: var(--navy);
+        padding-bottom: 6px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid var(--line);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .section-title::before {
+        content: "";
+        width: 4px; height: 14px;
+        background: var(--accent);
+        border-radius: 2px;
+    }
+
+    p { font-size: 13.5px; margin-bottom: 6px; }
+
+    ul { list-style: none; }
+
+    ul li {
+        font-size: 13.5px;
+        padding-left: 18px;
+        position: relative;
+        margin-bottom: 5px;
+    }
+
+    ul li::before {
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: 9px;
+        width: 5px; height: 5px;
+        background: var(--accent);
+        border-radius: 50%;
+    }
+
+    ul li strong { color: var(--navy); }
+
+    .why-works ul li {
+        white-space: nowrap;
+        font-size: 12.5px;
+        margin-bottom: 6px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12.5px;
+        margin-top: 4px;
+    }
+
+    thead th {
+        background: var(--navy);
+        color: #fff;
+        text-align: left;
+        padding: 8px 12px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .8px;
+        text-transform: uppercase;
+    }
+
+    tbody td {
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) { background: var(--bg-soft); }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    .step-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px; height: 20px;
+        background: var(--navy);
+        color: #fff;
+        border-radius: 50%;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .num-col { width: 34px; }
+
+    .action-nowrap {
+        white-space: nowrap;
+    }
+
+    .timeline-empty {
+        min-width: 90px;
+        color: #cbd5e1;
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+    }
+
+    .experience-box {
+        background: var(--bg-soft);
+        border-left: 4px solid var(--navy);
+        padding: 14px 18px;
+        border-radius: 0 6px 6px 0;
+        margin-top: 6px;
+    }
+
+    .experience-box p {
+        font-size: 13px;
+        margin-bottom: 8px;
+        color: var(--navy);
+        font-weight: 600;
+    }
+
+    .experience-box ul li {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+
+    .bottom-line-black ul li {
+        color: #000;
+        font-weight: 400;
+        font-size: 14px;
+        margin-bottom: 7px;
+    }
+
+    .bottom-line-black ul li::before {
+        background: #000;
+        width: 6px; height: 6px;
+        top: 9px;
+    }
+
+    .bottom-line-black ul li:last-child {
+        font-weight: 700;
+    }
+
+    [data-lang] { display: none; }
+    [data-lang].visible { display: block; }
+
+    @media print {
+        body { background: #fff; padding: 0; }
+        .toolbar { display: none !important; }
+        .page { box-shadow: none; border-radius: 0; max-width: 100%; }
+        .doc-header { padding: 18px 24px 16px; }
+        .doc-title { font-size: 20px; }
+        .doc-body { padding: 16px 24px 20px; }
+        .section { margin-bottom: 14px; }
+        .section-title { margin-bottom: 7px; }
+        table { font-size: 11px; }
+        thead th { padding: 6px 9px; }
+        tbody td { padding: 6px 9px; }
+        ul li, p { font-size: 12px; }
+        .why-works ul li { font-size: 11px; }
+        @page { size: A4; margin: 12mm; }
+    }
+
+    @media (max-width: 640px) {
+        .doc-header { padding: 20px 20px 18px; }
+        .doc-body { padding: 20px 20px 24px; }
+        .doc-title { font-size: 19px; }
+        .grid-2 { grid-template-columns: 1fr; }
+        .meta-item { flex: 1 1 100%; border-right: none; border-bottom: 1px solid var(--line); }
+        .meta-item:last-child { border-bottom: none; }
+        table { font-size: 11.5px; }
+        thead th, tbody td { padding: 7px 8px; }
+        .why-works ul li { white-space: normal; }
+        .action-nowrap { white-space: normal; }
+    }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+    <div class="lang-toggle">
+        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+        <button id="btn-zh" onclick="setLang('zh')">中文</button>
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨 Print / 打印</button>
+</div>
+
+<div class="page">
+
+    <div class="doc-header">
+        <div data-lang="en" class="visible">
+            <div class="doc-kicker">A Draft Proposal</div>
+            <div class="doc-title">Building Direct Market Connections in Africa</div>
+            <div class="doc-subtitle">A low-cost, high-impact approach to entering the African market</div>
+        </div>
+        <div data-lang="zh">
+            <div class="doc-kicker">提案草稿</div>
+            <div class="doc-title">建立非洲直接市场联系</div>
+            <div class="doc-subtitle">低成本、高回报的非洲市场切入方案</div>
+        </div>
+    </div>
+
+    <div class="meta-bar">
+        <div class="meta-item">
+            <span class="meta-label" data-lang="en">Prepared by</span>
+            <span class="meta-label" data-lang="zh">提交人</span>
+            <span class="meta-value" data-lang="en">International Sales Team</span>
+            <span class="meta-value" data-lang="zh">国际销售团队</span>
+        </div>
+        <div class="meta-item">
+            <span class="meta-label" data-lang="en">Date</span>
+            <span class="meta-label" data-lang="zh">日期</span>
+            <span class="meta-value" data-lang="en">September 11</span>
+            <span class="meta-value" data-lang="zh">9月11日</span>
+        </div>
+    </div>
+
+    <div class="doc-body">
+
+        <!-- ================= EN ================= -->
+        <div data-lang="en" class="visible">
+
+            <div class="section">
+                <div class="section-title">The Problem</div>
+                <ul>
+                    <li>We cannot physically visit Africa to meet potential buyers.</li>
+                    <li>Cold emails and remote research are not enough to build trust.</li>
+                    <li>We need <strong>real feedback</strong> from the African market before investing in a full sales push.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <div class="section-title">The Solution / Core Idea</div>
+                <ul>
+                    <li>Use trusted local friends/contacts in Africa to visit target companies on our behalf.</li>
+                    <li>We collect senior-level contacts, arrange product samples, and set up virtual meetings.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <div class="section-title">My Experience at Broadlink</div>
+                <div class="experience-box">
+                    <p>At my previous company (Smart Home Industry), we faced some challenges:</p>
+                    <ul>
+                        <li>Our smart products were sold in North America / Europe / India.</li>
+                        <li>We needed testing feedback (bugs, connection failures, etc.) from different locations.</li>
+                        <li>I asked my Chinese/foreign friends studying/living in those markets.</li>
+                        <li>I offered them a part-time testing role.</li>
+                        <li>They tested our products &amp; reported issues directly to us.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">How It Works</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="num-col"></th>
+                            <th>Action</th>
+                            <th>Outcome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="step-num">1</span></td>
+                            <td class="action-nowrap">Identify target companies (importers/distributors/building material suppliers)</td>
+                            <td>A focused list of qualified leads</td>
+                        </tr>
+                        <tr>
+                            <td><span class="step-num">2</span></td>
+                            <td>I'll train them on what to say (how to present our products)</td>
+                            <td>Face-to-face introduction of our company</td>
+                        </tr>
+                        <tr>
+                            <td><span class="step-num">3</span></td>
+                            <td>Collect senior manager contacts</td>
+                            <td>Direct access to decision-makers</td>
+                        </tr>
+                        <tr>
+                            <td><span class="step-num">4</span></td>
+                            <td>Send free sample kits</td>
+                            <td>Buyers can evaluate quality first-hand</td>
+                        </tr>
+                        <tr>
+                            <td><span class="step-num">5</span></td>
+                            <td>Arrange Zoom meetings</td>
+                            <td>Company intro, products, OEM/ODM capabilities</td>
+                        </tr>
+                        <tr>
+                            <td><span class="step-num">6</span></td>
+                            <td>Invite them to visit our factory in China</td>
+                            <td>Build long-term partnership</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="grid-2">
+                <div class="section why-works">
+                    <div class="section-title">Why This Works</div>
+                    <ul>
+                        <li><strong>Low Cost</strong> — No overseas trips or research firms</li>
+                        <li><strong>Real Feedback</strong> — Straight from buyers, not reports</li>
+                        <li><strong>Warm Leads</strong> — Personal visits open doors that emails cannot</li>
+                        <li><strong>Relationship-Driven</strong> — Personal connections matter in Africa</li>
+                        <li><strong>Scalable</strong> — Proven in one country, replicable across Africa</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Budget Required</div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Transportation allowance + Lunch</td>
+                                <td style="text-align:right;">200–250 yuan / visit</td>
+                            </tr>
+                            <tr>
+                                <td>Sample kits for qualified buyers (2–3 kits)</td>
+                                <td style="text-align:right;">$50</td>
+                            </tr>
+                            <tr>
+                                <td>Zoom meeting setup (free up to 40 minutes)</td>
+                                <td style="text-align:right;">No cost</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Next Steps</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Step</th>
+                            <th>Owner</th>
+                            <th>Timeline</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Identify target companies</td><td>Sales Team</td><td class="timeline-empty"></td></tr>
+                        <tr><td>Contact &amp; train friends/local reps</td><td>Ahmed 吴丁</td><td class="timeline-empty"></td></tr>
+                        <tr><td>Conduct office visits</td><td>African Friends/Reps</td><td class="timeline-empty"></td></tr>
+                        <tr><td>Send samples &amp; arrange meetings</td><td>Sales Team</td><td class="timeline-empty"></td></tr>
+                        <tr><td>Follow up &amp; convert</td><td>Sales Team</td><td class="timeline-empty"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Bottom Line</div>
+                <div class="bottom-line-black">
+                    <ul>
+                        <li>This is a low-risk, low-cost, high-impact approach to enter the African market</li>
+                        <li>We gain real market feedback</li>
+                        <li>We build direct relationships with local companies</li>
+                        <li>We position ourselves for long-term growth in Africa</li>
+                        <li>We can apply a similar approach to Central Asia, Turkey, and other markets</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= 中文 ================= -->
+        <div data-lang="zh">
+
+            <div class="section">
+                <div class="section-title">问题所在</div>
+                <ul>
+                    <li>我们目前无法亲自前往非洲拜访潜在买家。</li>
+                    <li>仅靠冷邮件和远程调研，无法建立真正的信任。</li>
+                    <li>在全面投入销售资源之前，我们需要来自非洲市场的<strong>真实反馈</strong>。</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <div class="section-title">解决方案 / 核心思路</div>
+                <ul>
+                    <li>借助非洲当地可信的朋友/人脉，代替我们拜访目标公司。</li>
+                    <li>我们收集高管联系方式、安排产品样品，并组织线上会议。</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <div class="section-title">我在博联的经验</div>
+                <div class="experience-box">
+                    <p>在上一家公司（智能家居行业），我们曾面临一些挑战：</p>
+                    <ul>
+                        <li>我们的智能产品销往北美 / 欧洲 / 印度。</li>
+                        <li>我们需要来自不同地区的测试反馈（漏洞、连接故障等）。</li>
+                        <li>我委托在当地留学/生活的中国及外国朋友。</li>
+                        <li>我给他们提供兼职测试的工作。</li>
+                        <li>他们测试我们的产品，并直接向我们反馈问题。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">执行步骤</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="num-col"></th>
+                            <th>行动</th>
+                            <th>成果</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="step-num">1</span></td>
+                            <td class="action-nowrap">确定目标公司（进口商/经销商/建材供应商）</td>
+                            <td>一份精准的合格客户名单</td>
+                        </tr>
+                        <tr>
+                            <td><span class="step-num">2</span></td>
+                            <td>我会培训他们如何表达（如何介绍我们的产品）</td>
+                            <td>面对面介绍我们公司</td>
+                        </tr>
+                        <tr>
+                            <td><span class="step-num">3</span></td>
+                            <td>收集高管联系方式</td>
+                            <td>直接对接决策人</td>
+                        </tr>
+                        <tr>
+                            <td><span class="step-num">4</span></td>
+                            <td>寄送免费样品套装</td>
+                            <td>买家可亲自评估产品品质</td>
+                        </tr>
+                        <tr>
+                            <td><span class="step-num">5</span></td>
+                            <td>安排 Zoom 视频会议</td>
+                            <td>公司介绍、产品、OEM/ODM 能力</td>
+                        </tr>
+                        <tr>
+                            <td><span class="step-num">6</span></td>
+                            <td>邀请其参观中国工厂</td>
+                            <td>建立长期合作关系</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="grid-2">
+                <div class="section why-works">
+                    <div class="section-title">为什么有效</div>
+                    <ul>
+                        <li><strong>低成本</strong> — 无需海外差旅或调研公司</li>
+                        <li><strong>真实反馈</strong> — 直接来自买家，而非报告</li>
+                        <li><strong>优质线索</strong> — 当面拜访，打开邮件打不开的门</li>
+                        <li><strong>关系导向</strong> — 非洲市场重视人际连接</li>
+                        <li><strong>可复制</strong> — 一国跑通，可推广至全非洲</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">所需预算</div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>交通补贴 + 午餐</td>
+                                <td style="text-align:right;">200–250 元 / 次</td>
+                            </tr>
+                            <tr>
+                                <td>给合格买家的样品套装（2–3 套）</td>
+                                <td style="text-align:right;">$50</td>
+                            </tr>
+                            <tr>
+                                <td>Zoom 会议设置（40 分钟内免费）</td>
+                                <td style="text-align:right;">无成本</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">下一步行动</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>行动</th>
+                            <th>负责人</th>
+                            <th>时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>确定目标公司</td><td>销售团队</td><td class="timeline-empty"></td></tr>
+                        <tr><td>联系并培训朋友/当地代表</td><td>Ahmed 吴丁</td><td class="timeline-empty"></td></tr>
+                        <tr><td>执行办公室拜访</td><td>非洲朋友/代表</td><td class="timeline-empty"></td></tr>
+                        <tr><td>寄送样品并安排会议</td><td>销售团队</td><td class="timeline-empty"></td></tr>
+                        <tr><td>跟进并转化</td><td>销售团队</td><td class="timeline-empty"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <div class="section-title">总结</div>
+                <div class="bottom-line-black">
+                    <ul>
+                        <li>这是一条低风险、低成本、高回报的非洲市场切入路径</li>
+                        <li>我们获得真实的市场反馈</li>
+                        <li>我们与当地公司建立直接联系</li>
+                        <li>我们为在非洲的长期增长奠定基础</li>
+                        <li>我们可将这一模式复制到中亚、土耳其及其他市场</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function setLang(lang) {
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+
+        document.querySelectorAll('[data-lang]').forEach(function (el) {
+            if (el.getAttribute('data-lang') === lang) {
+                el.classList.add('visible');
+            } else {
+                el.classList.remove('visible');
+            }
+        });
+
+        document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+
+        try { localStorage.setItem('proposal-lang', lang); } catch (e) {}
+    }
+
+    (function () {
+        var saved = 'en';
+        try { saved = localStorage.getItem('proposal-lang') || 'en'; } catch (e) {}
+        setLang(saved);
+    })();
+</script>
+
+</body>
+</html>
