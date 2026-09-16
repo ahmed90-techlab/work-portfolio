@@ -1,0 +1,2969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; form-action 'none'; base-uri 'self';">
+<title>Waltive Canton Fair Knowledge Base 2026 — Global Edition</title>
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('waltive_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+})();
+</script>
+<style>
+:root {
+  --primary: #16A34A; --primary-light: #22C55E; --primary-dark: #15803D;
+  --bg: #FFFFFF; --bg-surface: #F8FAFC; --bg-surface-2: #F1F5F9; --bg-surface-3: #E2E8F0;
+  --text: #0F172A; --text-secondary: #475569; --text-muted: #64748B;
+  --border: #E2E8F0; --border-light: #CBD5E1;
+  --warning: #D97706; --warning-bg: #FEF3C7;
+  --success: #059669; --info: #2563EB; --info-bg: #DBEAFE;
+  --critical: #DC2626; --critical-bg: #FEE2E2;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06); --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --sidebar-width: 300px; --header-height: 64px;
+}
+[data-theme="dark"] {
+  --primary: #2DA937; --primary-light: #3CB847; --primary-dark: #23852C;
+  --bg: #0F172A; --bg-surface: #1E293B; --bg-surface-2: #273449; --bg-surface-3: #334155;
+  --text: #F1F5F9; --text-secondary: #94A3B8; --text-muted: #94A3B8;
+  --border: #334155; --border-light: #475569;
+  --warning: #F59E0B; --warning-bg: rgba(245,158,11,0.1);
+  --success: #10B981; --info: #3B82F6; --info-bg: rgba(59,130,246,0.1);
+  --critical: #EF4444; --critical-bg: rgba(239,68,68,0.1);
+  --shadow: 0 1px 3px rgba(0,0,0,0.3); --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.65; transition: background 0.2s, color 0.2s; }
+
+.skip-link { position: absolute; top: -100px; left: 8px; background: var(--primary); color: #fff; padding: 8px 16px; border-radius: 0 0 8px 8px; z-index: 1000; text-decoration: none; font-weight: 600; font-size: 13px; }
+.skip-link:focus { top: 0; outline: 3px solid var(--primary-dark); outline-offset: 2px; }
+
+button:focus-visible, a:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
+button:focus:not(:focus-visible) { outline: none; }
+
+.header { height: var(--header-height); background: var(--bg-surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 20px; position: fixed; top: 0; left: 0; right: 0; z-index: 300; gap: 14px; box-shadow: var(--shadow); }
+.menu-btn { display: none; width: 38px; height: 38px; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 18px; cursor: pointer; align-items: center; justify-content: center; flex-shrink: 0; }
+.menu-btn:hover { background: var(--bg-surface-2); }
+.logo { font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: 1.2px; white-space: nowrap; flex-shrink: 0; }
+.logo span { color: #F97316; }
+
+.search-bar { flex: 1; max-width: 560px; margin: 0 auto; position: relative; }
+.search-bar::before { content: "🔍"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; opacity: 0.55; pointer-events: none; }
+.search-bar input { width: 100%; height: 40px; background: var(--bg-surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 0 36px 0 36px; color: var(--text); font-size: 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+.search-bar input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(45,169,55,0.15); }
+.search-clear { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 16px; padding: 6px 8px; border-radius: 4px; display: none; line-height: 1; }
+.search-clear:hover { background: var(--bg-surface-3); color: var(--text); }
+.search-clear.show { display: block; }
+.search-results { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-md); max-height: 400px; overflow-y: auto; display: none; z-index: 400; }
+.search-results.active { display: block; }
+.search-result-item { display: block; width: 100%; text-align: left; padding: 10px 14px; border: none; border-bottom: 1px solid var(--border); background: transparent; cursor: pointer; font: inherit; font-size: 13px; color: inherit; }
+.search-result-item:last-child { border-bottom: none; }
+.search-result-item:hover, .search-result-item.focused { background: var(--bg-surface-2); }
+.search-result-title { font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.search-result-path { font-size: 11px; color: var(--text-muted); }
+.search-empty { padding: 20px; text-align: center; color: var(--text-muted); font-size: 13px; }
+mark.search-highlight { background: #FDE68A; color: #78350F; padding: 1px 3px; border-radius: 3px; }
+[data-theme="dark"] mark.search-highlight { background: rgba(245,158,11,0.35); color: #FEF3C7; }
+
+.header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.icon-btn { width: 38px; height: 38px; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; padding: 0; }
+.icon-btn:hover { background: var(--bg-surface-2); border-color: var(--border-light); }
+.header-right { font-size: 12px; color: var(--text-muted); white-space: nowrap; padding-left: 8px; border-left: 1px solid var(--border); }
+
+.layout { display: flex; padding-top: var(--header-height); min-height: 100vh; }
+
+.sidebar-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 150; display: none; opacity: 0; transition: opacity 0.25s; border: none; padding: 0; cursor: pointer; }
+.sidebar-backdrop.show { display: block; opacity: 1; }
+
+.sidebar { width: var(--sidebar-width); background: var(--bg-surface); border-right: 1px solid var(--border); position: fixed; top: var(--header-height); bottom: 0; left: 0; overflow-y: auto; padding: 14px 0 80px; z-index: 200; transition: transform 0.3s ease; }
+.nav-group { margin-bottom: 2px; }
+.nav-group-title { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 18px; font-family: inherit; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.7px; cursor: pointer; user-select: none; background: transparent; border: none; text-align: left; transition: color 0.15s, background 0.15s; }
+.nav-group-title:hover { color: var(--text); background: var(--bg-surface-2); }
+.nav-group-title .arrow { transition: transform 0.2s; font-size: 10px; pointer-events: none; }
+.nav-group.collapsed .arrow { transform: rotate(-90deg); }
+.nav-group-items { overflow: hidden; transition: max-height 0.25s ease; }
+.nav-item { display: block; width: 100%; padding: 8px 18px 8px 32px; font-family: inherit; font-size: 13.5px; color: var(--text-secondary); cursor: pointer; border: none; border-left: 3px solid transparent; background: transparent; text-align: left; transition: color 0.12s, background 0.12s, border-color 0.12s; line-height: 1.4; }
+.nav-item:hover { color: var(--text); background: var(--bg-surface-2); }
+.nav-item.active { color: var(--primary); background: rgba(45,169,55,0.08); border-left-color: var(--primary); font-weight: 600; }
+[data-theme="dark"] .nav-item.active { background: rgba(45,169,55,0.12); }
+
+.main-content { flex: 1; margin-left: var(--sidebar-width); padding: 28px 48px 80px; max-width: 1100px; width: 100%; }
+.breadcrumb { font-size: 12.5px; color: var(--text-muted); margin-bottom: 18px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.breadcrumb button { background: transparent; border: none; color: var(--text-secondary); cursor: pointer; font: inherit; padding: 2px 4px; border-radius: 4px; }
+.breadcrumb button:hover { color: var(--primary); text-decoration: underline; }
+.breadcrumb .sep { opacity: 0.5; }
+.breadcrumb .current { color: var(--text); font-weight: 500; }
+
+.page-section { display: none; animation: fadeIn 0.2s ease; }
+.page-section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+h1 { font-size: 28px; margin-bottom: 8px; font-weight: 700; line-height: 1.25; color: var(--text); }
+.page-subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+h2 { font-size: 20px; margin: 34px 0 14px; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 8px; font-weight: 700; scroll-margin-top: 80px; }
+h3 { font-size: 16px; margin: 22px 0 10px; color: var(--primary-dark); font-weight: 700; scroll-margin-top: 80px; }
+[data-theme="dark"] h3 { color: var(--primary-light); }
+h4 { font-size: 14px; margin: 16px 0 8px; font-weight: 700; }
+p { margin-bottom: 12px; color: var(--text-secondary); }
+strong { color: var(--text); font-weight: 600; }
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+ul, ol { margin: 10px 0 16px 22px; color: var(--text-secondary); }
+li { margin-bottom: 6px; }
+li strong { color: var(--text); }
+
+.table-wrap { overflow-x: auto; margin: 14px 0 22px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-surface); }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 560px; }
+th { background: var(--bg-surface-2); text-align: left; padding: 11px 14px; font-weight: 700; color: var(--text); border-bottom: 2px solid var(--border); white-space: nowrap; position: sticky; top: 0; z-index: 5; }
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--bg-surface-2); }
+
+.callout { padding: 14px 18px; border-radius: 8px; margin: 16px 0; border-left: 4px solid; background: var(--bg-surface-2); font-size: 14px; }
+.callout.primary { border-color: var(--primary); background: rgba(22,163,74,0.06); }
+.callout.warning { border-color: var(--warning); background: var(--warning-bg); }
+.callout.info { border-color: var(--info); background: var(--info-bg); }
+.callout.critical { border-color: var(--critical); background: var(--critical-bg); }
+.callout strong { color: var(--text); }
+[data-theme="dark"] .callout.primary { background: rgba(45,169,55,0.08); }
+
+.key-number { display: inline-block; background: var(--primary); color: #fff; padding: 1px 8px; border-radius: 5px; font-weight: 700; font-size: 13.5px; font-family: 'SF Mono', Monaco, Consolas, monospace; }
+.key-number.amber { background: var(--warning); }
+.key-number.blue { background: var(--info); }
+
+.faq-item { margin-bottom: 10px; background: var(--bg-surface); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+.faq-question { display: block; width: 100%; padding: 13px 44px 13px 18px; font-family: inherit; font-size: 14px; font-weight: 600; color: var(--text); background: var(--bg-surface-2); cursor: pointer; position: relative; user-select: none; border: none; text-align: left; transition: background 0.15s; }
+.faq-question:hover { background: var(--bg-surface-3); }
+.faq-question::after { content: "▾"; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-size: 12px; color: var(--text-muted); transition: transform 0.2s; pointer-events: none; }
+.faq-item.open .faq-question::after { transform: translateY(-50%) rotate(180deg); }
+.faq-answer { padding: 0 18px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 14px; color: var(--text-secondary); }
+.faq-item.open .faq-answer { padding: 14px 18px; }
+
+.script-block { position: relative; background: var(--bg-surface-2); border: 1px solid var(--border); border-left: 4px solid var(--primary); border-radius: 8px; padding: 16px 18px; margin: 14px 0; font-size: 14px; line-height: 1.7; }
+.script-block p:last-child { margin-bottom: 0; }
+.script-block .copy-btn { position: absolute; top: 8px; right: 8px; background: var(--bg-surface); border: 1px solid var(--border); color: var(--text-secondary); font-size: 11px; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.15s; font-family: inherit; }
+.script-block .copy-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+.script-block .copy-btn.copied { background: var(--success); color: #fff; border-color: var(--success); }
+
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--text); color: var(--bg); padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; box-shadow: var(--shadow-md); opacity: 0; transition: all 0.25s; z-index: 1000; pointer-events: none; }
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+.back-to-top { position: fixed; bottom: 24px; right: 24px; width: 44px; height: 44px; background: var(--primary); color: #fff; border: none; border-radius: 50%; font-size: 18px; cursor: pointer; box-shadow: var(--shadow-md); display: none; align-items: center; justify-content: center; z-index: 250; transition: all 0.2s; padding: 0; }
+.back-to-top.show { display: flex; }
+.back-to-top:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+.on-this-page { background: var(--bg-surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; margin: 0 0 20px; font-size: 13px; }
+.on-this-page summary { cursor: pointer; font-weight: 700; color: var(--text); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; list-style: none; }
+.on-this-page summary::-webkit-details-marker { display: none; }
+.on-this-page summary::before { content: "▸ "; color: var(--primary); }
+.on-this-page[open] summary::before { content: "▾ "; }
+.on-this-page ul { margin: 10px 0 0 18px; list-style: none; }
+.on-this-page li { margin-bottom: 4px; }
+.on-this-page a { font-size: 12.5px; color: var(--text-secondary); }
+.on-this-page a:hover { color: var(--primary); }
+
+.badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
+.badge.green { background: rgba(22,163,74,0.12); color: var(--primary-dark); }
+.badge.amber { background: var(--warning-bg); color: var(--warning); }
+.badge.blue { background: var(--info-bg); color: var(--info); }
+.badge.red { background: var(--critical-bg); color: var(--critical); }
+[data-theme="dark"] .badge.green { background: rgba(45,169,55,0.15); color: var(--primary-light); }
+
+.footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); text-align: center; }
+
+@media (max-width: 960px) {
+  .menu-btn { display: flex; }
+  .sidebar { transform: translateX(-100%); box-shadow: 4px 0 24px rgba(0,0,0,0.15); width: 300px; }
+  .sidebar.open { transform: translateX(0); }
+  .main-content { margin-left: 0; padding: 24px 18px 80px; }
+  .header-right { display: none; }
+  .logo { font-size: 17px; }
+  .search-bar { max-width: none; }
+}
+@media (max-width: 600px) {
+  h1 { font-size: 22px; }
+  h2 { font-size: 17px; }
+  h3 { font-size: 15px; }
+  .main-content { padding: 20px 14px 80px; }
+  .header { padding: 0 12px; gap: 8px; }
+  .search-bar input { font-size: 13px; }
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+@media print {
+  .header, .sidebar, .sidebar-backdrop, .back-to-top, .toast, .search-results, .copy-btn, .menu-btn, .header-actions, .skip-link { display: none !important; }
+  .main-content { margin-left: 0 !important; padding: 0 !important; max-width: none !important; }
+  .page-section { display: block !important; page-break-after: always; }
+  .page-section:not(.active) { display: none !important; }
+  body { background: #fff !important; color: #000 !important; font-size: 11pt; }
+  .table-wrap { border: 1px solid #ccc; }
+  th { background: #f0f0f0 !important; color: #000 !important; }
+  td { color: #000 !important; }
+  .callout { border: 1px solid #ccc; background: #f9f9f9 !important; }
+  .faq-answer { max-height: none !important; padding: 14px 18px !important; }
+  .faq-item { break-inside: avoid; }
+  a { color: #000; text-decoration: none; }
+  .script-block { border: 1px solid #ccc; background: #f9f9f9 !important; }
+  mark.search-highlight { background: #fff !important; color: #000 !important; }
+}
+</style>
+</head>
+<body>
+
+<a href="#mainContent" class="skip-link">Skip to main content</a>
+
+<header class="header">
+  <button type="button" class="menu-btn" id="menuBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+  <div class="logo" role="img" aria-label="Waltive — Canton Fair 2026">WALT<span>IVE</span></div>
+  <div class="search-bar" role="search">
+    <input type="text" id="searchInput" placeholder="Search country, HS code, duty, certification, FAQ..." autocomplete="off" aria-label="Search knowledge base" aria-autocomplete="list" aria-controls="searchResults" aria-expanded="false">
+    <button type="button" class="search-clear" id="searchClear" aria-label="Clear search">✕</button>
+    <div class="search-results" id="searchResults" role="listbox" aria-label="Search results"></div>
+  </div>
+  <div class="header-actions">
+    <button type="button" class="icon-btn" id="themeToggle" aria-pressed="false" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+    <button type="button" class="icon-btn" id="printBtn" title="Print or save as PDF" aria-label="Print page">🖨</button>
+  </div>
+  <div class="header-right" aria-hidden="true">Canton Fair 2026 — Global Edition</div>
+</header>
+
+<button type="button" class="sidebar-backdrop" id="sidebarBackdrop" aria-label="Close navigation" tabindex="-1"></button>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+
+    <div class="nav-group" data-group="quick-start">
+      <button type="button" class="nav-group-title" aria-expanded="true" aria-controls="grp-quick-start"><span aria-hidden="true">🚀</span> Quick Start <span class="arrow" aria-hidden="true">▾</span></button>
+      <div class="nav-group-items" id="grp-quick-start">
+        <button type="button" class="nav-item" data-page="fair-overview" data-crumb="Quick Start › Fair Overview">Fair Overview &amp; Daily Prep</button>
+        <button type="button" class="nav-item" data-page="pitch-60sec" data-crumb="Quick Start › 60-Second Pitch">60-Second Pitch Scripts</button>
+        <button type="button" class="nav-item" data-page="quick-reference" data-crumb="Quick Start › Quick Reference">Quick Reference: Key Numbers</button>
+      </div>
+    </div>
+
+    <div class="nav-group" data-group="product">
+      <button type="button" class="nav-group-title" aria-expanded="true" aria-controls="grp-product"><span aria-hidden="true">📦</span> Product Knowledge <span class="arrow" aria-hidden="true">▾</span></button>
+      <div class="nav-group-items" id="grp-product">
+        <button type="button" class="nav-item" data-page="spc-vs-wpc" data-crumb="Product › SPC vs WPC">SPC vs WPC: Core Differences</button>
+        <button type="button" class="nav-item" data-page="tech-specs" data-crumb="Product › Technical Specs">Technical Specifications</button>
+        <button type="button" class="nav-item" data-page="certifications" data-crumb="Product › Certifications">Certifications &amp; Compliance</button>
+        <button type="button" class="nav-item" data-page="installation" data-crumb="Product › Application & Installation">Application &amp; Installation</button>
+        <button type="button" class="nav-item" data-page="customization" data-crumb="Product › Customization & MOQ">Customization &amp; MOQ</button>
+      </div>
+    </div>
+
+    <div class="nav-group" data-group="pricing">
+      <button type="button" class="nav-group-title" aria-expanded="true" aria-controls="grp-pricing"><span aria-hidden="true">💰</span> Pricing &amp; Commercial <span class="arrow" aria-hidden="true">▾</span></button>
+      <div class="nav-group-items" id="grp-pricing">
+        <button type="button" class="nav-item" data-page="pricing-strategy" data-crumb="Pricing › Strategy by Region">Pricing Strategy by Region</button>
+        <button type="button" class="nav-item" data-page="pricing-qa" data-crumb="Pricing › Q&A Scripts">Pricing Q&amp;A Scripts</button>
+        <button type="button" class="nav-item" data-page="moq-terms" data-crumb="Pricing › MOQ, Payment & Terms">MOQ, Payment &amp; Terms</button>
+        <button type="button" class="nav-item" data-page="logistics" data-crumb="Pricing › Logistics & Packaging">Logistics &amp; Packaging</button>
+      </div>
+    </div>
+
+    <div class="nav-group" data-group="market">
+      <button type="button" class="nav-group-title" aria-expanded="true" aria-controls="grp-market"><span aria-hidden="true">🌍</span> Market Intelligence <span class="arrow" aria-hidden="true">▾</span></button>
+      <div class="nav-group-items" id="grp-market">
+        <button type="button" class="nav-item" data-page="global-market" data-crumb="Market › Global Market Overview">Global Market Overview</button>
+        <button type="button" class="nav-item" data-page="global-tariff" data-crumb="Market › Global Tariffs">Global Tariffs &amp; Duty Reference</button>
+        <button type="button" class="nav-item" data-page="global-certification" data-crumb="Market › Global Certifications">Certification by Market</button>
+        <button type="button" class="nav-item" data-page="fta-guide" data-crumb="Market › FTA & Trade Agreements">FTA &amp; Trade Agreements</button>
+        <button type="button" class="nav-item" data-page="global-competitors" data-crumb="Market › Global Competitors">Global Competitive Landscape</button>
+        <button type="button" class="nav-item" data-page="china-overview" data-crumb="Market › China Overview">China Market Overview</button>
+        <button type="button" class="nav-item" data-page="china-manufacturers" data-crumb="Market › Top Manufacturers">Top Manufacturers by Region</button>
+        <button type="button" class="nav-item" data-page="china-price-compare" data-crumb="Market › Price Comparison">Regional Price Comparison</button>
+        <button type="button" class="nav-item" data-page="china-quality" data-crumb="Market › Quality Issues">Quality Issues &amp; Standards</button>
+        <button type="button" class="nav-item" data-page="india-market" data-crumb="Market › India Landscape">India Market Landscape</button>
+      </div>
+    </div>
+
+    <div class="nav-group" data-group="huating">
+      <button type="button" class="nav-group-title" aria-expanded="true" aria-controls="grp-huating"><span aria-hidden="true">🏆</span> Huating Positioning <span class="arrow" aria-hidden="true">▾</span></button>
+      <div class="nav-group-items" id="grp-huating">
+        <button type="button" class="nav-item" data-page="huating-benchmark" data-crumb="Huating › Price Benchmark">Price Benchmark vs Market</button>
+        <button type="button" class="nav-item" data-page="huating-swot" data-crumb="Huating › SWOT Analysis">SWOT Analysis</button>
+        <button type="button" class="nav-item" data-page="huating-usp" data-crumb="Huating › Core USPs">Core USPs &amp; Differentiators</button>
+        <button type="button" class="nav-item" data-page="huating-capacity" data-crumb="Huating › Certifications & Capacity">Certifications &amp; Capacity</button>
+      </div>
+    </div>
+
+    <div class="nav-group" data-group="playbook">
+      <button type="button" class="nav-group-title" aria-expanded="true" aria-controls="grp-playbook"><span aria-hidden="true">🎯</span> Sales Playbook <span class="arrow" aria-hidden="true">▾</span></button>
+      <div class="nav-group-items" id="grp-playbook">
+        <button type="button" class="nav-item" data-page="playbook-faq" data-crumb="Playbook › Customer FAQ">Customer FAQ</button>
+        <button type="button" class="nav-item" data-page="playbook-objections" data-crumb="Playbook › Competitor Objections">Competitor Objection Scripts</button>
+        <button type="button" class="nav-item" data-page="playbook-buyer-roles" data-crumb="Playbook › Buyer Role Playbook">Buyer Role Playbook</button>
+        <button type="button" class="nav-item" data-page="global-sales-scripts" data-crumb="Playbook › Global Sales Scripts">Global Market Sales Scripts</button>
+        <button type="button" class="nav-item" data-page="playbook-after-sales" data-crumb="Playbook › After-Sales & Relationship">After-Sales &amp; Relationship</button>
+      </div>
+    </div>
+
+    <div class="nav-group" data-group="tools">
+      <button type="button" class="nav-group-title" aria-expanded="true" aria-controls="grp-tools"><span aria-hidden="true">🔧</span> Tools &amp; Resources <span class="arrow" aria-hidden="true">▾</span></button>
+      <div class="nav-group-items" id="grp-tools">
+        <button type="button" class="nav-item" data-page="tools-search-guide" data-crumb="Tools › Search Guide">Global Search Guide</button>
+        <button type="button" class="nav-item" data-page="tools-print-guide" data-crumb="Tools › Print & Export">Print &amp; Export Guide</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content" id="mainContent" tabindex="-1">
+    <div class="breadcrumb" id="breadcrumb"></div>
+
+    <!-- ============================================================ -->
+    <!-- QUICK START -->
+    <!-- ============================================================ -->
+
+    <section class="page-section" id="fair-overview">
+      <h1>Fair Overview &amp; Daily Prep</h1>
+      <p class="page-subtitle">Your daily operating rhythm at Canton Fair 2026.</p>
+
+      <details class="on-this-page" open>
+        <summary>On this page</summary>
+        <ul>
+          <li><a href="#prep-before">Before the Fair Opens</a></li>
+          <li><a href="#prep-during">During the Fair</a></li>
+          <li><a href="#prep-after">After Each Meeting</a></li>
+          <li><a href="#prep-regions">Buyer Regions This Year</a></li>
+        </ul>
+      </details>
+
+      <h2 id="prep-before">Before the Fair Opens (Daily)</h2>
+      <ul>
+        <li>Review <strong>Quick Reference</strong> — memorize key FOB prices, MOQ, HS codes, and duty rates by region.</li>
+        <li>Charge phone and power bank. Download offline copies of this knowledge base.</li>
+        <li>Ensure sample boards are clean, labeled, organized by product family (SPC flat, SPC fluted, WPC fluted, mouldings).</li>
+        <li>Test your pitch: 30-second opening, 60-second product demo, 90-second value story.</li>
+      </ul>
+
+      <h2 id="prep-during">During the Fair</h2>
+      <ul>
+        <li><strong>Listen first.</strong> Ask "Where will this panel be installed?" and "Which country are you importing into?" before quoting.</li>
+        <li><strong>Show, don't tell.</strong> Hand over samples. Let buyers feel the weight and edge quality.</li>
+        <li><strong>Anchor to value.</strong> PUR lamination, certifications, complete system — not just price.</li>
+        <li><strong>Capture contact details</strong> — name, company, country, product interest, quantity estimate.</li>
+      </ul>
+
+      <h2 id="prep-after">After Each Meeting</h2>
+      <ul>
+        <li>Log the buyer's details within 15 minutes.</li>
+        <li>Send a WhatsApp follow-up with the specific product catalog and price list discussed.</li>
+        <li>Note objections — check <strong>Competitor Objection Scripts</strong> for better responses next time.</li>
+      </ul>
+
+      <h2 id="prep-regions">Buyer Regions This Year (2026 Canton Fair Data)</h2>
+      <p>Based on Phase 1 and Phase 2 buyer demographics, prepare most heavily for these regions:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Region</th><th scope="col">Buyer Profile</th><th scope="col">Preparation Priority</th></tr></thead>
+          <tbody>
+            <tr><td><strong>SE Asia</strong> (Vietnam, Thailand, Philippines, Indonesia, Malaysia)</td><td>Distributors, contractors — ACFTA-savvy</td><td>🔴 Highest — fastest growing, FTA benefits</td></tr>
+            <tr><td><strong>Middle East</strong> (Saudi, UAE, Qatar)</td><td>Contractors, project buyers — need SASO</td><td>🔴 High — premium pricing, SASO knowledge critical</td></tr>
+            <tr><td><strong>South America</strong> (Brazil, Mexico, Chile)</td><td>Importers — high tariff markets</td><td>🟠 Medium — growing +29.8% transaction growth</td></tr>
+            <tr><td><strong>Africa</strong> (Nigeria, Kenya, South Africa)</td><td>Distributors — price-sensitive</td><td>🟠 Medium — growing, volume-driven</td></tr>
+            <tr><td><strong>EU / UK</strong></td><td>Distributors, project buyers — compliance-focused</td><td>🟠 Medium — CBAM, UKCA, EUDR</td></tr>
+            <tr><td><strong>USA</strong></td><td>Importers — Section 301 conscious</td><td>🟡 Lower — declining -15.5%</td></tr>
+            <tr><td><strong>Central Asia</strong> (Russia, Uzbekistan, Kazakhstan)</td><td>Distributors — Belt &amp; Road</td><td>🟡 Lower — growing +14.9% from Belt &amp; Road</td></tr>
+            <tr><td><strong>India</strong></td><td>Importers, contractors</td><td>🔴 High — SPC market booming, no AD duty</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout primary">
+        <strong>Strategic insight:</strong> Traditional Western markets (US, Western Europe) declined 15.5% in transactions. Emerging markets (South America, Africa, Central Asia) grew +29.8%. Belt &amp; Road countries increased share by +14.9%. Prioritize preparation for SE Asia, Middle East, India, and emerging markets.
+      </div>
+
+      <h2>60 Questions to Study</h2>
+      <p>Split into four categories. Review one each morning.</p>
+
+      <h3>Day 1 — Product &amp; Technical</h3>
+      <ol>
+        <li>Difference between SPC and WPC in raw material composition?</li>
+        <li>Density of SPC vs WPC boards?</li>
+        <li>Thermal expansion coefficient comparison?</li>
+        <li>Fire rating and test report availability?</li>
+        <li>Formaldehyde emission level?</li>
+        <li>Glue type used for lamination — PUR or cold?</li>
+        <li>Standard PVC film thickness?</li>
+        <li>PET film and synchronized embossed grain availability?</li>
+        <li>MOQ for flat panels, fluted panels, mouldings?</li>
+        <li>Production lead time?</li>
+        <li>Monthly production capacity?</li>
+        <li>On-time delivery rate?</li>
+        <li>Product warranty?</li>
+        <li>Weight per square meter for 6mm and 8mm boards?</li>
+        <li>CBM per carton for main products?</li>
+      </ol>
+
+      <h3>Day 2 — Pricing &amp; Commercial (Global)</h3>
+      <ol start="16">
+        <li>FOB price for H8150F, H8600F, GS1358?</li>
+        <li>Price difference between PVC and PET film?</li>
+        <li>Full container order discounts?</li>
+        <li>Payment terms?</li>
+        <li>Mixed container orders supported?</li>
+        <li>HS code for finished panels vs bare substrate?</li>
+        <li>Total duty in USA (Section 301)?</li>
+        <li>Total duty in EU (incl. CBAM)?</li>
+        <li>Total duty in Australia (ChAFTA 0%)?</li>
+        <li>Total duty in Saudi Arabia (GCC)?</li>
+        <li>Total duty in Brazil (60–90% total tax)?</li>
+        <li>Anti-dumping status by country?</li>
+        <li>Sample availability and lead time?</li>
+        <li>Are samples free?</li>
+      </ol>
+
+      <h3>Day 3 — Competitor &amp; Market (Global)</h3>
+      <ol start="30">
+        <li>How do we compare with Shandong suppliers?</li>
+        <li>How do we compare with Foshan suppliers?</li>
+        <li>How do we compare with Turkey suppliers?</li>
+        <li>How do we compare with Vietnam suppliers?</li>
+        <li>How do we compare with Indian suppliers?</li>
+        <li>Our advantage over other Zhejiang suppliers?</li>
+        <li>Do we have exterior wall panels?</li>
+        <li>Custom profile capability and mould cost?</li>
+        <li>Custom color MOQ?</li>
+        <li>Stock colors available?</li>
+        <li>Packing method — master carton or pallet?</li>
+        <li>Carton sizes for main products?</li>
+        <li>CBM per carton?</li>
+        <li>Meters per 20ft and 40HQ container?</li>
+        <li>Transit time to USA, EU, Australia, Gulf?</li>
+        <li>FTA origin documentation?</li>
+      </ol>
+
+      <h3>Day 4 — Application, Certification &amp; After-Sales</h3>
+      <ol start="46">
+        <li>Installation method for SPC boards?</li>
+        <li>Installation accessories provided?</li>
+        <li>Panels suitable for ceilings / bathrooms / kitchens?</li>
+        <li>Recommended spacing for grille panels?</li>
+        <li>Installation instructions or videos?</li>
+        <li>US certifications — ASTM E84, Prop 65?</li>
+        <li>EU certifications — CE/CPR, REACH, EUDR?</li>
+        <li>UK UKCA marking?</li>
+        <li>Canada CSA/ULC?</li>
+        <li>Australia AS/NZS 3837?</li>
+        <li>Gulf SASO/SABER?</li>
+        <li>Russia EAC/GOST?</li>
+        <li>After-sales policy?</li>
+        <li>Quality problem handling?</li>
+        <li>Marketing support?</li>
+        <li>Exclusive distributor possibility?</li>
+        <li>Mould fee refund policy?</li>
+        <li>Container loading photos?</li>
+        <li>Third-party inspection accepted?</li>
+        <li>OEM / ODM private label?</li>
+      </ol>
+    </section>
+
+    <section class="page-section" id="pitch-60sec">
+      <h1>60-Second Pitch Scripts</h1>
+      <p class="page-subtitle">Four openings for different buyer types. Memorize one, adapt the others.</p>
+
+      <h2>Universal Opening</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Welcome. We're Waltive — 15 years OEM/ODM, 11 production lines, 500,000 m² monthly capacity. We supply a complete SPC wall system: flat panels, fluted grilles, and every matching moulding — all in the same color, from one factory.</p>
+        <p>Our key advantage is <strong>PUR hot melt lamination as standard</strong> — panels don't peel or bubble even in 40°C+ heat. We're French A+ and B-s1,d0 certified.</p>
+        <p>What project are you sourcing for? India? Middle East? SE Asia? I can show you the right product in 2 minutes."</p>
+      </div>
+
+      <h2>When Buyer Asks About SPC</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"SPC is our flagship. Stone-polymer core, zero wood content — 100% waterproof, dimensionally stable in hot climates, fire-rated to B-s1,d0.</p>
+        <p>Our flat panels range from 6mm to 8mm, 140mm to 1120mm wide, 2900mm long. We use controlled filler ratio — max 65% — so boards don't warp in summer. Every panel is PUR-laminated with 0.12mm PVC film, and we can upgrade to PET for premium projects.</p>
+        <p>Price starts at <strong>$4.70/m² FOB Ningbo</strong>. Want to see a sample?"</p>
+      </div>
+
+      <h2>When Buyer Prefers WPC</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"WPC is great for dry feature walls. But let me ask — is this going in a bathroom, kitchen, or high-humidity area?</p>
+        <p>If yes, SPC wins. SPC is 100% waterproof; WPC is water-resistant only. SPC is 30–50% lighter, so you get more meters per container — lower freight cost. And SPC holds its shape in 40°C+ heat.</p>
+        <p>Our WPC fluted panels start at <strong>$0.51/m</strong> — very competitive. Our SPC fluted panels start at <strong>$0.82/m</strong>. Use SPC for wet/hot areas, WPC for dry feature walls. Same color, one supplier."</p>
+      </div>
+
+      <h2>When Buyer Asks "How Much?"</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Great — I'll give you a clear price in one minute. But first, let me quote the <em>right</em> product, because our pricing depends on four things: size, surface film, order volume, and destination.</p>
+        <p>Ballpark: SPC flat panels <strong>$4.70–5.24/m²</strong>; SPC fluted <strong>$0.82–1.21/m</strong>; WPC fluted <strong>$0.51–0.64/m</strong>; mouldings <strong>$0.24–1.95/m</strong>.</p>
+        <p>Landing cost varies by country — we can calculate exact for your market with HS code and duty.</p>
+        <p>What's your project and destination country? Let me show you the right product."</p>
+      </div>
+    </section>
+
+    <section class="page-section" id="quick-reference">
+      <h1>Quick Reference: Key Numbers</h1>
+      <p class="page-subtitle">The only numbers you need to memorize for Canton Fair.</p>
+
+      <h2>💰 Pricing at a Glance</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Product</th><th scope="col">FOB Ningbo</th><th scope="col">MOQ</th></tr></thead>
+          <tbody>
+            <tr><td>SPC flat wall panel (8mm, PVC)</td><td><span class="key-number">$4.70–5.24/m²</span></td><td>500 m²/color</td></tr>
+            <tr><td>SPC flat wall panel (6mm, PVC)</td><td><span class="key-number">$3.89–4.29/m²</span></td><td>500 m²/color</td></tr>
+            <tr><td>SPC fluted panel (140–160mm)</td><td><span class="key-number">$0.82–1.21/m</span></td><td>1500 m/color</td></tr>
+            <tr><td>WPC fluted panel (120–150mm)</td><td><span class="key-number">$0.51–0.64/m</span></td><td>2000 m/color</td></tr>
+            <tr><td>SPC decorative mouldings</td><td><span class="key-number">$0.24–1.95/m</span></td><td>1500 m/color</td></tr>
+            <tr><td>Flat Bamboo WPC (8mm, 0.7 density)</td><td><span class="key-number">$5.30/m²</span></td><td>500 m²/color</td></tr>
+            <tr><td>Flat Bamboo WPC (8mm, 0.85 crushproof)</td><td><span class="key-number">$6.07/m²</span></td><td>500 m²/color</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>🏭 Capacity &amp; Delivery</h2>
+      <ul>
+        <li>Production lines: <span class="key-number">11</span></li>
+        <li>Monthly capacity: <span class="key-number">500,000 m²</span></li>
+        <li>Standard lead time: <span class="key-number">25 days</span></li>
+        <li>On-time delivery: <span class="key-number">100%</span></li>
+        <li>Warranty: <span class="key-number">8 years</span></li>
+        <li>Export countries: <span class="key-number">28</span></li>
+      </ul>
+
+      <h2>🌍 Global Import Quick Facts</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Market</th><th scope="col">HS Code</th><th scope="col">Total Duty / Tax</th><th scope="col">Key Note</th></tr></thead>
+          <tbody>
+            <tr><td>🇮🇳 India</td><td>3925 90 90</td><td><span class="key-number amber">~31% CIF</span></td><td>No AD duty</td></tr>
+            <tr><td>🇺🇸 USA</td><td>3925.90</td><td><span class="key-number amber">~42.8% landed</span></td><td>Section 301 +25%</td></tr>
+            <tr><td>🇪🇺 EU</td><td>3925.90</td><td><span class="key-number amber">6.5% + VAT</span></td><td>CBAM applies</td></tr>
+            <tr><td>🇬🇧 UK</td><td>3925.90</td><td><span class="key-number amber">6% + 20% VAT</span></td><td>UKCA needed</td></tr>
+            <tr><td>🇦🇺 Australia</td><td>3925.90</td><td><span class="badge green">0% + 10% GST</span></td><td>ChAFTA 0%</td></tr>
+            <tr><td>🇸🇦 Saudi Arabia</td><td>3925.90</td><td><span class="key-number amber">5% + 15% VAT</span></td><td>SASO/SABER required</td></tr>
+            <tr><td>🇦🇪 UAE</td><td>3925.90</td><td><span class="key-number amber">5% + 5% VAT</span></td><td>GCC tariff</td></tr>
+            <tr><td>🇧🇷 Brazil</td><td>3925.90</td><td><span class="badge red">60–90% total</span></td><td>Very high tax burden</td></tr>
+            <tr><td>🇻🇳 Vietnam / 🇹🇭 Thailand</td><td>3925.90</td><td><span class="badge green">0% + VAT</span></td><td>ACFTA 0%</td></tr>
+            <tr><td>🇷🇺 Russia</td><td>3925.90</td><td><span class="key-number amber">6.5–20% + VAT</span></td><td>EAC/GOST needed</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>🏆 Certifications to Mention</h2>
+      <ul>
+        <li><strong>EU:</strong> CE/CPR, French A+, EN 13501-1 B-s1,d0, REACH, EN 15102</li>
+        <li><strong>UK:</strong> UKCA (in progress), UK Trademark Waltive (UK00004338988)</li>
+        <li><strong>USA:</strong> ASTM E84 (in progress), Prop 65 (confirm)</li>
+        <li><strong>Australia:</strong> AS/NZS 3837 (in progress)</li>
+        <li><strong>Gulf:</strong> SASO/SABER (in progress)</li>
+        <li><strong>Global:</strong> ISO 9001:2015, SGS third-party verified</li>
+      </ul>
+
+      <h2>📦 Port of Loading &amp; Transit Times</h2>
+      <ul>
+        <li><strong>Port of loading:</strong> Ningbo, China (Shanghai optional)</li>
+        <li><strong>Transit times from Ningbo:</strong> SE Asia 7–12 days · Australia 18–22 days · Middle East 18–25 days · USA West 14–18 days · USA East 28–35 days · EU 30–35 days · Brazil 35–40 days · Africa 25–35 days</li>
+        <li><strong>Payment terms:</strong> 30% T/T deposit, balance against B/L copy</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- PRODUCT KNOWLEDGE -->
+    <!-- ============================================================ -->
+
+    <section class="page-section" id="spc-vs-wpc">
+      <h1>SPC vs WPC: Core Differences</h1>
+      <p class="page-subtitle">Everything you need to explain why SPC is our flagship — and when WPC is still the right choice.</p>
+
+      <div class="callout primary">
+        <strong>Key takeaway:</strong> SPC is better for wet areas, hot climates, and commercial projects. WPC is competitive on price for dry feature walls. We supply both — one supplier, one color, one container.
+      </div>
+
+      <h2>Raw Material Composition</h2>
+      <p><strong>SPC (Stone Plastic Composite):</strong> Calcium carbonate (stone powder) + PVC resin + stabilizers. <strong>Zero wood content.</strong></p>
+      <p><strong>WPC (Wood Plastic Composite):</strong> Wood fiber/flour + PVC resin + additives. Contains wood fiber.</p>
+
+      <h2>Density Comparison</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Product</th><th scope="col">Thickness</th><th scope="col">Weight</th></tr></thead>
+          <tbody>
+            <tr><td>SPC board</td><td>6mm</td><td>4.9–5.4 kg/m²</td></tr>
+            <tr><td>SPC board</td><td>8mm</td><td>5.8–7.0 kg/m²</td></tr>
+            <tr><td>WPC board (standard density 0.7)</td><td>8mm</td><td>6.2 kg/m²</td></tr>
+            <tr><td>WPC board (crushproof density 0.85)</td><td>8mm</td><td>6.8 kg/m²</td></tr>
+            <tr><td>SPC fluted panel</td><td>8–15mm</td><td>0.6–1.1 kg/m</td></tr>
+            <tr><td>WPC fluted panel</td><td>8–10mm</td><td>1.0–1.5 kg/m</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Thermal Expansion</h2>
+      <p>SPC has a <strong>much lower thermal expansion coefficient</strong> than WPC — roughly 30–50% lower. SPC boards are far more stable in hot climates (40°C+). WPC can warp under sustained heat.</p>
+
+      <h2>Water &amp; Moisture Resistance</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Property</th><th scope="col">SPC</th><th scope="col">WPC</th></tr></thead>
+          <tbody>
+            <tr><td>Waterproof</td><td>✅ 100%</td><td>⚠️ Water-resistant only</td></tr>
+            <tr><td>Swelling in water</td><td>None</td><td>Can swell over time</td></tr>
+            <tr><td>Mold / mildew risk</td><td>None</td><td>Some risk in humid areas</td></tr>
+            <tr><td>Termite / insect risk</td><td>None (no wood)</td><td>Some risk (wood fiber)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Fire Performance</h2>
+      <p>Both tested to <strong>EN 13501-1 Class B-s1,d0</strong>: ultra-low smoke (s1) and zero burning droplets (d0).</p>
+
+      <h2>Advocating SPC Over WPC — Script</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"I understand — WPC fluted panels do look great for dry feature walls. But let me ask: <strong>where is this panel going to be installed?</strong></p>
+        <p>If it's a hotel bathroom, kitchen backsplash, basement, or coastal project — SPC wins. Four reasons:</p>
+        <p><strong>1. Weight &amp; shipping cost.</strong> WPC grille panels are 1.2–1.5 kg/m; SPC is 0.6–1.1 kg/m. That's 30–50% lighter — more meters per container, lower freight.</p>
+        <p><strong>2. Moisture &amp; warping.</strong> WPC contains wood fiber and can swell or grow mold. SPC has zero wood — dimensionally stable forever.</p>
+        <p><strong>3. Installation speed.</strong> Same click system, but SPC's lighter weight and rigidity install faster — especially on ceilings.</p>
+        <p><strong>4. Fire performance.</strong> Both are B-s1,d0, but SPC's stone core adds inherent fire resistance.</p>
+        <p><strong>Recommendation:</strong> SPC for wet/hot zones, WPC for dry feature walls. Same color, one container."</p>
+      </div>
+
+      <h2>When to Use Which</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Application</th><th scope="col">Recommendation</th><th scope="col">Reason</th></tr></thead>
+          <tbody>
+            <tr><td>Bathroom / shower wall</td><td><span class="badge green">SPC</span></td><td>100% waterproof</td></tr>
+            <tr><td>Kitchen backsplash</td><td><span class="badge green">SPC</span></td><td>Moisture + heat resistant</td></tr>
+            <tr><td>Hotel corridor / commercial</td><td><span class="badge green">SPC</span></td><td>Impact-resistant, fire-rated</td></tr>
+            <tr><td>Coastal / high-humidity</td><td><span class="badge green">SPC</span></td><td>No swelling, no mold</td></tr>
+            <tr><td>Living room TV wall (dry)</td><td><span class="badge blue">Either</span></td><td>WPC for deeper grain look</td></tr>
+            <tr><td>Ceiling (any room)</td><td><span class="badge green">SPC</span></td><td>Lighter, easier install</td></tr>
+            <tr><td>Exterior cladding</td><td><span class="badge amber">Custom</span></td><td>Modified formula with UV stabilizer</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="page-section" id="tech-specs">
+      <h1>Technical Specifications</h1>
+      <p class="page-subtitle">All technical Q&amp;A for Canton Fair — answer confidently with numbers.</p>
+
+      <h2>Raw Material &amp; Density</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q1. What is the difference between SPC and WPC in raw material composition?</button>
+        <div class="faq-answer">SPC = calcium carbonate + PVC resin + stabilizers, zero wood content. WPC = wood fiber + PVC resin + additives. SPC is denser, 100% waterproof, more dimensionally stable.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q2. What is the density of your SPC and WPC boards?</button>
+        <div class="faq-answer">SPC 6mm: 4.9–5.4 kg/m²; SPC 8mm: 5.8–7.0 kg/m². WPC 8mm standard (0.7): 6.2 kg/m²; WPC 8mm crushproof (0.85): 6.8 kg/m².</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q3. What is the thermal expansion coefficient of SPC vs WPC?</button>
+        <div class="faq-answer">SPC has 30–50% lower thermal expansion than WPC. Far more stable in 40°C+ heat.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q4. What is the fire rating of your panels?</button>
+        <div class="faq-answer">EN 13501-1 Class B-s1,d0 — very low smoke, zero burning droplets. Full SGS test reports available.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q5. What is the formaldehyde emission level?</button>
+        <div class="faq-answer">Non-detect (&lt;0.05 mg/L) per EN 12460-5. French A+ certified, TVOC &lt;100 μg/m³.</div>
+      </div>
+
+      <h2>Lamination &amp; Surface</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q6. What glue do you use for lamination?</button>
+        <div class="faq-answer">PUR hot melt lamination as standard. Permanent chemical bond. No peeling or bubbling.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q7. What is the thickness of your standard PVC film?</button>
+        <div class="faq-answer">Genuine 0.12mm PVC film with scratch-resistant top coat.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q8. Can you do PET film lamination?</button>
+        <div class="faq-answer">Yes — custom upgrade. Synchronized embossed grain available for premium wood textures.</div>
+      </div>
+
+      <h2>Order &amp; Production</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q9. What is the MOQ?</button>
+        <div class="faq-answer">Flat panels: 500 m²/color. Fluted panels: 1,500–2,000 m/color. Mouldings: 1,500 m/color. Mixed containers supported.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q10. What is your production lead time?</button>
+        <div class="faq-answer">25 days after deposit and color confirmation. Faster for stock colors.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q11. What is your monthly production capacity?</button>
+        <div class="faq-answer">11 automated production lines, 500,000 m²/month.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q12. What is your on-time delivery rate?</button>
+        <div class="faq-answer">100% on-time delivery record.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q13. What is the warranty on your panels?</button>
+        <div class="faq-answer">8-year product warranty covering manufacturing defects.</div>
+      </div>
+
+      <h2>Weight &amp; Dimensions</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q14. What is the weight per square meter for your 6mm and 8mm boards?</button>
+        <div class="faq-answer">6mm SPC: 4.9–5.4 kg/m². 8mm SPC: 5.8–7.0 kg/m². WPC 8mm: 6.2–6.8 kg/m² depending on density.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Q15. What is the CBM per carton for your main products?</button>
+        <div class="faq-answer">H8150F: 0.045 CBM. H8300F: 0.054. H8600F: 0.072. GS1358: 0.056. Full data in quotation sheet.</div>
+      </div>
+    </section>
+
+    <section class="page-section" id="certifications">
+      <h1>Certifications &amp; Compliance</h1>
+      <p class="page-subtitle">Every certification, standard, and test number you need at the fair.</p>
+
+      <div class="callout warning">
+        <strong>Important:</strong> Certification requirements vary by destination country. French A+ and EN 13501-1 are EU standards — they do not automatically satisfy US, UK, Gulf, Australian, or Canadian requirements. See the <strong>Certification by Market</strong> page for full global matrix.
+      </div>
+
+      <h2>Our Full Certification Suite</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Certification</th><th scope="col">Standard</th><th scope="col">Quantified Data</th></tr></thead>
+          <tbody>
+            <tr><td>French A+ Indoor Air Quality</td><td>—</td><td>TVOC &lt; 100 μg/m³; Formaldehyde &lt; 0.05 mg/L (non-detect, EN 12460-5)</td></tr>
+            <tr><td>EU Fire Rating</td><td>EN 13501-1 Class B-s1,d0</td><td>s1 = ultra-low smoke; d0 = zero burning droplets</td></tr>
+            <tr><td>Heavy Metal Migration</td><td>EN 15102</td><td>Lead, cadmium, etc. — not detected</td></tr>
+            <tr><td>CE Marking</td><td>EU Construction Products Regulation</td><td>Full Declaration of Performance (DoP)</td></tr>
+            <tr><td>UK Trademark Waltive</td><td>UKIPO No. UK00004338988</td><td>Class 19 (Building materials) + Class 20 (Furniture)</td></tr>
+            <tr><td>Quality Management</td><td>ISO 9001:2015</td><td>Full IQC/IPQC/FQC/OQC system</td></tr>
+            <tr><td>Third-Party Testing</td><td>SGS</td><td>All EN standards verified</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Certification Q&amp;A Scripts</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What certifications do you have?</button>
+        <div class="faq-answer">CE certified. EN 13501-1 Class B-s1,d0 fire rating. French A+ indoor air quality. Heavy metal migration to EN 15102. All SGS verified. For US, UK, Gulf, and Australian certifications, see the Certification by Market page.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Can you send me the French A+ certificate?</button>
+        <div class="faq-answer">Yes — I'll email it today along with the SGS test report.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Do you have CE marking?</button>
+        <div class="faq-answer">Yes — full CE marking under EU Construction Products Regulation, with Declaration of Performance.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is your UK trademark number?</button>
+        <div class="faq-answer">UK00004338988 — dual-class registration (Class 19 + Class 20) for the Waltive brand.</div>
+      </div>
+    </section>
+
+    <section class="page-section" id="installation">
+      <h1>Application &amp; Installation</h1>
+      <p class="page-subtitle">Answer every installation question with confidence.</p>
+
+      <h2>Installation Method</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is the installation method for your SPC boards?</button>
+        <div class="faq-answer">Tongue-and-groove (or click) system combined with glue for permanent bond. Aluminium alloy accessories available for clean finish. Dry-fit installation reduces labor time by 50%+.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Do you provide installation accessories?</button>
+        <div class="faq-answer">Yes — complete matching range: corner mouldings, edge banding, flat mouldings, skirting, ceiling lines, window casings. All same color and finish.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Can your panels be installed on ceilings?</button>
+        <div class="faq-answer">Yes. Lightweight and rigid — ideal for ceilings. Dedicated ceiling lines (D50, D80, D804) available.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Can your panels be used in bathrooms?</button>
+        <div class="faq-answer">Yes. SPC is 100% waterproof — ideal for showers and wet areas. Won't swell, warp, or grow mold.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Can your panels be used in kitchens?</button>
+        <div class="faq-answer">Yes. SPC is perfect for kitchen backsplashes — moisture-resistant, heat-resistant, easy to clean, B-s1,d0 fire-rated.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Do you provide installation instructions or videos?</button>
+        <div class="faq-answer">Yes — detailed manuals and video guides. Team available for technical support during installation.</div>
+      </div>
+
+      <h2>Installation Tips</h2>
+      <ul>
+        <li><strong>Surface prep:</strong> Clean, dry, level wall.</li>
+        <li><strong>Acclimatization:</strong> 24 hours in the room before install.</li>
+        <li><strong>Expansion gaps:</strong> 3–5mm at top and bottom.</li>
+        <li><strong>Adhesive:</strong> PUR or MS polymer for permanent bond.</li>
+        <li><strong>Cutting:</strong> Fine-tooth blade or oscillating tool.</li>
+      </ul>
+    </section>
+
+    <section class="page-section" id="customization">
+      <h1>Customization &amp; MOQ</h1>
+      <p class="page-subtitle">What we can customize, and what it costs.</p>
+
+      <h2>Customization Capabilities</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Feature</th><th scope="col">Capability</th><th scope="col">MOQ / Cost</th></tr></thead>
+          <tbody>
+            <tr><td>Custom colors</td><td>Match any RAL or film color</td><td>500 m² (flat) / 1500–2000 m (fluted)</td></tr>
+            <tr><td>Custom profiles</td><td>New extrusion moulds</td><td>Mould cost varies; refundable at volume</td></tr>
+            <tr><td>Custom widths</td><td>14mm to 120mm</td><td>Standard</td></tr>
+            <tr><td>Custom lengths</td><td>Up to 2900mm standard</td><td>Available</td></tr>
+            <tr><td>PET film upgrade</td><td>Synchronized embossed grain</td><td>+15–25% on unit price</td></tr>
+            <tr><td>Private label / OEM</td><td>Your brand on packaging</td><td>Volume-based</td></tr>
+            <tr><td>Exterior formula</td><td>Modified with UV stabilizer</td><td>Custom quote</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>MOQ by Product Type</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Product</th><th scope="col">MOQ</th></tr></thead>
+          <tbody>
+            <tr><td>SPC / WPC flat panels</td><td>500 m²/color</td></tr>
+            <tr><td>SPC fluted panels</td><td>1,500 m/color</td></tr>
+            <tr><td>WPC fluted panels</td><td>2,000 m/color</td></tr>
+            <tr><td>Decorative mouldings</td><td>1,500 m/color</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Custom Profile Process</h2>
+      <ol>
+        <li>Buyer provides drawing or sample</li>
+        <li>We quote mould cost</li>
+        <li>Buyer approves and pays mould fee</li>
+        <li>Mould production: 15–25 days</li>
+        <li>Sample approval</li>
+        <li>Mass production</li>
+        <li>Mould fee refunded once cumulative volume reaches agreed threshold</li>
+      </ol>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- PRICING & COMMERCIAL -->
+    <!-- ============================================================ -->
+
+    <section class="page-section" id="pricing-strategy">
+      <h1>Pricing Strategy by Region</h1>
+      <p class="page-subtitle">How to position our pricing against Shandong, Zhejiang, and Foshan competitors.</p>
+
+      <h2>Pricing vs. Chinese Competitor Regions</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Product Tier</th><th scope="col">Positioning</th><th scope="col">Rationale</th></tr></thead>
+          <tbody>
+            <tr><td>Entry tier: Thin WPC fluted panels</td><td>10–15% above Shandong bottom; 10% below Zhejiang avg</td><td>Loss leader — get buyers to stop, then sell full system</td></tr>
+            <tr><td>Mid tier: Standard SPC flat panels</td><td>In line with Zhejiang avg</td><td>Justify with PUR lamination, tropical formula, color consistency</td></tr>
+            <tr><td>Premium tier: Crushproof WPC / PET</td><td>5–10% above Zhejiang avg</td><td>High-performance upgrade most Shandong factories cannot offer</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Pricing Adaptation by Export Destination</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Market</th><th scope="col">Strategy</th></tr></thead>
+          <tbody>
+            <tr><td><strong>India</strong></td><td>Lead with fluted panel price hook, promote bundle value, offer bare substrate option. 3–5% container discount for full 40HQ.</td></tr>
+            <tr><td><strong>Middle East</strong></td><td>Lead with PET lamination, crushproof WPC, full system. 10–15% premium possible.</td></tr>
+            <tr><td><strong>SE Asia</strong></td><td>Standard pricing, emphasize ACFTA 0% duty and fast lead times.</td></tr>
+            <tr><td><strong>Australia</strong></td><td>Lead with ChAFTA 0% duty — huge landing cost advantage.</td></tr>
+            <tr><td><strong>USA</strong></td><td>Section 301 focus — offer documentation support, focus on premium differentiation.</td></tr>
+            <tr><td><strong>EU</strong></td><td>CBAM readiness, French A+ premium, EUDR for WPC.</td></tr>
+            <tr><td><strong>Africa</strong></td><td>Basic entry SKU priced competitively. Volume focus.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Key Pricing Tactics</h2>
+      <ol>
+        <li><strong>Bundle pricing:</strong> 5–8% discount for full system orders (flat + fluted + mouldings).</li>
+        <li><strong>Grade tiering:</strong> Two clear grades (0.7 vs 0.85 density WPC).</li>
+        <li><strong>Bare substrate option:</strong> 25–30% below finished panels.</li>
+      </ol>
+    </section>
+
+    <section class="page-section" id="pricing-qa">
+      <h1>Pricing Q&amp;A Scripts</h1>
+      <p class="page-subtitle">Ready answers for every pricing question — without being defensive.</p>
+
+      <h2>Specific Product Pricing</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is your FOB price for H8150F, H8600F, GS1358?</button>
+        <div class="faq-answer">H8150F (150mm SPC): ~$0.87/m. H8600F (600mm SPC): $4.70/m². GS1358 (135×8.5mm SPC fluted): $0.88/m. Exact quote at fair based on volume.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is the price difference between PVC film and PET film?</button>
+        <div class="faq-answer">PET is a custom upgrade, typically +15–25% on unit price. Better scratch resistance, anti-fingerprint, premium matte finish.</div>
+      </div>
+
+      <h2>Discounts &amp; Terms</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Do you offer discounts for full container orders?</button>
+        <div class="faq-answer">Yes — 3–5% discount for full 40HQ container orders. Mixed containers also qualify for volume-based pricing.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is your payment term?</button>
+        <div class="faq-answer">30% T/T deposit in advance, balance against B/L copy. Flexible terms for long-term partners.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Can you do mixed container orders?</button>
+        <div class="faq-answer">Yes — fully supported across SPC, WPC, fluted panels, and mouldings.</div>
+      </div>
+
+      <h2>HS Codes &amp; Duties (Global)</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is the HS code for finished panels?</button>
+        <div class="faq-answer">3925 90 90 (global baseline for plastic builders' ware). Some countries require 8- or 10-digit national code — we provide full documentation.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">How much is the total duty in my country?</button>
+        <div class="faq-answer">Depends on destination. India ~31%, USA ~42.8% (with Section 301), EU 6.5% + VAT, Australia 0% (ChAFTA), Saudi 5% + 15% VAT, Brazil 60–90%. See the Global Tariffs page for full breakdown.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Is there anti-dumping duty on your products?</button>
+        <div class="faq-answer">No current AD duty on SPC or WPC wall panels from China into India, EU, or most markets. AD measures exist for decorative paper laminates and solid acrylic sheets — different product categories.</div>
+      </div>
+
+      <h2>Sampling</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Can you provide a sample for testing?</button>
+        <div class="faq-answer">Yes — standard samples free of charge. Buyer covers courier. Custom samples incur small fee, refundable against future orders.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is the sample lead time?</button>
+        <div class="faq-answer">Standard: free, 3–7 days. Custom: small fee, 7–10 days. Shipped via DHL/FedEx at buyer's account.</div>
+      </div>
+
+      <h2>Handling "How Much Is This?" — Master Script</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Great — I'll give you a clear price in just one minute. But first, let me quote the <strong>right product</strong>, because pricing depends on four things:</p>
+        <p><strong>1. Size</strong> — width and thickness<br>
+        <strong>2. Surface film</strong> — standard 0.12mm PVC or premium PET<br>
+        <strong>3. Order volume</strong> — flat panels 500 m²/color; fluted 1500–2000 m/color<br>
+        <strong>4. Destination country</strong> — duty and tax vary; we can calculate landed cost for your market</p>
+        <p><strong>Benchmark range (FOB Ningbo):</strong><br>
+        • SPC flat wall panels (8mm, PVC): <strong>$4.70–5.24/m²</strong><br>
+        • SPC fluted panels (140–160mm): <strong>$0.82–1.21/m</strong><br>
+        • WPC fluted panels (120–150mm): <strong>$0.51–0.64/m</strong><br>
+        • SPC decorative lines: <strong>$0.24–1.95/m</strong></p>
+        <p><strong>Why our prices are competitive:</strong> PUR hot melt lamination on every panel. 11 production lines, 500,000 m² monthly. French A+ and B-s1,d0 certified. Complete matching system. 8-year warranty.</p>
+        <p>What's your project and destination? Let me show you the right product."</p>
+      </div>
+    </section>
+
+    <section class="page-section" id="moq-terms">
+      <h1>MOQ, Payment &amp; Terms</h1>
+      <p class="page-subtitle">All commercial terms in one place.</p>
+
+      <h2>MOQ Summary</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Product</th><th scope="col">MOQ</th></tr></thead>
+          <tbody>
+            <tr><td>SPC / WPC flat panels</td><td>500 m²/color</td></tr>
+            <tr><td>SPC fluted panels</td><td>1,500 m/color</td></tr>
+            <tr><td>WPC fluted panels</td><td>2,000 m/color</td></tr>
+            <tr><td>Decorative mouldings</td><td>1,500 m/color</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Payment Terms</h2>
+      <ul>
+        <li><strong>Standard:</strong> 30% T/T deposit, balance against B/L copy</li>
+        <li><strong>Long-term partners:</strong> Flexible terms negotiable</li>
+        <li><strong>Currency:</strong> USD (default), EUR available</li>
+      </ul>
+
+      <h2>Price Validity &amp; Adjustments</h2>
+      <ul>
+        <li>Quotation valid for <strong>30 days</strong></li>
+        <li>Price based on USD/RMB exchange rate at quotation date. If rate changes ±3%, price may adjust</li>
+        <li>FCL with one port. LCL or multi-port converts to EXW</li>
+        <li>Shipment quantity: 5% more or less allowed</li>
+      </ul>
+
+      <h2>Order Process</h2>
+      <ol>
+        <li>Buyer confirms product, quantity, color</li>
+        <li>We issue Proforma Invoice</li>
+        <li>Buyer pays 30% deposit</li>
+        <li>Production begins (25 days)</li>
+        <li>QC inspection + container loading photos</li>
+        <li>Balance payment against B/L copy</li>
+        <li>Shipping documents released</li>
+      </ol>
+    </section>
+
+    <section class="page-section" id="logistics">
+      <h1>Logistics &amp; Packaging</h1>
+      <p class="page-subtitle">Everything about packing, loading, and shipping.</p>
+
+      <h2>Packing Method</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Product</th><th scope="col">Packing</th></tr></thead>
+          <tbody>
+            <tr><td>SPC flat panels</td><td>Master carton</td></tr>
+            <tr><td>SPC fluted panels</td><td>Master carton</td></tr>
+            <tr><td>WPC flat panels</td><td>Pallet</td></tr>
+            <tr><td>WPC fluted panels</td><td>Master carton</td></tr>
+            <tr><td>Mouldings</td><td>Master carton</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Carton Sizes — Main Products</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Item</th><th scope="col">Carton Size (mm)</th><th scope="col">Pcs/Ctn</th><th scope="col">CBM/Ctn</th></tr></thead>
+          <tbody>
+            <tr><td>H8150F (150mm SPC)</td><td>2920 × 170 × 90</td><td>10</td><td>0.045</td></tr>
+            <tr><td>H8300F (300mm SPC)</td><td>2920 × 310 × 60</td><td>6</td><td>0.054</td></tr>
+            <tr><td>H8600F (600mm SPC)</td><td>2920 × 620 × 40</td><td>4</td><td>0.072</td></tr>
+            <tr><td>GS1358 (SPC fluted)</td><td>2920 × 154 × 124</td><td>12</td><td>0.056</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Container Loading</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Container</th><th scope="col">Usable CBM</th><th scope="col">Example (H8600F)</th></tr></thead>
+          <tbody>
+            <tr><td>20ft</td><td>~25–28 CBM</td><td>~4,000 meters</td></tr>
+            <tr><td>40HQ</td><td>~65–68 CBM</td><td>~10,000 meters</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Transit Times from Ningbo (Approx.)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Destination</th><th scope="col">Port</th><th scope="col">Transit Time</th></tr></thead>
+          <tbody>
+            <tr><td>SE Asia</td><td>Ho Chi Minh / Bangkok / Port Klang</td><td>7–12 days</td></tr>
+            <tr><td>Australia</td><td>Sydney / Melbourne</td><td>18–22 days</td></tr>
+            <tr><td>Middle East</td><td>Jeddah / Dubai / Dammam</td><td>18–25 days</td></tr>
+            <tr><td>USA West Coast</td><td>Los Angeles / Long Beach</td><td>14–18 days</td></tr>
+            <tr><td>USA East Coast</td><td>New York / Savannah</td><td>28–35 days</td></tr>
+            <tr><td>EU</td><td>Rotterdam / Hamburg</td><td>30–35 days</td></tr>
+            <tr><td>UK</td><td>Felixstowe / Southampton</td><td>32–38 days</td></tr>
+            <tr><td>India</td><td>Nhava Sheva / Mundra</td><td>18–22 days</td></tr>
+            <tr><td>Brazil</td><td>Santos</td><td>35–40 days</td></tr>
+            <tr><td>Africa</td><td>Lagos / Mombasa / Durban</td><td>25–35 days</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Shipping Terms</h2>
+      <ul>
+        <li><strong>Port of loading:</strong> Ningbo, China (Shanghai optional)</li>
+        <li><strong>Incoterms:</strong> FOB Ningbo (standard), CIF, EXW</li>
+        <li><strong>Shipment quantity:</strong> 5% more or less allowed</li>
+        <li><strong>Documentation:</strong> Commercial invoice, packing list, B/L, CO, test reports</li>
+      </ul>
+
+      <h2>Logistics Q&amp;A</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is the packing method?</button>
+        <div class="faq-answer">Master carton for panels; pallet for WPC flat boards. Custom packaging available.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">How many meters per 20ft / 40HQ?</button>
+        <div class="faq-answer">20ft: ~25–28 CBM; 40HQ: ~65–68 CBM. Example: H8600F 40HQ fits ~10,000 meters. Exact depends on product mix.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Do you support FOB, CIF, or EXW?</button>
+        <div class="faq-answer">Yes — FOB Ningbo standard, CIF, and EXW all available.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is the shipment lead time?</button>
+        <div class="faq-answer">25 days production after deposit + transit time to your destination port.</div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- MARKET INTELLIGENCE — GLOBAL SECTIONS -->
+    <!-- ============================================================ -->
+
+    <section class="page-section" id="global-market">
+      <h1>Global Market Overview</h1>
+      <p class="page-subtitle">Market size, growth drivers, and top import markets for SPC/WPC wall panels.</p>
+
+      <details class="on-this-page" open>
+        <summary>On this page</summary>
+        <ul>
+          <li><a href="#gm-size">Market Size &amp; Growth</a></li>
+          <li><a href="#gm-top-markets">Top 20 Import Markets</a></li>
+          <li><a href="#gm-trends">Global Trends &amp; Demand Drivers</a></li>
+          <li><a href="#gm-canton">Canton Fair Buyer Demographics 2026</a></li>
+          <li><a href="#gm-importers">Leading Importer Companies by Country</a></li>
+        </ul>
+      </details>
+
+      <h2 id="gm-size">Market Size &amp; Growth</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Segment</th><th scope="col">2025 Value</th><th scope="col">CAGR (2025–2030)</th><th scope="col">2030 Projected</th></tr></thead>
+          <tbody>
+            <tr><td>SPC wall panels (global)</td><td>USD 1.73B</td><td>10.3%</td><td>USD 2.83B</td></tr>
+            <tr><td>WPC wall panels (global)</td><td>USD 2.1B</td><td>8.7%</td><td>USD 3.2B</td></tr>
+            <tr><td>Combined SPC + WPC decorative panels</td><td>USD 3.83B</td><td>9.4%</td><td>USD 6.03B</td></tr>
+            <tr><td>Global interior wall panels (all materials)</td><td>USD 28.6B</td><td>6.2%</td><td>USD 38.7B</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout primary">
+        <strong>Key insight:</strong> SPC wall panels are the fastest-growing segment within interior wall panels — growing at nearly 2× the overall market rate. This validates our focus on SPC as our flagship product.
+      </div>
+
+      <h2 id="gm-top-markets">Top 20 Import Markets for HS 3925.90</h2>
+      <p>Ranked by annual import value and growth trajectory.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Rank</th><th scope="col">Country</th><th scope="col">Region</th><th scope="col">Growth Trend</th><th scope="col">Notes</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>United States</td><td>N. America</td><td>Stable</td><td>Section 301 tariff applies</td></tr>
+            <tr><td>2</td><td>Germany</td><td>EU</td><td>Stable</td><td>CBAM applies from 2026</td></tr>
+            <tr><td>3</td><td>United Kingdom</td><td>UK</td><td>Growing</td><td>UKCA replacing CE</td></tr>
+            <tr><td>4</td><td>France</td><td>EU</td><td>Stable</td><td>French A+ preferred</td></tr>
+            <tr><td>5</td><td>Canada</td><td>N. America</td><td>Growing</td><td>70–80% import dependence on China</td></tr>
+            <tr><td>6</td><td>Australia</td><td>Oceania</td><td>Growing</td><td>ChAFTA 0% duty</td></tr>
+            <tr><td>7</td><td>Netherlands</td><td>EU</td><td>Stable</td><td>Rotterdam hub</td></tr>
+            <tr><td>8</td><td>Saudi Arabia</td><td>Middle East</td><td>Growing fast</td><td>SASO/SABER required</td></tr>
+            <tr><td>9</td><td>UAE</td><td>Middle East</td><td>Growing fast</td><td>GCC tariff structure</td></tr>
+            <tr><td>10</td><td>Vietnam</td><td>SE Asia</td><td>Growing fast</td><td>ACFTA 0% duty</td></tr>
+            <tr><td>11</td><td>Thailand</td><td>SE Asia</td><td>Growing fast</td><td>ACFTA 0% duty</td></tr>
+            <tr><td>12</td><td>Philippines</td><td>SE Asia</td><td>Growing fast</td><td>ACFTA 0% duty</td></tr>
+            <tr><td>13</td><td>India</td><td>South Asia</td><td>Booming</td><td>No AD duty on wall panels</td></tr>
+            <tr><td>14</td><td>Mexico</td><td>N. America</td><td>Growing</td><td>Nearshoring tailwind</td></tr>
+            <tr><td>15</td><td>Turkey</td><td>MENA</td><td>Stable</td><td>Domestic production growing</td></tr>
+            <tr><td>16</td><td>Brazil</td><td>S. America</td><td>Growing</td><td>High tariff burden</td></tr>
+            <tr><td>17</td><td>Indonesia</td><td>SE Asia</td><td>Growing</td><td>ACFTA 0% duty</td></tr>
+            <tr><td>18</td><td>Nigeria</td><td>Africa</td><td>Growing fast</td><td>Price-sensitive</td></tr>
+            <tr><td>19</td><td>Kenya</td><td>Africa</td><td>Growing</td><td>EA hub</td></tr>
+            <tr><td>20</td><td>Russia</td><td>CIS</td><td>Stable</td><td>EAC/GOST required</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="gm-trends">Global Trends &amp; Demand Drivers</h2>
+      <ul>
+        <li><strong>Renovation over new construction</strong> — post-2024, more buyers upgrading existing buildings than building new</li>
+        <li><strong>Waterproof interiors demand</strong> — growing market for SPC in bathrooms and kitchens across all regions</li>
+        <li><strong>Fire safety regulation tightening</strong> — especially EU, UK, Middle East, and Australia</li>
+        <li><strong>Environmental compliance</strong> — EUDR (deforestation), CBAM (carbon), REACH (chemicals) shaping supplier selection</li>
+        <li><strong>Labor cost pressure</strong> — dry-fit systems favored over traditional tiling in most markets</li>
+        <li><strong>PET/Premium surface demand</strong> — synchronized emboss and anti-fingerprint growing in EU and Middle East</li>
+        <li><strong>Design trends</strong> — fluted panels dominant for feature walls; wood-grain and marble patterns most popular</li>
+      </ul>
+
+      <h2 id="gm-canton">Canton Fair Buyer Demographics 2026</h2>
+      <p>Based on Phase 1 &amp; Phase 2 attendance and transaction data.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Region</th><th scope="col">Transaction Change YoY</th><th scope="col">Position for Waltive</th></tr></thead>
+          <tbody>
+            <tr><td>South America</td><td>+29.8%</td><td>Growing opportunity — Brazil, Mexico, Chile</td></tr>
+            <tr><td>Africa</td><td>+29.8%</td><td>Volume opportunity — Nigeria, Kenya, South Africa</td></tr>
+            <tr><td>Central Asia</td><td>+29.8%</td><td>Belt &amp; Road — Russia, Uzbekistan, Kazakhstan</td></tr>
+            <tr><td>Belt &amp; Road countries (aggregate)</td><td>+14.9% share</td><td>Focus area for new buyers</td></tr>
+            <tr><td>Middle East</td><td>Stable / growing</td><td>Premium opportunity — SASO compliance is key</td></tr>
+            <tr><td>SE Asia</td><td>Growing</td><td>ACFTA advantage — high-volume, fast-growing</td></tr>
+            <tr><td>Traditional Western markets (US, W. Europe)</td><td>-15.5%</td><td>Declining — focus on premium differentiation</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout primary">
+        <strong>Strategic takeaway:</strong> Emerging markets grew +29.8% while traditional Western markets declined -15.5%. Prepare most heavily for SE Asia, Middle East, India, South America, and Africa. Belt &amp; Road countries increased share by +14.9% — Central Asia and Russia are new opportunities.
+      </div>
+
+      <h2 id="gm-importers">Leading Importer Companies by Country</h2>
+      <p>Reference list of key importers — useful for understanding market structure. Do NOT solicit directly during the fair; use for market knowledge.</p>
+
+      <h3>USA</h3>
+      <ul>
+        <li>Anton Decotech LLC</li>
+        <li>Sogo Home Decor LLC</li>
+        <li>Nadin's Decor Corporation</li>
+        <li>Northwest Luxury Panels</li>
+      </ul>
+
+      <h3>Saudi Arabia</h3>
+      <ul>
+        <li>Al Fozan Building Materials</li>
+        <li>Madar Building Materials</li>
+        <li>Al Muhaidib Building Materials</li>
+        <li>Casa Piu</li>
+        <li>Sara Group</li>
+      </ul>
+
+      <h3>Australia</h3>
+      <ul>
+        <li>Various interior design distributors and trade suppliers (fragmented market)</li>
+      </ul>
+
+      <h3>UK</h3>
+      <ul>
+        <li>Regional building material distributors and online retailers (fragmented)</li>
+      </ul>
+    </section>
+
+    <section class="page-section" id="global-tariff">
+      <h1>Global Tariffs &amp; Duty Reference</h1>
+      <p class="page-subtitle">Complete duty schedule for HS 3925.90 across 20+ markets.</p>
+
+      <div class="callout warning">
+        <strong>Always verify with a licensed customs broker.</strong> Duty rates change, and the final duty depends on the full 8- or 10-digit national code, FTA eligibility, and anti-dumping status. These are working figures for conversation — not for legal documentation.
+      </div>
+
+      <h2>Global Duty Schedule — HS 3925.90</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Market</th><th scope="col">HS Code</th><th scope="col">MFN Tariff</th><th scope="col">VAT/GST</th><th scope="col">FTA Rate</th><th scope="col">Special Notes</th></tr></thead>
+          <tbody>
+            <tr><td>🇺🇸 USA</td><td>3925.90</td><td>5.3%</td><td>State sales tax</td><td>—</td><td><span class="badge red">Section 301 +25%</span> → total ~42.8%</td></tr>
+            <tr><td>🇪🇺 EU</td><td>3925.90</td><td>6.5%</td><td>15–25%</td><td>—</td><td><span class="badge amber">CBAM applies</span> — emissions reporting</td></tr>
+            <tr><td>🇬🇧 UK</td><td>3925.90</td><td>6.0%</td><td>20% VAT</td><td>—</td><td>UKCA marking required</td></tr>
+            <tr><td>🇨🇦 Canada</td><td>3918.10 / 4411.92</td><td>5–7.5%</td><td>5% GST + provincial</td><td>—</td><td>70–80% import dependence on China</td></tr>
+            <tr><td>🇦🇺 Australia</td><td>3925.90</td><td>0%</td><td>10% GST</td><td><span class="badge green">0% (ChAFTA)</span></td><td>Origin criteria must be met</td></tr>
+            <tr><td>🇸🇦 Saudi Arabia</td><td>3925.90</td><td>5% (GCC)</td><td>15% VAT</td><td>—</td><td><span class="badge amber">SASO/SABER required</span></td></tr>
+            <tr><td>🇦🇪 UAE</td><td>3925.90</td><td>5% (GCC)</td><td>5% VAT</td><td>—</td><td>GCC Common External Tariff</td></tr>
+            <tr><td>🇧🇷 Brazil</td><td>3925.90</td><td>16.2% (II)</td><td>Federal + state</td><td>—</td><td><span class="badge red">Total 60–90% of CIF</span></td></tr>
+            <tr><td>🇷🇺 Russia</td><td>3925.90</td><td>6.5–20%</td><td>20% VAT</td><td>—</td><td><span class="badge amber">EAC/GOST required</span></td></tr>
+            <tr><td>🇹🇷 Turkey</td><td>3925.90</td><td>2.5–8%</td><td>20% VAT</td><td>—</td><td>Currency volatility impacts landed cost</td></tr>
+            <tr><td>🇿🇦 South Africa</td><td>3925.90</td><td>Up to 20%</td><td>15% VAT</td><td>—</td><td>—</td></tr>
+            <tr><td>🇳🇬 Nigeria</td><td>3925.90</td><td>5–35%</td><td>7.5% VAT</td><td>—</td><td>Verify with customs broker</td></tr>
+            <tr><td>🇰🇪 Kenya</td><td>3925.90</td><td>25%</td><td>16% VAT</td><td>—</td><td>—</td></tr>
+            <tr><td>🇹🇭 Thailand</td><td>3925.90</td><td>8–15%</td><td>7% VAT</td><td><span class="badge green">0% (ACFTA)</span></td><td>Form E required</td></tr>
+            <tr><td>🇻🇳 Vietnam</td><td>3925.90</td><td>Varies</td><td>10% VAT</td><td><span class="badge green">0% (ACFTA)</span></td><td>ASEAN-China FTA</td></tr>
+            <tr><td>🇵🇭 Philippines</td><td>3925.90</td><td>15% MFN</td><td>12% VAT</td><td><span class="badge green">0% (ACFTA/RCEP)</span></td><td>—</td></tr>
+            <tr><td>🇮🇩 Indonesia</td><td>3925.90</td><td>20% MFN</td><td>12% VAT</td><td><span class="badge green">0% (ACFTA)</span></td><td>—</td></tr>
+            <tr><td>🇲🇾 Malaysia</td><td>3925.90</td><td>8–13%</td><td>10% SST</td><td><span class="badge green">0% (ACFTA)</span></td><td>—</td></tr>
+            <tr><td>🇮🇳 India</td><td>3925 90 90</td><td>10% BCD</td><td>18% IGST</td><td>—</td><td><span class="badge amber">Total ~31%</span></td></tr>
+            <tr><td>🇯🇵 Japan</td><td>3925.90</td><td>3.9%</td><td>10% CT</td><td><span class="badge green">0% (RCEP)</span></td><td>—</td></tr>
+            <tr><td>🇰🇷 South Korea</td><td>3925.90</td><td>6.5%</td><td>10% VAT</td><td><span class="badge green">0% (China-Korea FTA)</span></td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Key Duty Structures Explained</h2>
+
+      <h3>USA — Section 301 Tariff</h3>
+      <ul>
+        <li>Base MFN: 5.3%</li>
+        <li>Section 301: +25% (List 3 / List 4A — verify current status)</li>
+        <li>Total effective: <strong>~42.8% landed</strong></li>
+        <li>State sales tax added at point of sale</li>
+        <li><strong>Business implication:</strong> USA remains a premium market but total landed cost is 3× higher than Australia or SE Asia</li>
+      </ul>
+
+      <h3>EU — CBAM (Carbon Border Adjustment Mechanism)</h3>
+      <ul>
+        <li>Base MFN: 6.5%</li>
+        <li>VAT: 15–25% depending on country (DE 19%, FR 20%, ES 21%, IT 22%)</li>
+        <li><strong>CBAM transition period runs through 2025</strong>; full implementation from 2026</li>
+        <li>Importers must report embedded carbon emissions</li>
+        <li>WPC panels may fall under CBAM scope — verify with EU importer</li>
+      </ul>
+
+      <h3>Australia — ChAFTA Advantage</h3>
+      <ul>
+        <li>Base MFN: 0% under ChAFTA (Australia–China Free Trade Agreement)</li>
+        <li>GST: 10% (creditable for GST-registered importers)</li>
+        <li><strong>Certificate of Origin required</strong></li>
+        <li><strong>Business implication:</strong> Australia is our best-value FTA market — 0% duty vs 6.5% EU or 5.3% USA</li>
+      </ul>
+
+      <h3>Saudi Arabia — SASO / SABER</h3>
+      <ul>
+        <li>GCC tariff: 5%</li>
+        <li>VAT: 15%</li>
+        <li><strong>SASO / SABER certification required before shipment</strong></li>
+        <li>PCoC (Product Certificate of Conformity) + SCoC (Shipment Certificate of Conformity)</li>
+        <li><strong>Without SASO, goods cannot clear customs</strong></li>
+      </ul>
+
+      <h3>Brazil — High Total Tax Burden</h3>
+      <ul>
+        <li>Import duty (II): 16.2%</li>
+        <li>IPI (industrialized products tax)</li>
+        <li>ICMS (state VAT): 12–18%</li>
+        <li>PIS/COFINS</li>
+        <li><strong>Total tax burden: 60–90% of CIF</strong></li>
+        <li>Still viable for premium products — domestic alternatives are 3× our price</li>
+      </ul>
+
+      <h2>FTA Rate Eligibility</h2>
+      <div class="callout primary">
+        <strong>We can provide FTA origin documentation for:</strong>
+        <ul>
+          <li><strong>ChAFTA</strong> (Australia) — 0% duty</li>
+          <li><strong>ACFTA</strong> (ASEAN: Vietnam, Thailand, Philippines, Indonesia, Malaysia) — 0% duty, Form E</li>
+          <li><strong>RCEP</strong> (14 Asia-Pacific countries including Japan, Korea, Australia, NZ) — reduced rates</li>
+          <li><strong>China-Korea FTA</strong> — 0% for eligible goods</li>
+        </ul>
+        <p>For all FTA benefits, direct shipment is usually required. Trans-shipment through non-FTA countries may void origin.</p>
+      </div>
+
+      <h2>Tariff Q&amp;A Scripts</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is the HS code for your products?</button>
+        <div class="faq-answer">3925 90 90 for finished laminated panels — the global baseline. Some countries require 8- or 10-digit national code. We provide full documentation.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">How much is the total import duty in my country?</button>
+        <div class="faq-answer">Depends on destination. India ~31%, USA ~42.8% (with Section 301), EU 6.5% + VAT, Australia 0% (ChAFTA), Saudi 5% + 15% VAT, Brazil 60–90%. See the full table above for your market.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Is there anti-dumping duty on your products?</button>
+        <div class="faq-answer">No current AD duty on SPC or WPC wall panels from China into India, EU, or most markets. AD measures exist for decorative paper laminates and solid acrylic sheets — different product categories.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Do you provide FTA documentation?</button>
+        <div class="faq-answer">Yes — ChAFTA (Australia), ACFTA (ASEAN Form E), RCEP, and China-Korea FTA. Direct shipment required for FTA eligibility.</div>
+      </div>
+    </section>
+
+    <section class="page-section" id="global-certification">
+      <h1>Certification by Market</h1>
+      <p class="page-subtitle">Different markets require different certifications. Know what your buyer needs.</p>
+
+      <div class="callout critical">
+        <strong>Critical:</strong> French A+ and EN 13501-1 are EU standards. They do <strong>not</strong> automatically satisfy US, UK, Gulf, Australian, or Canadian requirements. Always match the certification to the destination market.
+      </div>
+
+      <h2>Certification Requirements Matrix</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Market</th><th scope="col">Required Certification</th><th scope="col">Standard</th><th scope="col">Our Status</th></tr></thead>
+          <tbody>
+            <tr><td>🇪🇺 EU</td><td>CE marking under CPR</td><td>EN 15102</td><td><span class="badge green">✅ Have</span></td></tr>
+            <tr><td>🇪🇺 EU</td><td>REACH (chemicals)</td><td>EC 1907/2006</td><td><span class="badge green">✅ Have</span></td></tr>
+            <tr><td>🇪🇺 EU</td><td>EUDR (if WPC contains wood fiber)</td><td>Due diligence</td><td><span class="badge amber">⚠️ Confirm</span></td></tr>
+            <tr><td>🇪🇺 EU</td><td>CBAM (carbon reporting)</td><td>Reg 2023/956</td><td><span class="badge amber">⚠️ In progress</span></td></tr>
+            <tr><td>🇬🇧 UK</td><td>UKCA marking</td><td>Post-Brexit</td><td><span class="badge amber">⚠️ In progress</span></td></tr>
+            <tr><td>🇺🇸 USA</td><td>ASTM E84 (fire)</td><td>Surface burning</td><td><span class="badge amber">⚠️ In progress</span></td></tr>
+            <tr><td>🇺🇸 USA</td><td>California Prop 65</td><td>Chemical warning</td><td><span class="badge amber">⚠️ Confirm</span></td></tr>
+            <tr><td>🇺🇸 USA</td><td>CARB / TSCA Title VI (formaldehyde)</td><td>Federal</td><td><span class="badge green">✅ Equivalent</span></td></tr>
+            <tr><td>🇨🇦 Canada</td><td>CSA / ULC</td><td>Product safety</td><td><span class="badge amber">⚠️ Obtain</span></td></tr>
+            <tr><td>🇦🇺 Australia</td><td>AS/NZS 3837 (fire)</td><td>Fire testing</td><td><span class="badge amber">⚠️ Obtain</span></td></tr>
+            <tr><td>🇸🇦 Saudi Arabia</td><td><strong>SASO / SABER</strong></td><td>PCoC + SCoC</td><td><span class="badge red">❌ Critical gap</span></td></tr>
+            <tr><td>🇦🇪 UAE</td><td>ESMA / GCC conformity</td><td>—</td><td><span class="badge amber">⚠️ Obtain</span></td></tr>
+            <tr><td>🇷🇺 Russia</td><td>EAC / GOST</td><td>Fire safety</td><td><span class="badge amber">⚠️ Obtain</span></td></tr>
+            <tr><td>🇧🇷 Brazil</td><td>INMETRO</td><td>Product cert</td><td><span class="badge amber">⚠️ Confirm</span></td></tr>
+            <tr><td>🌍 Global</td><td>ISO 9001:2015</td><td>Quality mgmt</td><td><span class="badge green">✅ Have</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Market-by-Market Certification Guide</h2>
+
+      <h3>🇪🇺 European Union — CE / CPR</h3>
+      <ul>
+        <li><strong>CE marking</strong> under EU Construction Products Regulation (CPR)</li>
+        <li>Requires Declaration of Performance (DoP)</li>
+        <li>Tested to EN 15102 (decorative wall coverings)</li>
+        <li>Fire rating: EN 13501-1 Class B-s1,d0</li>
+        <li>Indoor air: French A+ (voluntary premium), TVOC &lt;100 μg/m³</li>
+        <li><strong>REACH</strong> — SVHC-free confirmed</li>
+        <li><strong>EUDR</strong> (EU Deforestation Regulation) — applies to WPC if wood fiber content qualifies. Confirm with buyer</li>
+        <li><strong>CBAM</strong> — carbon border adjustment. Importers must report embedded carbon. Full compliance from 2026</li>
+      </ul>
+
+      <h3>🇬🇧 United Kingdom — UKCA</h3>
+      <ul>
+        <li>Post-Brexit, CE marking no longer recognized for GB market (except NI)</li>
+        <li><strong>UKCA marking</strong> replaces CE</li>
+        <li>Same technical standards as EU (EN 15102, EN 13501-1)</li>
+        <li>We are in progress on UKCA application</li>
+        <li><strong>Waltive brand</strong> is registered in UK (UK00004338988)</li>
+      </ul>
+
+      <h3>🇺🇸 USA — ASTM + Prop 65</h3>
+      <ul>
+        <li><strong>ASTM E84</strong> — Surface Burning Characteristics (Class A, B, or C)</li>
+        <li><strong>California Prop 65</strong> — requires warnings if certain chemicals present</li>
+        <li><strong>CARB Phase 2</strong> / <strong>TSCA Title VI</strong> — formaldehyde emission limits</li>
+        <li>Our French A+ certification demonstrates equivalent formaldehyde performance (non-detect)</li>
+        <li>ASTM E84 testing in progress</li>
+        <li><strong>Section 301</strong> adds 25% duty</li>
+      </ul>
+
+      <h3>🇨🇦 Canada — CSA / ULC</h3>
+      <ul>
+        <li>Provincial-level building codes</li>
+        <li><strong>CSA</strong> or <strong>ULC</strong> certification for product safety</li>
+        <li>Fire rating: CAN/ULC-S102</li>
+        <li>70–80% import dependence on China — strong market</li>
+      </ul>
+
+      <h3>🇦🇺 Australia — AS/NZS</h3>
+      <ul>
+        <li><strong>AS/NZS 3837</strong> — fire testing (cone calorimeter)</li>
+        <li>Building Code of Australia (BCA) compliance</li>
+        <li>Group 1, 2, 3, or 4 fire rating depending on application</li>
+        <li><strong>ChAFTA 0% duty</strong> — big advantage</li>
+      </ul>
+
+      <h3>🇸🇦 Saudi Arabia — SASO / SABER</h3>
+      <ul>
+        <li><strong>Critical for market access</strong> — no SASO = no customs clearance</li>
+        <li>Requires PCoC (Product Certificate of Conformity) + SCoC (Shipment Certificate of Conformity)</li>
+        <li>Testing via accredited third party (SGS, Intertek, TUV)</li>
+        <li>Fire rating and chemical composition tested</li>
+        <li>We are in progress on SASO registration</li>
+      </ul>
+
+      <h3>🇦🇪 UAE — ESMA / GCC</h3>
+      <ul>
+        <li>Emirates Authority for Standardization &amp; Metrology</li>
+        <li>GCC Conformity Marking (G-Mark) for some products</li>
+        <li>Municipality approval for construction materials</li>
+      </ul>
+
+      <h3>🇷🇺 Russia / EAC — GOST</h3>
+      <ul>
+        <li><strong>EAC mark</strong> for Eurasian Economic Union</li>
+        <li><strong>GOST fire safety</strong> certification</li>
+        <li>20% VAT</li>
+      </ul>
+
+      <h2>Certification Q&amp;A Scripts</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What certifications do you have for US market?</button>
+        <div class="faq-answer">ASTM E84 testing is in progress. French A+ (formaldehyde non-detect) meets CARB Phase 2 and TSCA Title VI equivalent. Prop 65 documentation — confirm with buyer. Section 301 duty documentation fully supported.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What certifications do you have for EU market?</button>
+        <div class="faq-answer">CE marking under CPR with full DoP. EN 13501-1 Class B-s1,d0 fire rating. French A+ indoor air quality. REACH compliant. EN 15102 heavy metal migration. CBAM readiness in progress.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What certifications do you have for Saudi Arabia?</button>
+        <div class="faq-answer">SASO/SABER registration in progress. We can provide test reports for PCoC application. Full documentation support for customs clearance.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What certifications do you have for Australia?</button>
+        <div class="faq-answer">AS/NZS 3837 testing in progress. ChAFTA Certificate of Origin fully supported. 0% duty under ChAFTA.</div>
+      </div>
+    </section>
+
+    <section class="page-section" id="fta-guide">
+      <h1>FTA &amp; Trade Agreements</h1>
+      <p class="page-subtitle">How free trade agreements reduce your import duty.</p>
+
+      <h2>Active Free Trade Agreements</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">FTA</th><th scope="col">Countries</th><th scope="col">Benefit</th><th scope="col">Requirements</th></tr></thead>
+          <tbody>
+            <tr><td><strong>ChAFTA</strong></td><td>China–Australia</td><td><span class="badge green">0% duty</span> on wall panels</td><td>Certificate of Origin; direct shipment</td></tr>
+            <tr><td><strong>ACFTA</strong></td><td>China–ASEAN (Vietnam, Thailand, Philippines, Indonesia, Malaysia, Singapore, Myanmar, Laos, Cambodia, Brunei)</td><td><span class="badge green">0% duty</span> on eligible goods</td><td>Form E Certificate of Origin</td></tr>
+            <tr><td><strong>RCEP</strong></td><td>China + 14 Asia-Pacific (incl. Japan, Korea, Australia, NZ)</td><td>Reduced tariffs</td><td>RCEP Certificate of Origin</td></tr>
+            <tr><td><strong>China-Korea FTA</strong></td><td>China–South Korea</td><td><span class="badge green">0%</span> for eligible goods</td><td>FTA Certificate of Origin</td></tr>
+            <tr><td><strong>GCC</strong></td><td>China–Gulf Cooperation Council (Saudi, UAE, Qatar, Kuwait, Bahrain, Oman)</td><td>5% standard tariff</td><td>GCC Common External Tariff</td></tr>
+            <tr><td><strong>EU-GSP</strong></td><td>China → EU</td><td>No GSP benefit (China graduated)</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Strategic FTA Advantages</h2>
+
+      <h3>Australia — 0% Duty Under ChAFTA</h3>
+      <p>Our strongest FTA market. Total landing cost drops by 5–6% vs non-FTA suppliers.</p>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"ChAFTA gives you 0% duty on our panels — compared to 5.3% US MFN or 6.5% EU MFN. We provide full Certificate of Origin documentation. Your landed cost is essentially just CIF + 10% GST (which is creditable if you're GST-registered). Compare that to other suppliers — you save 5–6% on duty alone. For a 40HQ container worth $30,000, that's $1,500–1,800 in savings."</p>
+      </div>
+
+      <h3>ASEAN — 0% Duty Under ACFTA</h3>
+      <p>Vietnam, Thailand, Philippines, Indonesia, Malaysia — all eligible for 0% duty under ACFTA with Form E.</p>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Vietnam, Thailand, Philippines, Indonesia, Malaysia — all benefit from ACFTA. 0% import duty on our panels. We provide Form E Certificate of Origin. Your landed cost is just CIF + local VAT. This is why our SE Asia business has grown fastest — no duty barrier, 7–12 day transit from Ningbo."</p>
+      </div>
+
+      <h3>RCEP — Reduced Rates</h3>
+      <p>China + Japan, Korea, Australia, NZ, and ASEAN combined. Reduced or 0% tariffs for eligible goods under a single RCEP certificate.</p>
+
+      <h2>FTA Q&amp;A Scripts</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Can you provide FTA origin documentation?</button>
+        <div class="faq-answer">Yes — ChAFTA (Australia), ACFTA (ASEAN Form E), RCEP, and China-Korea FTA. Direct shipment required for FTA eligibility. We handle all paperwork.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Do your panels qualify for ChAFTA 0% duty?</button>
+        <div class="faq-answer">Yes — our SPC and WPC panels meet ChAFTA origin criteria. 0% duty applies with Certificate of Origin. Direct shipment China → Australia.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">How do I claim ACFTA 0% duty?</button>
+        <div class="faq-answer">We provide Form E Certificate of Origin with your shipment. Present at customs in Vietnam, Thailand, Philippines, Indonesia, or Malaysia. Direct shipment from China.</div>
+      </div>
+    </section>
+
+    <section class="page-section" id="global-competitors">
+      <h1>Global Competitive Landscape</h1>
+      <p class="page-subtitle">How we position vs Turkey, Vietnam, India, Korea, and other supplier countries.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Competitor Country</th><th scope="col">Strength</th><th scope="col">Weakness</th><th scope="col">How Huating Wins</th></tr></thead>
+          <tbody>
+            <tr><td>🇹🇷 <strong>Turkey</strong></td><td>Proximity to EU; 2.5–8% duty into EU via customs union; growing domestic SPC capacity</td><td>Higher labor cost; limited PET capability; smaller production scale</td><td>Better pricing; full certification suite; larger scale (11 lines vs 2–4); complete matching system</td></tr>
+            <tr><td>🇻🇳 <strong>Vietnam</strong></td><td>ACFTA benefits; low labor cost; growing SPC/WPC capacity</td><td>Smaller capacity; limited product range; limited PET capability</td><td>Larger production scale; complete system; more certifications; wider SKU range</td></tr>
+            <tr><td>🇮🇳 <strong>India</strong></td><td>Domestic market growth; "Make in India" advantage; local lamination capability</td><td>Limited SPC capacity; quality inconsistency; higher labor cost</td><td>Superior SPC quality; PUR lamination standard; no AD duty into India; competitive landed cost</td></tr>
+            <tr><td>🇰🇷 <strong>South Korea</strong></td><td>Premium positioning; advanced PET technology</td><td>High cost; limited scale; Korea-centric</td><td>Better value; comparable quality; larger capacity for bulk orders</td></tr>
+            <tr><td>🇹🇭 <strong>Thailand</strong></td><td>ACFTA; automotive-grade quality in some segments</td><td>Limited decorative panel capacity; higher labor cost</td><td>Larger decorative range; complete system; broader certifications</td></tr>
+            <tr><td>🇩🇪 <strong>Germany</strong></td><td>Premium engineering; proximity to EU market</td><td>Very high cost; limited volume; specialty focus</td><td>40–60% cost advantage; comparable certifications; faster lead times</td></tr>
+            <tr><td>🇺🇸 <strong>USA</strong></td><td>Domestic production for US market (no Section 301)</td><td>Very high cost; limited decorative range; small scale</td><td>Even with Section 301, landed cost 30–50% below US production for premium quality</td></tr>
+            <tr><td>🇨🇳 <strong>Shandong</strong></td><td>Rock-bottom pricing; high volume</td><td>Quality inconsistency; cold glue; no PET; limited certifications</td><td>PUR lamination; French A+; complete system; higher reliability</td></tr>
+            <tr><td>🇨🇳 <strong>Foshan</strong></td><td>Decorative 3D and curved profiles; design leadership</td><td>Inconsistent SPC substrate; higher price for standard panels</td><td>Better flat panel value; competitive fluted panels; complete system pricing</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Positioning Scripts vs Key Competitors</h2>
+
+      <h3>vs Turkey (for EU buyers)</h3>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Turkey has proximity to the EU, but their capacity is limited — most factories only run 2–4 lines. We run 11. Their PET capability is limited; ours is full-range. And our pricing is 20–30% below Turkish suppliers for equivalent quality. When you need a full container with consistent color across panels, grilles, and mouldings, that's where we win."</p>
+      </div>
+
+      <h3>vs Vietnam (for SE Asia buyers)</h3>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Vietnam has ACFTA benefits, just like China. But their SPC production scale is much smaller. We run 11 lines, 500,000 m² monthly. If you need a full 40HQ in 25 days with consistent quality, Vietnam can't match that. Plus we offer a complete matching system — flat panels, fluted grilles, and every moulding in exact same color."</p>
+      </div>
+
+      <h3>vs India (for India buyers)</h3>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Indian-made SPC has improved, but quality is still inconsistent. We use PUR hot melt lamination as standard, French A+ certification, and controlled filler ratio. Even after 31% import duty, our landed cost is comparable to Indian premium — with better consistency and a complete matching system. And there's no AD duty on our category."</p>
+      </div>
+    </section>
+
+    <section class="page-section" id="china-overview">
+      <h1>China Market Overview</h1>
+      <p class="page-subtitle">Three major production hubs and their positioning.</p>
+
+      <div class="callout primary">
+        <strong>Key takeaway:</strong> Waltive / Huating is positioned in the Zhejiang export-oriented quality tier, with unique advantages in complete system offering and competitive fluted panel pricing.
+      </div>
+
+      <h2>Three Major Production Hubs</h2>
+      <h3>Shandong Province (Linyi as core hub)</h3>
+      <p>The largest production base by volume, focused on ultra-low-cost mass production. Benefits from huge local reserves of calcium carbonate and wood fiber.</p>
+      <ul>
+        <li><strong>Positioning:</strong> Budget mass market</li>
+        <li><strong>Lamination:</strong> Mostly basic PVC film, cold glue. PET extremely limited</li>
+        <li><strong>Weaknesses:</strong> High filler → warping risk; color inconsistency</li>
+      </ul>
+
+      <h3>Foshan (Guangdong Province)</h3>
+      <p>China's interior decoration design hub, focused on aesthetics and decorative profiles.</p>
+      <ul>
+        <li><strong>Positioning:</strong> Decorative design-focused</li>
+        <li><strong>Main products:</strong> Decorative WPC fluted grilles (curved, wave, 3D carved)</li>
+        <li><strong>Weaknesses:</strong> Higher overhead; SPC substrate quality inconsistent</li>
+      </ul>
+
+      <h3>Zhejiang Province (Jinhua, Haining, Jiaxing)</h3>
+      <p>The most export-oriented region, with balanced quality, technology and service.</p>
+      <ul>
+        <li><strong>Positioning:</strong> Export-oriented quality leader</li>
+        <li><strong>Lamination:</strong> PUR hot melt standard. PVC and premium PET widely available</li>
+        <li><strong>Weaknesses:</strong> Cannot match Shandong's rock-bottom pricing</li>
+      </ul>
+
+      <h2>Regional Capability Matrix</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Capability</th><th scope="col">Shandong</th><th scope="col">Zhejiang</th><th scope="col">Foshan</th></tr></thead>
+          <tbody>
+            <tr><td>Basic PVC lamination</td><td>✅ Standard</td><td>✅ Standard</td><td>✅ Standard</td></tr>
+            <tr><td>PUR hot melt lamination</td><td>❌ Rare</td><td>✅ Standard</td><td>⚠️ Premium only</td></tr>
+            <tr><td>PET film / synchronized grain</td><td>❌ Almost none</td><td>✅ Widely available</td><td>⚠️ Limited, expensive</td></tr>
+            <tr><td>SPC wall panels</td><td>⚠️ Entry grade only</td><td>✅ Full range</td><td>⚠️ Small volume</td></tr>
+            <tr><td>Decorative 3D / curved profiles</td><td>❌ Very limited</td><td>⚠️ Standard shapes</td><td>✅ Industry leading</td></tr>
+            <tr><td>Full matching moulding system</td><td>❌ Limited</td><td>✅ Complete systems</td><td>⚠️ Partial range</td></tr>
+            <tr><td>Export documentation &amp; service</td><td>⚠️ Basic</td><td>✅ Professional</td><td>⚠️ Inconsistent</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="page-section" id="china-manufacturers">
+      <h1>Top Manufacturers by Region</h1>
+      <p class="page-subtitle">Benchmark of leading factories in each hub.</p>
+
+      <h2>Zhejiang Province</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Company</th><th scope="col">Core Products</th><th scope="col">Price (FOB)</th></tr></thead>
+          <tbody>
+            <tr><td>Zhejiang Walrus New Material</td><td>SPC wall panel, flat WPC, WPC fluted, PET laminated</td><td>WPC fluted: $1.8–2.4/m; SPC flat: $3.2–4.2/m²</td></tr>
+            <tr><td>Zhejiang Tianzhen Technology</td><td>High density WPC, SPC wall panel, UV coating</td><td>WPC fluted: $1.7–2.2/m; SPC flat: $3.0–4.0/m²</td></tr>
+            <tr><td>Haining Longtime Industry</td><td>Bamboo fiber WPC, WPC fluted slat, SPC panel</td><td>WPC fluted: $1.6–2.1/m</td></tr>
+            <tr><td>Zhejiang Hemei Decoration</td><td>Standard WPC panel, fluted panels, PVC film</td><td>WPC fluted: $1.5–2.0/m</td></tr>
+            <tr><td>Zhejiang Qianduomu</td><td>Custom WPC grille, curved WPC, SPC sheets, PET &amp; PVC foil</td><td>WPC fluted: $1.7–2.3/m</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Shandong Province</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Company</th><th scope="col">Core Products</th><th scope="col">Price (FOB)</th></tr></thead>
+          <tbody>
+            <tr><td>Shandong Yiju New Material</td><td>WPC panel, bamboo charcoal, SPC wall sheet</td><td>WPC fluted: $1.2–1.7/m; SPC flat: $2.6–3.4/m²</td></tr>
+            <tr><td>Shandong Dowell Decorative</td><td>Budget WPC panels, simple fluted slats</td><td>WPC fluted: $1.1–1.6/m</td></tr>
+            <tr><td>Shandong Yuantai WPC</td><td>WPC interior + exterior cladding</td><td>WPC fluted: $1.2–1.8/m</td></tr>
+            <tr><td>Shandong Lvsen WPC</td><td>WPC fluted grille, cheap PVC laminated sheets</td><td>WPC fluted: $1.1–1.5/m</td></tr>
+            <tr><td>Shandong Xiuchen New Material</td><td>Mass production basic WPC panels</td><td>WPC fluted: $1.0–1.6/m</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Foshan (Guangdong)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Company</th><th scope="col">Core Products</th><th scope="col">Price (FOB)</th></tr></thead>
+          <tbody>
+            <tr><td>Foshan Rucca Building Material</td><td>WPC fluted slats, curved wave panels, 3D panels</td><td>WPC fluted: $1.6–2.3/m</td></tr>
+            <tr><td>Foshan Muyangsen New Material</td><td>WPC grille, decorative cladding, UV marble sheet</td><td>WPC fluted: $1.7–2.4/m</td></tr>
+            <tr><td>Foshan Suke Decoration</td><td>WPC interior panels, simple fluted panels</td><td>WPC fluted: $1.5–2.1/m</td></tr>
+            <tr><td>Foshan Ecoupp New Materials</td><td>High gloss SPC panels, marble pattern SPC</td><td>WPC fluted: $1.8–2.4/m</td></tr>
+            <tr><td>Foshan Xinxieyuan New Material</td><td>Budget WPC fluted slats</td><td>WPC fluted: $1.4–1.9/m</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="page-section" id="china-price-compare">
+      <h1>Regional Price Comparison</h1>
+      <p class="page-subtitle">Side-by-side benchmark across manufacturing regions.</p>
+
+      <h2>Price Benchmark Table</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Product</th><th scope="col">Shandong</th><th scope="col">Zhejiang</th><th scope="col">Foshan</th></tr></thead>
+          <tbody>
+            <tr><td>Flat WPC wall panel (8mm)</td><td>$2.80–3.60/m²</td><td>$3.20–4.20/m²</td><td>$3.40–4.20/m²</td></tr>
+            <tr><td>Flat SPC wall panel (8mm)</td><td>$2.60–3.40/m²</td><td>$3.20–4.50/m²</td><td>$3.80–4.60/m²</td></tr>
+            <tr><td>WPC fluted panel (150mm)</td><td>$1.00–1.60/m</td><td>$1.20–2.00/m</td><td>$1.40–2.30/m</td></tr>
+            <tr><td>SPC fluted panel (150mm)</td><td>Not widely available</td><td>$0.90–1.40/m</td><td>Not widely available</td></tr>
+            <tr><td>Decorative mouldings (standard)</td><td>Limited basic options</td><td>$0.30–2.20/m</td><td>Limited range only</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warning">
+        <strong>Price trap warning:</strong> The lowest quoted prices often come with hidden trade-offs: thinner core, higher filler, cold glue instead of PUR, thinner film than advertised, or EXW terms. Always standardize all parameters before comparing.
+      </div>
+    </section>
+
+    <section class="page-section" id="china-quality">
+      <h1>Quality Issues &amp; Standards</h1>
+      <p class="page-subtitle">Common quality issues, root causes, and Huating standards.</p>
+
+      <h2>Common Quality Issues</h2>
+      <h3>1. Delamination (film peeling)</h3>
+      <ul>
+        <li><strong>Root cause:</strong> Cold glue instead of PUR; insufficient surface treatment</li>
+        <li><strong>Most common in:</strong> Budget Shandong factories</li>
+        <li><strong>Huating standard:</strong> PUR hot melt + plasma pre-treatment</li>
+      </ul>
+      <h3>2. Warping in hot weather</h3>
+      <ul>
+        <li><strong>Root cause:</strong> Excessively high filler ratio (70%+), low PVC resin</li>
+        <li><strong>Huating standard:</strong> Controlled filler (max 65% SPC, 60% WPC), multi-stage cooling</li>
+      </ul>
+      <h3>3. Batch-to-batch color mismatch</h3>
+      <ul>
+        <li><strong>Root cause:</strong> Poor color dosing, no final QC</li>
+        <li><strong>Huating standard:</strong> Automatic masterbatch dosing, spectrophotometer verification</li>
+      </ul>
+      <h3>4. Edge brittleness and cracking</h3>
+      <ul>
+        <li><strong>Root cause:</strong> Too much filler, insufficient impact modifier</li>
+        <li><strong>Huating standard:</strong> CPE impact modifier, drop impact testing</li>
+      </ul>
+      <h3>5. Poor scratch resistance</h3>
+      <ul>
+        <li><strong>Root cause:</strong> Thinner film than advertised (0.08mm vs 0.12mm), no top coat</li>
+        <li><strong>Huating standard:</strong> Genuine 0.12mm film with scratch-resistant top coat</li>
+      </ul>
+
+      <div class="callout info">
+        <strong>Sales guideline:</strong> Never badmouth competitors directly. Frame quality differences as: "Different factories choose different formulations and processes to hit different price points. We build our panels for long-term reliability."
+      </div>
+    </section>
+
+    <section class="page-section" id="india-market">
+      <h1>India Market Landscape</h1>
+      <p class="page-subtitle">Local manufacturers, popular products, and lamination economics.</p>
+
+      <h2>Tier 1: Large Pan-India Manufacturers</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Company</th><th scope="col">Core Products</th><th scope="col">Price (INR)</th></tr></thead>
+          <tbody>
+            <tr><td>Dhabriya Polywood Ltd.</td><td>PVC wall panels, fluted, SPC flooring, PVC foam</td><td>Flat PVC: ₹97–102/sq ft; Fluted: ₹102–150/sq ft</td></tr>
+            <tr><td>E3 Group</td><td>WPC boards, prelam MDF, HPL, WPC doors</td><td>WPC board: ₹145–190/sq ft</td></tr>
+            <tr><td>Rushil Decor Ltd. (VIR)</td><td>Laminates, MDF, PVC &amp; WPC boards</td><td>WPC board: ₹150–220/sq ft</td></tr>
+            <tr><td>KAKA PVC</td><td>PVC wall panels, fluted, louvers, doors</td><td>Flat PVC: ₹120/sq ft; PVC louvers: ₹190–210/sq ft</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Tier 2: Regional &amp; Specialized</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Company</th><th scope="col">Core Products</th><th scope="col">Price (INR)</th></tr></thead>
+          <tbody>
+            <tr><td>Zap Exports Pvt. Ltd.</td><td>WPC panels, 3D PVC panels, louvers</td><td>WPC fluted: ₹300–450/piece</td></tr>
+            <tr><td>Manakamna Composites</td><td>WPC panels, boards, sheets, flooring</td><td>WPC foam: ₹150/sq ft</td></tr>
+            <tr><td>Treeplast / MAA Panel India</td><td>WPC louvers, PVC louvers, PVC doors</td><td>WPC louvers: ₹350–500/piece</td></tr>
+            <tr><td>Alstone WPC</td><td>SPC flooring, WPC building boards</td><td>WPC board: ₹130–180/sq ft</td></tr>
+            <tr><td>PARÉ Innovations</td><td>Wall/ceiling/facade systems, louvers</td><td>Premium: ₹350–600/sq ft</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout primary">
+        <strong>Key insight:</strong> Very few Indian manufacturers produce SPC wall panels domestically at scale. Almost all SPC wall panels sold in India are imported from China — this is our strongest market opportunity. No AD duty applies.
+      </div>
+
+      <h2>Lamination Technology in India</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Lamination Type</th><th scope="col">Availability in India</th><th scope="col">Chinese Supply</th></tr></thead>
+          <tbody>
+            <tr><td>Basic PVC film</td><td>Very common</td><td>Standard</td></tr>
+            <tr><td>PVC membrane / 3D</td><td>Available on PVC panels</td><td>Wide range</td></tr>
+            <tr><td>PET film lamination</td><td>Rare locally</td><td>Zhejiang specializes</td></tr>
+            <tr><td>PP / ARC foil</td><td>Almost no local production</td><td>Premium Chinese factories</td></tr>
+            <tr><td>Synchronized emboss</td><td>Very limited locally</td><td>Zhejiang standard</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Bare Substrate vs Finished Panel Economics</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Option</th><th scope="col">Total Landed + Processing</th><th scope="col">Better for</th></tr></thead>
+          <tbody>
+            <tr><td>Finished laminated panel (HS 3925)</td><td>~$4.59/m² (standard PVC)</td><td>Standard bulk orders, best total cost</td></tr>
+            <tr><td>Bare substrate + local lamination (HS 3921)</td><td>~$5.16–5.76/m²</td><td>Flexibility, custom projects, Made-in-India requirements</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warning">
+        <strong>HS code note:</strong> Bare substrate boards (HS 39211200) at ~44% total duty vs finished panels (HS 39259090) at ~31% total duty.
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- HUATING POSITIONING -->
+    <!-- ============================================================ -->
+
+    <section class="page-section" id="huating-benchmark">
+      <h1>Price Benchmark vs Market</h1>
+      <p class="page-subtitle">Our pricing vs regional averages.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Product</th><th scope="col">Huating</th><th scope="col">Shandong</th><th scope="col">Zhejiang Avg</th><th scope="col">Foshan</th><th scope="col">Position</th></tr></thead>
+          <tbody>
+            <tr><td>Flat SPC wall panel (8mm)</td><td>$4.70–5.24/m²</td><td>$2.60–3.40</td><td>$3.20–4.50</td><td>$3.80–4.60</td><td>Slightly above Zhejiang avg</td></tr>
+            <tr><td>Flat Bamboo WPC (8mm, 0.7)</td><td>$5.30/m²</td><td>$2.80–3.60</td><td>$3.20–4.20</td><td>$3.40–4.20</td><td>Premium tier</td></tr>
+            <tr><td>Flat Bamboo WPC (8mm, 0.85)</td><td>$6.07/m²</td><td>—</td><td>—</td><td>—</td><td>Unique high-density</td></tr>
+            <tr><td>Thin WPC fluted (120–150mm)</td><td><span class="key-number">$0.51–0.64/m</span></td><td>$0.60–0.90</td><td>$0.70–1.10</td><td>$0.85–1.30</td><td><strong>Price leader</strong></td></tr>
+            <tr><td>SPC fluted panel (140–160mm)</td><td>$0.82–1.21/m</td><td>—</td><td>$0.90–1.40</td><td>—</td><td>Competitive mid-range</td></tr>
+            <tr><td>SPC decorative mouldings</td><td>$0.24–1.95/m</td><td>Limited</td><td>$0.30–2.20</td><td>Limited</td><td>Most complete range</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="page-section" id="huating-swot">
+      <h1>SWOT Analysis</h1>
+      <p class="page-subtitle">Strengths, weaknesses, opportunities, threats.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col" style="width:50%">Strengths</th><th scope="col" style="width:50%">Weaknesses</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                <ul>
+                  <li><strong>Complete SPC wall system</strong> with full matching mouldings</li>
+                  <li><strong>Industry-leading pricing</strong> on fluted panels (15–30% below market)</li>
+                  <li><strong>PUR hot melt lamination</strong> standard</li>
+                  <li><strong>11 production lines</strong>, 500,000 m² monthly capacity</li>
+                  <li><strong>Full EU certification suite:</strong> French A+, B-s1,d0, CE</li>
+                  <li><strong>25-day lead time</strong>, 100% on-time</li>
+                  <li>UK registered trademark Waltive</li>
+                  <li>15 years OEM/ODM, 28 export countries</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>Flat panel prices higher than Shandong</li>
+                  <li>No standard PET lamination offering</li>
+                  <li>Limited brand recognition vs large listed players</li>
+                  <li>No exterior WPC cladding line</li>
+                  <li>Limited 3D/curved decorative profiles vs Foshan</li>
+                  <li><strong>Certification gaps:</strong> UKCA, ASTM E84, SASO, AS/NZS in progress</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Opportunities</th><th scope="col">Threats</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                <ul>
+                  <li>SE Asia &amp; Middle East buyer growth at Canton Fair</li>
+                  <li>Indian SPC market booming with limited local supply</li>
+                  <li>ACFTA / ChAFTA FTA advantages</li>
+                  <li>Premium PET / ARC finish growing fast</li>
+                  <li>CBAM readiness opens EU doors</li>
+                  <li>Belt &amp; Road countries +14.9% share</li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li>Shandong price undercutting on basic bulk orders</li>
+                  <li>Foshan winning design-focused orders</li>
+                  <li>Turkey &amp; Vietnam growing as alternative suppliers</li>
+                  <li>Potential future AD duties</li>
+                  <li>Certification gaps blocking US, Gulf, Australia orders</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout primary">
+        <strong>Strategic sweet spot:</strong> We are not the cheapest supplier — we are the best value complete SPC wall system supplier for professional export importers.
+      </div>
+    </section>
+
+    <section class="page-section" id="huating-usp">
+      <h1>Core USPs &amp; Differentiators</h1>
+      <p class="page-subtitle">3-tier USP system with quantified proof.</p>
+
+      <h2>Tier 1 — Product USPs</h2>
+      <div class="callout primary">
+        <strong>1. PUR hot melt lamination standard on all products</strong><br>
+        Panels will not peel or bubble even in 40°C+ heat — no delamination problems like cold-glue boards.
+      </div>
+      <div class="callout primary">
+        <strong>2. Complete one-stop wall system (100+ SKUs)</strong><br>
+        Flat panels, fluted grilles, and every matching moulding in exact same color. 40+ grille profiles.
+      </div>
+      <div class="callout primary">
+        <strong>3. French A+ &amp; B-s1,d0 certified quality</strong><br>
+        TVOC &lt;100 μg/m³, formaldehyde non-detect. EN 13501-1 Class B-s1,d0.
+      </div>
+
+      <h2>Tier 2 — Scale &amp; Delivery USPs</h2>
+      <div class="callout info">
+        <strong>1. 11 production lines = 500,000 m² monthly capacity</strong><br>
+        Full-process QC. 100% on-time delivery record.
+      </div>
+      <div class="callout info">
+        <strong>2. Industry-leading pricing on fluted panels &amp; mouldings</strong><br>
+        15–30% below comparable Zhejiang and Foshan suppliers.
+      </div>
+      <div class="callout info">
+        <strong>3. 14–120 mm width customization</strong><br>
+        Reduces on-site cutting waste by 5–10%.
+      </div>
+
+      <h2>Tier 3 — Brand &amp; Service USPs</h2>
+      <ul>
+        <li><strong>UK registered trademark Waltive</strong> (UK00004338988)</li>
+        <li><strong>15 years OEM/ODM</strong> across 28 export countries</li>
+        <li><strong>25-day standard lead time</strong></li>
+        <li><strong>Mixed container orders</strong> supported</li>
+        <li><strong>8-year warranty</strong> with 12-hour after-sales response</li>
+        <li>FTA documentation support (ChAFTA, ACFTA, RCEP)</li>
+      </ul>
+    </section>
+
+    <section class="page-section" id="huating-capacity">
+      <h1>Certifications &amp; Capacity</h1>
+      <p class="page-subtitle">Production scale, team structure, and certifications.</p>
+
+      <h2>Production Capacity</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Metric</th><th scope="col">Value</th></tr></thead>
+          <tbody>
+            <tr><td>Automated production lines</td><td><span class="key-number">11</span></td></tr>
+            <tr><td>Monthly capacity</td><td><span class="key-number">500,000 m²</span></td></tr>
+            <tr><td>Annual capacity</td><td><span class="key-number">5,000,000 m²</span></td></tr>
+            <tr><td>Standard lead time</td><td><span class="key-number">25 days</span></td></tr>
+            <tr><td>On-time delivery</td><td><span class="key-number">100%</span></td></tr>
+            <tr><td>Factory scale</td><td>25,000 m² total / 12,000 m² production</td></tr>
+            <tr><td>Team</td><td>98 total | 10 R&amp;D | 8 engineers | 6 QC</td></tr>
+            <tr><td>Experience</td><td>15 years OEM/ODM | 10 years direct export</td></tr>
+            <tr><td>Export reach</td><td>28 countries</td></tr>
+            <tr><td>Warranty</td><td>8 years</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Certifications</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Certification</th><th scope="col">Standard</th><th scope="col">Market</th></tr></thead>
+          <tbody>
+            <tr><td>French A+ Indoor Air Quality</td><td>EN 12460-5</td><td>EU + global premium</td></tr>
+            <tr><td>EU Fire Rating</td><td>EN 13501-1 B-s1,d0</td><td>EU</td></tr>
+            <tr><td>Heavy Metal Migration</td><td>EN 15102</td><td>EU</td></tr>
+            <tr><td>CE Marking</td><td>EU CPR</td><td>EU</td></tr>
+            <tr><td>UK Trademark</td><td>UK00004338988</td><td>UK</td></tr>
+            <tr><td>ISO 9001:2015</td><td>Quality management</td><td>Global</td></tr>
+            <tr><td>SGS Third-Party</td><td>All EN standards</td><td>Global</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warning">
+        <strong>Certifications in progress:</strong> UKCA (UK), ASTM E84 + Prop 65 (USA), CSA/ULC (Canada), AS/NZS 3837 (Australia), SASO/SABER (Saudi Arabia), EAC/GOST (Russia). Contact team for current status.
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SALES PLAYBOOK -->
+    <!-- ============================================================ -->
+
+    <section class="page-section" id="playbook-faq">
+      <h1>Customer FAQ</h1>
+      <p class="page-subtitle">Ready answers for the most common questions.</p>
+
+      <h2>Pricing, MOQ &amp; Quotation</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is your price for WPC / SPC wall panels?</button>
+        <div class="faq-answer">Standard 8mm SPC flat panels with 0.12mm PVC film: FOB Ningbo from $4.70/m². Thin WPC fluted panels from $0.51/m. All prices include PUR hot melt lamination.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is your MOQ?</button>
+        <div class="faq-answer">Flat panels 500 m²/color. Fluted panels and mouldings 1,500–2,000 m/color. Mixed containers supported.</div>
+      </div>
+
+      <h2>Surface Lamination &amp; Finishes</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What kind of lamination glue do you use?</button>
+        <div class="faq-answer">PUR hot melt standard. Permanent chemical bond — no peeling or bubbling.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Do you offer PET film lamination?</button>
+        <div class="faq-answer">Standard is 0.12mm PVC. PET including synchronized embossed grain and ultra-matte anti-fingerprint is available as custom upgrade.</div>
+      </div>
+
+      <h2>Quality &amp; Climate Performance</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Will these panels warp in hot weather?</button>
+        <div class="faq-answer">Our formulas are engineered for tropical climates. Controlled filler ratio and high-grade resin minimize thermal expansion — unlike low-cost Shandong boards with high calcium filler content.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Will the lamination peel off over time?</button>
+        <div class="faq-answer">Very unlikely with PUR hot melt lamination. Budget factories using cold glue face peeling issues in hot/humid climates. PUR creates a permanent bond.</div>
+      </div>
+
+      <h2>Global Import, Customs &amp; Duties</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What HS code do you use?</button>
+        <div class="faq-answer">Finished laminated panels: 3925 90 90. Bare substrate: 3921 12 00. Clearly stated on commercial invoice. National codes may vary — we provide full documentation.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">How much is total import duty in my country?</button>
+        <div class="faq-answer">Depends on destination: India ~31%, USA ~42.8% (Section 301), EU 6.5% + VAT, Australia 0% (ChAFTA), Saudi 5% + VAT, Brazil 60–90%. See Global Tariffs page.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Is there anti-dumping duty on your products?</button>
+        <div class="faq-answer">No current AD duty on SPC or WPC wall panels from China into India, EU, or most markets. AD measures apply only to decorative paper laminates and solid acrylic sheets.</div>
+      </div>
+
+      <h2>Certifications &amp; Compliance</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What certifications do you have?</button>
+        <div class="faq-answer">CE, French A+, EN 13501-1 B-s1,d0, EN 15102, ISO 9001:2015, SGS verified. UKCA, ASTM E84, SASO, AS/NZS in progress. See Certification by Market page.</div>
+      </div>
+
+      <h2>Order, Sampling &amp; Production</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is your production lead time?</button>
+        <div class="faq-answer">25 days after deposit and color confirmation. Faster for stock colors.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What are your payment terms?</button>
+        <div class="faq-answer">30% T/T deposit, balance against B/L copy. Flexible for long-term partners.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is your production capacity?</button>
+        <div class="faq-answer">11 production lines, 500,000 m² monthly capacity. 100% on-time delivery record.</div>
+      </div>
+    </section>
+
+    <section class="page-section" id="playbook-objections">
+      <h1>Competitor Objection Scripts</h1>
+      <p class="page-subtitle">Prepared responses to common objections.</p>
+
+      <h2>Price Objections</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">"Your price is higher than Shandong suppliers. Why?"</button>
+        <div class="faq-answer">Shandong factories quote lower because of higher filler content, thinner core, and mostly cold glue lamination. Those panels often warp or delaminate within 1–2 years in hot climates. For full projects — flat + fluted + mouldings — our total package is very competitive, one supplier, perfectly consistent color.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">"Local WPC prices in my country are lower."</button>
+        <div class="faq-answer">Basic low-grade bamboo charcoal WPC with simple PVC film is available at low prices locally. But premium quality with PUR lamination, PET film, or synchronized grain is limited locally and priced 2–3× higher. For equivalent quality, our landed cost is significantly cheaper.</div>
+      </div>
+
+      <h2>Competitor Comparison Objections</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">"How are you different from Foshan manufacturers?"</button>
+        <div class="faq-answer">Foshan is strong in decorative 3D and curved profiles, but their SPC substrate quality is inconsistent and standard panel prices are higher. We focus on high-quality, cost-effective standard SPC/WPC wall systems for bulk residential and commercial. Our fluted panels and mouldings are more competitive.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">"Turkish suppliers are closer to EU. Why should I buy from China?"</button>
+        <div class="faq-answer">Turkey has proximity advantage and EU customs union access. But Turkish capacity is limited — most run 2–4 lines. We run 11. And our pricing is 20–30% below Turkish suppliers for equivalent quality. When you need a full 40HQ with consistent color across panels, grilles, and mouldings in 25 days — that's where we win.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">"Vietnam has ACFTA 0% duty just like China."</button>
+        <div class="faq-answer">True — Vietnam also benefits from ACFTA. But their SPC production scale is much smaller. We run 11 lines, 500,000 m² monthly. If you need a full 40HQ in 25 days with consistent quality and a complete matching system, Vietnam can't match that today.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">"Why are your flat panels more expensive than average Zhejiang prices?"</button>
+        <div class="faq-answer">Our flat panels use higher density core material and PUR hot melt lamination — costs more but eliminates delamination and warping. Full QC on every order. Combined with our very competitive fluted panels and mouldings, your total project cost is actually lower.</div>
+      </div>
+
+      <h2>Product &amp; Customization Objections</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">"Can you do custom profiles?"</button>
+        <div class="faq-answer">Yes. Custom extrusion moulds for fluted panels and mouldings. Mould cost depends on complexity; refundable once cumulative order volume reaches agreed threshold.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">"Do you have exterior wall panels?"</button>
+        <div class="faq-answer">Standard range is interior. For exterior cladding we offer modified formula with UV stabilizer as custom order. Share project requirements for feasibility.</div>
+      </div>
+
+      <h2>Certification Objections</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">"Do you have ASTM E84 for the US market?"</button>
+        <div class="faq-answer">ASTM E84 testing is in progress. In the meantime, our French A+ and EN 13501-1 B-s1,d0 demonstrate equivalent fire performance. For US importers, we can arrange independent testing upon order confirmation.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">"Do you have SASO for Saudi Arabia?"</button>
+        <div class="faq-answer">SASO/SABER registration in progress. We provide full test reports for PCoC application. Documentation support for customs clearance. Confirm current status before order.</div>
+      </div>
+
+      <h2>Capacity &amp; Reliability Objections</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">"Can you handle large project orders on time?"</button>
+        <div class="faq-answer">Absolutely. 11 automated production lines with 500,000 m² monthly capacity. Full-process QC, 100% on-time delivery record. Regular supplier for hotel and premium apartment projects.</div>
+      </div>
+    </section>
+
+    <section class="page-section" id="playbook-buyer-roles">
+      <h1>Buyer Role Playbook</h1>
+      <p class="page-subtitle">Match your pitch to the buyer's role and pain point.</p>
+
+      <h2>Global Buyer Roles</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Buyer Role</th><th scope="col">Pain Point</th><th scope="col">Our Solution</th></tr></thead>
+          <tbody>
+            <tr><td>🇺🇸 US Importer</td><td>Section 301 tariff + antidumping risk</td><td>HS 3925.90 documentation, total landed cost calc, alternative classification guidance</td></tr>
+            <tr><td>🇪🇺 EU Distributor</td><td>CBAM + EUDR compliance</td><td>CBAM reporting readiness; EUDR due diligence for WPC; French A+ / CE / CPR</td></tr>
+            <tr><td>🇬🇧 UK Wholesaler</td><td>Post-Brexit UKCA marking</td><td>UKCA in progress; UK trademark Waltive for channel protection</td></tr>
+            <tr><td>🇸🇦 Saudi Contractor</td><td>SASO/SABER clearance delays</td><td>SASO registration in progress; full documentation support; test reports for PCoC</td></tr>
+            <tr><td>🇦🇺 Australian Builder</td><td>ChAFTA origin criteria</td><td>0% duty under ChAFTA; full Certificate of Origin documentation</td></tr>
+            <tr><td>🇻🇳 SE Asian Distributor</td><td>ACFTA benefits</td><td>0% duty under ACFTA; Form E handling; fast 7–12 day transit</td></tr>
+            <tr><td>🇮🇳 Indian Importer</td><td>No AD duty + SPC supply gap</td><td>No AD on our category; complete SPC system; bare substrate option</td></tr>
+            <tr><td>🇧🇷 Brazilian Importer</td><td>60–90% tax burden</td><td>EXW/FOB flexibility; premium positioning justifies higher landed cost</td></tr>
+            <tr><td>Hotel procurement manager</td><td>Fire inspection failure delays project</td><td>B-s1,d0 fire rating, EN 13501-1</td></tr>
+            <tr><td>Environmental compliance officer</td><td>VOC failing green certification</td><td>French A+, zero formaldehyde, TVOC &lt;100μg/m³</td></tr>
+            <tr><td>Chain retail engineering director</td><td>Long renovation cycles</td><td>Dry-fit tongue &amp; groove — 50%+ faster install</td></tr>
+            <tr><td>E-commerce sourcing manager</td><td>Multi-supplier coordination, color mismatch</td><td>One-stop 100+ SKU, unified color, single container</td></tr>
+            <tr><td>Large contractor</td><td>Insufficient capacity causes site stoppages</td><td>11 lines, 500,000 m² monthly output</td></tr>
+            <tr><td>Trading company supply chain</td><td>Vague quotes, hidden costs</td><td>Detailed FOB quote with CBM/pack/MOQ per SKU</td></tr>
+            <tr><td>Government auditor</td><td>Lack of authoritative test docs</td><td>Full SGS test report set, all EN standards</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Quick Reference by Buyer Region</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">If you're talking to...</th><th scope="col">Lead with...</th><th scope="col">Key number</th></tr></thead>
+          <tbody>
+            <tr><td>US Importer</td><td>Section 301 documentation + premium differentiation</td><td>~42.8% landed cost</td></tr>
+            <tr><td>EU Distributor</td><td>CBAM readiness + French A+ premium</td><td>6.5% + VAT</td></tr>
+            <tr><td>UK Distributor</td><td>UKCA in progress + Waltive brand</td><td>6% + 20% VAT</td></tr>
+            <tr><td>Saudi Contractor</td><td>SASO support + premium positioning</td><td>5% + 15% VAT</td></tr>
+            <tr><td>Australian Builder</td><td>ChAFTA 0% duty</td><td>0% + 10% GST</td></tr>
+            <tr><td>SE Asian Distributor</td><td>ACFTA 0% + fast transit</td><td>7–12 days transit</td></tr>
+            <tr><td>Indian Importer</td><td>No AD duty + SPC supply gap</td><td>~31% CIF, no AD</td></tr>
+            <tr><td>Brazilian Importer</td><td>Premium positioning despite high tax</td><td>60–90% total tax</td></tr>
+            <tr><td>Price-focused buyer</td><td>Fluted panels 15–30% below market</td><td>WPC fluted from $0.51/m</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="page-section" id="global-sales-scripts">
+      <h1>Global Market Sales Scripts</h1>
+      <p class="page-subtitle">Region-specific 60-second openings for Canton Fair conversations.</p>
+
+      <h2>🇺🇸 For US Buyers</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Welcome — I know Section 301 adds 25% on HS 3925.90 from China. That's real pain. But let me show you why US importers still choose us:</p>
+        <p><strong>1. Premium differentiation.</strong> Our PUR hot melt lamination and French A+ certification let you position at the premium end — Home Depot, Lowes, and specialty retailers pay more for that.</p>
+        <p><strong>2. Complete system.</strong> Flat panels, fluted grilles, matching mouldings — one supplier, one container, one color. Saves you 15%+ on procurement.</p>
+        <p><strong>3. Documentation support.</strong> We provide everything for customs: HS code, CO, test reports, Section 301 declaration.</p>
+        <p>What's your project? Let me show you the products that work best for the US retail market."</p>
+      </div>
+
+      <h2>🇪🇺 For EU Buyers</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Welcome. Two things EU importers ask me about in 2026: CBAM and EUDR. Let me address both:</p>
+        <p><strong>CBAM:</strong> We're ready with embedded carbon reporting. Full documentation support for your CBAM declaration.</p>
+        <p><strong>EUDR:</strong> For WPC products with wood fiber, we provide due diligence documentation. Our supply chain is traceable.</p>
+        <p><strong>Plus our standard EU certifications:</strong> CE/CPR, French A+, EN 13501-1 B-s1,d0, REACH. We meet the strictest European standards.</p>
+        <p>Our pricing is 6.5% duty + VAT — competitive with Turkish suppliers and superior in certifications. What project are you sourcing for?"</p>
+      </div>
+
+      <h2>🇬🇧 For UK Buyers</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Welcome. I know UKCA marking is now required post-Brexit — we're in progress on that certification. But there's a bigger opportunity:</p>
+        <p><strong>Waltive is a UK-registered trademark</strong> (UK00004338988). That means legal brand protection for exclusive distributors. White-label competitors can't offer that.</p>
+        <p>Our EU certifications — CE, French A+, B-s1,d0 — already meet the technical standards UKCA is based on. When our UKCA completes, you'll be first in line.</p>
+        <p>Duty is 6% + 20% VAT. What are you sourcing for — retail, trade, or projects?"</p>
+      </div>
+
+      <h2>🇸🇦 For Middle East Buyers</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Welcome. You know SASO/SABER clearance is the #1 delay risk at Jeddah, Dammam, and Dubai ports. Let me address that:</p>
+        <p><strong>SASO registration in progress.</strong> We provide full test reports for PCoC application. Documentation support end-to-end.</p>
+        <p><strong>Premium positioning.</strong> For Middle East luxury projects — hotels, malls, high-end residential — our French A+ and B-s1,d0 certifications open architect specifications. Competitive Turkish or Indian suppliers can't match this.</p>
+        <p><strong>5% GCC tariff + 15% VAT</strong> — favorable. 18–25 day transit from Ningbo.</p>
+        <p>What's your project — hotel, residential, retail?"</p>
+      </div>
+
+      <h2>🇦🇺 For Australian Buyers</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Welcome. ChAFTA is your big advantage — 0% duty on our panels. That's 5–6% savings versus EU suppliers, 5.3% versus US suppliers.</p>
+        <p><strong>Landed cost calculation:</strong> FOB + freight + 0% duty + 10% GST (creditable if you're GST-registered). For a 40HQ worth $30,000 FOB, that's $1,500–1,800 in duty savings alone.</p>
+        <p>We provide full Certificate of Origin. Direct shipment China → Australia. Our AS/NZS 3837 fire testing is in progress for full compliance.</p>
+        <p>What's your project — residential, commercial, or trade distribution?"</p>
+      </div>
+
+      <h2>🇻🇳 For SE Asian Buyers</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Welcome. ACFTA gives you 0% duty on our panels — same as Vietnam's local production. But here's the difference:</p>
+        <p><strong>Scale:</strong> We run 11 production lines, 500,000 m² monthly. Vietnamese SPC capacity is much smaller.</p>
+        <p><strong>Complete system:</strong> Flat panels, fluted grilles, matching mouldings — one supplier, one container. Vietnamese factories typically specialize in one product type.</p>
+        <p><strong>Fast transit:</strong> 7–12 days from Ningbo to Ho Chi Minh, Bangkok, or Port Klang. Same or faster than Vietnam domestic.</p>
+        <p>Form E Certificate of Origin handled by us. What are you sourcing?"</p>
+      </div>
+
+      <h2>🇮🇳 For Indian Buyers</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Welcome. Two things: SPC supply gap and no AD duty. Let me explain:</p>
+        <p><strong>SPC supply gap:</strong> Very few Indian manufacturers produce SPC wall panels at scale. Almost all SPC in India is imported. This is our biggest opportunity — we supply complete SPC systems with consistent quality.</p>
+        <p><strong>No AD duty:</strong> HS 3925.90 has no anti-dumping duty from China into India. Only decorative paper laminates and solid acrylic sheets have AD.</p>
+        <p><strong>Landed cost ~31% CIF</strong> — 10% BCD + 10% SWS + 18% IGST (creditable for GST-registered importers).</p>
+        <p><strong>Bare substrate option:</strong> For buyers with lamination lines, HS 39211200 at 25–30% below finished panels.</p>
+        <p>What project are you sourcing for?"</p>
+      </div>
+
+      <h2>🇧🇷 For South American Buyers</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Welcome. I know Brazil and South America have the highest import tax burden globally — 60–90% total. But here's why premium importers still choose us:</p>
+        <p><strong>1. Domestic alternatives are 3× our price.</strong> For premium laminated products, our landed cost is still 50–60% below local Brazilian production.</p>
+        <p><strong>2. Premium specifications justify retail price.</strong> PET, synchronized emboss, French A+ — these open architect and high-end retail channels where price sensitivity is lower.</p>
+        <p><strong>3. EXW or FOB flexibility.</strong> You control the import structure to optimize tax position.</p>
+        <p><strong>Transit:</strong> 35–40 days to Santos. 40HQ loading optimized for your mix.</p>
+        <p>What's your target market — retail, construction, or distribution?"</p>
+      </div>
+
+      <h2>🇳🇬 For African Buyers</h2>
+      <div class="script-block">
+        <button type="button" class="copy-btn">Copy</button>
+        <p>"Welcome. For Nigeria, Kenya, South Africa — the winning formula is price + reliability. Let me address both:</p>
+        <p><strong>Price:</strong> Our WPC fluted panels start at $0.51/m — among the most competitive in China. SPC flat panels from $4.70/m². We can match Shandong bulk pricing on entry SKUs while maintaining quality.</p>
+        <p><strong>Reliability:</strong> 11 production lines, 500,000 m² monthly, 100% on-time delivery. No supply disruption — critical for African distribution where lead times matter.</p>
+        <p><strong>Transit:</strong> 25–35 days to Lagos, Mombasa, or Durban.</p>
+        <p>Payment terms 30/70 T/T. What are you sourcing — full container or mixed?"</p>
+      </div>
+    </section>
+
+    <section class="page-section" id="playbook-after-sales">
+      <h1>After-Sales &amp; Relationship</h1>
+      <p class="page-subtitle">Scripts for relationship building and after-sales commitments.</p>
+
+      <h2>After-Sales Q&amp;A</h2>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What is your after-sales policy?</button>
+        <div class="faq-answer">8-year product warranty on panels. After-sales team responds within 12 hours. All issues handled promptly and fairly.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">What if there is a quality problem?</button>
+        <div class="faq-answer">We take full responsibility. Photos/videos reviewed; if our fault, we replace goods or compensate in your next order. Batch traceability prevents problems.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Do you have a local agent or warehouse?</button>
+        <div class="faq-answer">No local warehouse currently, but many regular clients across 28 countries supported directly from China. We ship to all major ports. For large distributors, we can discuss local presence in the future.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Can you provide marketing support?</button>
+        <div class="faq-answer">Yes — high-res images, product videos, catalog PDFs, and sample displays. Brand authorization for exclusive distributors. UK trademark Waltive can be licensed for your market.</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-question" aria-expanded="false">Can we be your exclusive distributor in our region?</button>
+        <div class="faq-answer">Yes — open to exclusive distribution agreements for partners with proven volume and market coverage. Minimum annual volumes and terms negotiable. Waltive (UK00004338988) can be licensed for exclusive use.</div>
+      </div>
+
+      <h2>Relationship Building Tips</h2>
+      <ul>
+        <li><strong>Follow up within 24 hours</strong> of every serious meeting.</li>
+        <li><strong>Send samples promptly</strong> — 3–7 days for standard items.</li>
+        <li><strong>Share certificates proactively.</strong></li>
+        <li><strong>Provide container loading photos</strong> — builds trust.</li>
+        <li><strong>Offer exclusive territory</strong> to committed partners with volume.</li>
+        <li><strong>Support marketing materials.</strong></li>
+        <li><strong>Visit key partners</strong> annually in major markets (India, SE Asia, Middle East).</li>
+      </ul>
+
+      <h2>Long-Term Partner Benefits</h2>
+      <ul>
+        <li>Priority production scheduling</li>
+        <li>Exclusive colors or designs for your market</li>
+        <li>Co-branded packaging and marketing materials</li>
+        <li>Quarterly performance review and rebate structure</li>
+        <li>First look at new product launches</li>
+        <li>Extended warranty and after-sales priority</li>
+        <li>FTA documentation support (ChAFTA, ACFTA, RCEP)</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TOOLS & RESOURCES -->
+    <!-- ============================================================ -->
+
+    <section class="page-section" id="tools-search-guide">
+      <h1>Global Search Guide</h1>
+      <p class="page-subtitle">How to use the search bar to find anything fast.</p>
+
+      <h2>What Search Covers</h2>
+      <p>Search across <strong>all sections</strong>. Try keywords like:</p>
+      <ul>
+        <li>Country names (e.g., "Saudi", "Australia", "USA")</li>
+        <li>HS codes (e.g., "3925")</li>
+        <li>Duty rates (e.g., "31%", "Section 301")</li>
+        <li>Product names (e.g., "GS1358", "H8600F")</li>
+        <li>Competitor names (e.g., "Foshan", "Turkey")</li>
+        <li>Certifications (e.g., "French A+", "SASO", "UKCA", "ASTM")</li>
+        <li>FTA names (e.g., "ChAFTA", "ACFTA", "RCEP")</li>
+        <li>Pricing (e.g., "4.70")</li>
+      </ul>
+
+      <h2>Search Tips</h2>
+      <ul>
+        <li><strong>Specific terms:</strong> "SASO" better than "Saudi certification".</li>
+        <li><strong>Keyboard navigation:</strong> ↑ / ↓ arrows, Enter to select, Escape to close.</li>
+        <li><strong>Keyboard shortcut:</strong> <code>Ctrl+K</code> or <code>Cmd+K</code>.</li>
+        <li><strong>Highlighting:</strong> Matched term is highlighted on the target page.</li>
+      </ul>
+
+      <h2>Common Global Searches</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">To find...</th><th scope="col">Search for...</th></tr></thead>
+          <tbody>
+            <tr><td>Saudi Arabia duty + SASO</td><td>Saudi</td></tr>
+            <tr><td>Australia FTA advantage</td><td>ChAFTA</td></tr>
+            <tr><td>USA Section 301 impact</td><td>Section 301</td></tr>
+            <tr><td>EU CBAM requirement</td><td>CBAM</td></tr>
+            <tr><td>SE Asia 0% duty</td><td>ACFTA</td></tr>
+            <tr><td>Certification for US market</td><td>ASTM</td></tr>
+            <tr><td>UK market requirements</td><td>UKCA</td></tr>
+            <tr><td>Brazil total tax</td><td>Brazil</td></tr>
+            <tr><td>India no AD duty</td><td>anti-dumping</td></tr>
+            <tr><td>Turkey competitor</td><td>Turkey</td></tr>
+            <tr><td>Vietnam competitor</td><td>Vietnam</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="page-section" id="tools-print-guide">
+      <h1>Print &amp; Export Guide</h1>
+      <p class="page-subtitle">How to print or export specific pages for your binder.</p>
+
+      <h2>Print the Current Page</h2>
+      <ol>
+        <li>Navigate to the page.</li>
+        <li>Click <strong>🖨 Print</strong> top-right.</li>
+        <li>Choose "Save as PDF" or select printer.</li>
+        <li>Recommended: A4, Portrait (or Landscape for wide tables), Background graphics ON.</li>
+      </ol>
+
+      <h2>Recommended Print Sets</h2>
+      <ul>
+        <li><strong>Global Sales Binder:</strong> Quick Reference + Global Tariffs + Certification by Market + FTA Guide + Global Sales Scripts + Competitor Objections</li>
+        <li><strong>Technical Binder:</strong> SPC vs WPC + Technical Specs + Certifications + Installation</li>
+        <li><strong>Market Intelligence Binder:</strong> Global Market Overview + Global Tariffs + Global Competitors + China Overview + India Landscape</li>
+        <li><strong>Full Reference:</strong> All 32 pages (approx 90–100 pages A4)</li>
+      </ul>
+    </section>
+
+    <div class="footer">
+      © 2026 Jinhua Huating New Materials Co., Ltd. | Waltive Brand | Canton Fair Internal Knowledge Base — Global Edition
+    </div>
+  </main>
+</div>
+
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var STORAGE_KEYS = {
+    theme: 'waltive_theme',
+    lastPage: 'waltive_last_page',
+    collapsedGroups: 'waltive_collapsed_groups'
+  };
+
+  var navItems        = document.querySelectorAll('.nav-item');
+  var pageSections    = document.querySelectorAll('.page-section');
+  var breadcrumb      = document.getElementById('breadcrumb');
+  var sidebar         = document.getElementById('sidebar');
+  var sidebarBackdrop = document.getElementById('sidebarBackdrop');
+  var menuBtn         = document.getElementById('menuBtn');
+  var themeToggle     = document.getElementById('themeToggle');
+  var printBtn        = document.getElementById('printBtn');
+  var searchInput     = document.getElementById('searchInput');
+  var searchResults   = document.getElementById('searchResults');
+  var searchClear     = document.getElementById('searchClear');
+  var backToTop       = document.getElementById('backToTop');
+  var toast           = document.getElementById('toast');
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = String(str);
+    return div.innerHTML;
+  }
+  function escapeRegExp(str) {
+    return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(function () { toast.classList.remove('show'); }, 2000);
+  }
+
+  /* THEME */
+  var currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+  themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+  themeToggle.setAttribute('aria-pressed', currentTheme === 'dark' ? 'true' : 'false');
+
+  themeToggle.addEventListener('click', function () {
+    var current = document.documentElement.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem(STORAGE_KEYS.theme, next); } catch (e) {}
+    themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+    themeToggle.setAttribute('aria-pressed', next === 'dark' ? 'true' : 'false');
+  });
+
+  printBtn.addEventListener('click', function () { window.print(); });
+
+  /* BREADCRUMB */
+  var CRUMB_TARGETS = {
+    'quick start': 'fair-overview',
+    'product': 'spc-vs-wpc',
+    'pricing': 'pricing-strategy',
+    'market': 'global-market',
+    'huating': 'huating-benchmark',
+    'playbook': 'playbook-faq',
+    'tools': 'tools-search-guide'
+  };
+
+  function buildBreadcrumb(crumbText) {
+    var parts = crumbText.split('›').map(function (s) { return s.trim(); });
+    var html = '';
+    parts.forEach(function (part, i) {
+      if (i === parts.length - 1) {
+        html += '<span class="current">' + escapeHtml(part) + '</span>';
+      } else {
+        html += '<button type="button" data-crumb-nav="' + escapeHtml(part) + '">' + escapeHtml(part) + '</button>';
+        html += '<span class="sep" aria-hidden="true">›</span>';
+      }
+    });
+    return html;
+  }
+
+  breadcrumb.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-crumb-nav]');
+    if (!btn) return;
+    var target = btn.getAttribute('data-crumb-nav').toLowerCase();
+    var pageId = CRUMB_TARGETS[target];
+    if (pageId) navigateTo(pageId);
+  });
+
+  /* NAVIGATION */
+  function navigateTo(pageId, pushHistory) {
+    if (pushHistory === undefined) pushHistory = true;
+    var item = document.querySelector('.nav-item[data-page="' + pageId + '"]');
+    if (!item) return;
+
+    var crumbText = item.getAttribute('data-crumb');
+
+    navItems.forEach(function (nav) {
+      nav.classList.remove('active');
+      nav.removeAttribute('aria-current');
+    });
+    item.classList.add('active');
+    item.setAttribute('aria-current', 'page');
+
+    pageSections.forEach(function (section) {
+      section.classList.remove('active');
+      if (section.id === pageId) section.classList.add('active');
+    });
+
+    // Clear stale search highlights on newly activated section
+    var activeSec = document.getElementById(pageId);
+    if (activeSec) {
+      activeSec.querySelectorAll('mark.search-highlight').forEach(function (m) {
+        var t = document.createTextNode(m.textContent);
+        m.parentNode.replaceChild(t, m);
+      });
+    }
+
+    // Auto-expand parent nav group if collapsed
+    var parentGroup = item.closest('.nav-group');
+    if (parentGroup && parentGroup.classList.contains('collapsed')) {
+      parentGroup.classList.remove('collapsed');
+      var title = parentGroup.querySelector('.nav-group-title');
+      if (title) title.setAttribute('aria-expanded', 'true');
+      updateGroupHeight(parentGroup);
+      saveCollapsedGroups();
+    }
+
+    // Scroll sidebar to active item
+    if (item.scrollIntoView && sidebar.contains(item)) {
+      item.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+    }
+
+    breadcrumb.innerHTML = buildBreadcrumb(crumbText);
+
+    if (pushHistory) {
+      var group = item.closest('.nav-group');
+      var groupName = group ? group.getAttribute('data-group') : 'page';
+      try {
+        history.pushState({ pageId: pageId }, '', '#' + groupName + '/' + pageId);
+      } catch (e) {}
+    }
+
+    try { localStorage.setItem(STORAGE_KEYS.lastPage, pageId); } catch (e) {}
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.innerWidth <= 960) closeSidebar();
+  }
+
+  navItems.forEach(function (item) {
+    item.addEventListener('click', function () {
+      navigateTo(item.getAttribute('data-page'));
+    });
+  });
+
+  window.addEventListener('popstate', function (e) {
+    if (e.state && e.state.pageId) navigateTo(e.state.pageId, false);
+  });
+
+  /* SIDEBAR */
+  function openSidebar() {
+    sidebar.classList.add('open');
+    sidebarBackdrop.classList.add('show');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    var firstNav = sidebar.querySelector('.nav-item');
+    if (firstNav) setTimeout(function () { firstNav.focus(); }, 100);
+  }
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    sidebarBackdrop.classList.remove('show');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    menuBtn.focus();
+  }
+  menuBtn.addEventListener('click', function () {
+    if (sidebar.classList.contains('open')) closeSidebar(); else openSidebar();
+  });
+  sidebarBackdrop.addEventListener('click', closeSidebar);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    if (!sidebar.classList.contains('open')) return;
+    if (window.innerWidth > 960) return;
+    var focusable = sidebar.querySelectorAll('button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    var first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+      closeSidebar();
+    }
+  });
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 960 && sidebar.classList.contains('open')) closeSidebar();
+  });
+
+  /* NAV GROUPS */
+  function updateGroupHeight(group) {
+    var items = group.querySelector('.nav-group-items');
+    if (!items) return;
+    if (group.classList.contains('collapsed')) items.style.maxHeight = '0px';
+    else items.style.maxHeight = items.scrollHeight + 'px';
+  }
+  function saveCollapsedGroups() {
+    var collapsed = [];
+    document.querySelectorAll('.nav-group.collapsed').forEach(function (g) {
+      var name = g.getAttribute('data-group');
+      if (name) collapsed.push(name);
+    });
+    try { localStorage.setItem(STORAGE_KEYS.collapsedGroups, JSON.stringify(collapsed)); } catch (e) {}
+  }
+  function restoreCollapsedGroups() {
+    var collapsed = [];
+    try { collapsed = JSON.parse(localStorage.getItem(STORAGE_KEYS.collapsedGroups) || '[]'); } catch (e) {}
+    collapsed.forEach(function (name) {
+      var group = document.querySelector('.nav-group[data-group="' + name + '"]');
+      if (group) {
+        group.classList.add('collapsed');
+        var title = group.querySelector('.nav-group-title');
+        if (title) title.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+  function initGroupHeights() {
+    document.querySelectorAll('.nav-group').forEach(function (group) { updateGroupHeight(group); });
+  }
+
+  sidebar.addEventListener('click', function (e) {
+    var title = e.target.closest('.nav-group-title');
+    if (!title) return;
+    var group = title.closest('.nav-group');
+    if (!group) return;
+    var isCollapsed = group.classList.toggle('collapsed');
+    title.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+    updateGroupHeight(group);
+    saveCollapsedGroups();
+  });
+
+  /* FAQ */
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.copy-btn')) return;
+    var q = e.target.closest('.faq-question');
+    if (!q) return;
+    var item = q.closest('.faq-item');
+    var answer = item.querySelector('.faq-answer');
+    if (!answer) return;
+    var isOpen = item.classList.toggle('open');
+    q.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    answer.style.maxHeight = isOpen ? answer.scrollHeight + 'px' : '0px';
+  });
+
+  /* COPY */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.copy-btn');
+    if (!btn) return;
+    var block = btn.closest('.script-block');
+    if (!block) return;
+    var clone = block.cloneNode(true);
+    clone.querySelectorAll('.copy-btn').forEach(function (b) { b.remove(); });
+    var text = clone.textContent.trim().replace(/\s+\n/g, '\n').replace(/\n{3,}/g, '\n\n');
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = '✓ Copied';
+        btn.setAttribute('aria-label', 'Script copied to clipboard');
+        btn.classList.add('copied');
+        showToast('Script copied to clipboard');
+        setTimeout(function () {
+          btn.textContent = 'Copy';
+          btn.removeAttribute('aria-label');
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(function () { showToast('Copy failed — please select manually'); });
+    } else {
+      var textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.top = '-9999px';
+      textarea.style.left = '-9999px';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try { document.execCommand('copy'); showToast('Script copied to clipboard'); }
+      catch (err) { showToast('Copy failed — please select manually'); }
+      document.body.removeChild(textarea);
+    }
+  });
+
+  /* SEARCH */
+  var searchIndex = [];
+  var searchFocusIdx = -1;
+  var searchDebounceTimer = null;
+
+  function buildSearchIndex() {
+    searchIndex = [];
+    var seen = new WeakSet();
+    pageSections.forEach(function (section) {
+      var pageId = section.id;
+      var item = document.querySelector('.nav-item[data-page="' + pageId + '"]');
+      var h1 = section.querySelector('h1');
+      var pageTitle = h1 ? h1.textContent : pageId;
+      var crumb = item ? item.getAttribute('data-crumb') : pageId;
+      var candidates = section.querySelectorAll('h2, h3, p, li, td, .faq-question, .callout, .script-block');
+      candidates.forEach(function (el) {
+        var ancestor = el.parentElement;
+        while (ancestor && ancestor !== section) {
+          if (seen.has(ancestor)) return;
+          ancestor = ancestor.parentElement;
+        }
+        if (seen.has(el)) return;
+        var text = el.textContent.trim();
+        if (text.length < 8) return;
+        seen.add(el);
+        searchIndex.push({
+          pageId: pageId,
+          pageTitle: pageTitle,
+          crumb: crumb,
+          text: text.substring(0, 2000)
+        });
+      });
+    });
+  }
+
+  function performSearch(term) {
+    term = term.toLowerCase().trim();
+    searchResults.innerHTML = '';
+    searchFocusIdx = -1;
+    searchInput.removeAttribute('aria-activedescendant');
+
+    if (term.length < 2) {
+      searchResults.classList.remove('active');
+      searchInput.setAttribute('aria-expanded', 'false');
+      return;
+    }
+
+    var matches = [];
+    var seenPages = {};
+    for (var i = 0; i < searchIndex.length; i++) {
+      var entry = searchIndex[i];
+      if (entry.text.toLowerCase().indexOf(term) !== -1) {
+        if (!seenPages[entry.pageId]) {
+          seenPages[entry.pageId] = true;
+          matches.push({ pageId: entry.pageId, pageTitle: entry.pageTitle, crumb: entry.crumb });
+        }
+      }
+    }
+
+    if (matches.length === 0) {
+      var emptyDiv = document.createElement('div');
+      emptyDiv.className = 'search-empty';
+      emptyDiv.textContent = 'No results found. Try a different keyword.';
+      searchResults.appendChild(emptyDiv);
+      searchResults.classList.add('active');
+      searchInput.setAttribute('aria-expanded', 'true');
+      return;
+    }
+
+    matches.slice(0, 12).forEach(function (match) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'search-result-item';
+      btn.setAttribute('role', 'option');
+      btn.setAttribute('aria-selected', 'false');
+      btn.innerHTML =
+        '<div class="search-result-title">' + escapeHtml(match.pageTitle) + '</div>' +
+        '<div class="search-result-path">' + escapeHtml(match.crumb) + '</div>';
+      btn.addEventListener('click', function () {
+        try { sessionStorage.setItem('waltive_search_term', term); } catch (e) {}
+        navigateTo(match.pageId);
+        searchResults.classList.remove('active');
+        searchInput.value = '';
+        searchClear.classList.remove('show');
+        searchInput.setAttribute('aria-expanded', 'false');
+        searchInput.removeAttribute('aria-activedescendant');
+      });
+      searchResults.appendChild(btn);
+    });
+
+    searchResults.classList.add('active');
+    searchInput.setAttribute('aria-expanded', 'true');
+  }
+
+  function updateSearchFocus(items) {
+    var activeId = '';
+    items.forEach(function (item, i) {
+      if (!item.id) item.id = 'sr-' + i + '-' + Math.random().toString(36).substr(2, 6);
+      var focused = (i === searchFocusIdx);
+      item.classList.toggle('focused', focused);
+      item.setAttribute('aria-selected', focused ? 'true' : 'false');
+      if (focused) activeId = item.id;
+    });
+    if (activeId) searchInput.setAttribute('aria-activedescendant', activeId);
+    else searchInput.removeAttribute('aria-activedescendant');
+    if (items[searchFocusIdx]) items[searchFocusIdx].scrollIntoView({ block: 'nearest' });
+  }
+
+  function highlightTermInPage(term) {
+    if (!term || term.length < 2) return;
+    var activeSection = document.querySelector('.page-section.active');
+    if (!activeSection) return;
+
+    activeSection.querySelectorAll('mark.search-highlight').forEach(function (m) {
+      var text = document.createTextNode(m.textContent);
+      m.parentNode.replaceChild(text, m);
+    });
+
+    var walker = document.createTreeWalker(activeSection, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (node) {
+        if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        var parent = node.parentNode;
+        if (!parent) return NodeFilter.FILTER_REJECT;
+        var tag = parent.tagName;
+        if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'MARK') return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    var nodes = [];
+    var n;
+    var lowerTerm = term.toLowerCase();
+    while ((n = walker.nextNode())) {
+      if (n.nodeValue.toLowerCase().indexOf(lowerTerm) !== -1) nodes.push(n);
+    }
+
+    nodes.forEach(function (node) {
+      var text = node.nodeValue;
+      var frag = document.createDocumentFragment();
+      var lastIdx = 0;
+      var re = new RegExp(escapeRegExp(term), 'gi');
+      var match;
+      while ((match = re.exec(text)) !== null) {
+        if (match.index > lastIdx) {
+          frag.appendChild(document.createTextNode(text.substring(lastIdx, match.index)));
+        }
+        var mark = document.createElement('mark');
+        mark.className = 'search-highlight';
+        mark.textContent = match[0];
+        frag.appendChild(mark);
+        lastIdx = match.index + match[0].length;
+      }
+      if (lastIdx < text.length) {
+        frag.appendChild(document.createTextNode(text.substring(lastIdx)));
+      }
+      node.parentNode.replaceChild(frag, node);
+    });
+
+    var first = activeSection.querySelector('mark.search-highlight');
+    if (first) setTimeout(function () { first.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 150);
+  }
+
+  searchInput.addEventListener('input', function (e) {
+    var term = e.target.value;
+    searchClear.classList.toggle('show', term.length > 0);
+    // Clear highlights across all sections on new search
+    document.querySelectorAll('mark.search-highlight').forEach(function (m) {
+      var t = document.createTextNode(m.textContent);
+      m.parentNode.replaceChild(t, m);
+    });
+    clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(function () { performSearch(term); }, 150);
+  });
+
+  searchInput.addEventListener('focus', function () {
+    if (searchInput.value.trim().length >= 2) {
+      searchResults.classList.add('active');
+      searchInput.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  searchInput.addEventListener('keydown', function (e) {
+    var items = searchResults.querySelectorAll('.search-result-item');
+    if (e.key === 'ArrowDown' && items.length) {
+      e.preventDefault();
+      searchFocusIdx = Math.min(searchFocusIdx + 1, items.length - 1);
+      updateSearchFocus(items);
+    } else if (e.key === 'ArrowUp' && items.length) {
+      e.preventDefault();
+      searchFocusIdx = Math.max(searchFocusIdx - 1, 0);
+      updateSearchFocus(items);
+    } else if (e.key === 'Enter' && searchFocusIdx >= 0 && items[searchFocusIdx]) {
+      e.preventDefault();
+      items[searchFocusIdx].click();
+    } else if (e.key === 'Escape') {
+      searchResults.classList.remove('active');
+      searchInput.setAttribute('aria-expanded', 'false');
+      searchInput.removeAttribute('aria-activedescendant');
+      searchFocusIdx = -1;
+    }
+  });
+
+  searchClear.addEventListener('click', function () {
+    searchInput.value = '';
+    searchClear.classList.remove('show');
+    searchResults.classList.remove('active');
+    searchInput.setAttribute('aria-expanded', 'false');
+    searchInput.removeAttribute('aria-activedescendant');
+    searchFocusIdx = -1;
+    searchInput.focus();
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.search-bar')) {
+      searchResults.classList.remove('active');
+      searchInput.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      searchInput.focus();
+      searchInput.select();
+    }
+  });
+
+  /* BACK TO TOP */
+  window.addEventListener('scroll', function () {
+    backToTop.classList.toggle('show', window.scrollY > 400);
+  }, { passive: true });
+
+  backToTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* INIT */
+  function determineInitialPage() {
+    var hash = window.location.hash.replace('#', '');
+    var pageId = null;
+    if (hash && hash.indexOf('/') !== -1) pageId = hash.split('/')[1];
+    if (!pageId || !document.getElementById(pageId)) {
+      try { pageId = localStorage.getItem(STORAGE_KEYS.lastPage); } catch (e) {}
+    }
+    if (!pageId || !document.getElementById(pageId)) pageId = 'fair-overview';
+    return pageId;
+  }
+
+  function initPage() {
+    restoreCollapsedGroups();
+    initGroupHeights();
+    var pageId = determineInitialPage();
+    navigateTo(pageId, false);
+    var item = document.querySelector('.nav-item[data-page="' + pageId + '"]');
+    if (item) {
+      var group = item.closest('.nav-group');
+      var groupName = group ? group.getAttribute('data-group') : 'page';
+      try { history.replaceState({ pageId: pageId }, '', '#' + groupName + '/' + pageId); } catch (e) {}
+    }
+    try {
+      var pending = sessionStorage.getItem('waltive_search_term');
+      if (pending) {
+        sessionStorage.removeItem('waltive_search_term');
+        highlightTermInPage(pending);
+      }
+    } catch (e) {}
+  }
+
+  window.addEventListener('hashchange', function () {
+    var hash = window.location.hash.replace('#', '');
+    if (hash && hash.indexOf('/') !== -1) {
+      var pageId = hash.split('/')[1];
+      if (document.getElementById(pageId)) navigateTo(pageId, false);
+    }
+  });
+
+  /* Recalc group heights on font load and resize */
+  window.addEventListener('load', function () {
+    document.querySelectorAll('.nav-group').forEach(updateGroupHeight);
+  });
+
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      document.querySelectorAll('.nav-group').forEach(updateGroupHeight);
+    }, 150);
+  });
+
+  function boot() {
+    buildSearchIndex();
+    initPage();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+})();
+</script>
+</body>
+</html>
