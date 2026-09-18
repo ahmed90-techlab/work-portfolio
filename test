@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Large Sample HTML Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #222;
+      background: #f5f5f7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1f2933, #3b82f6);
+      color: #fff;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    nav {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    nav a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav a:hover {
+      background: #fff;
+      color: #1f2933;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 20px auto 60px;
+      padding: 0 20px 40px;
+    }
+
+    section {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    }
+
+    section h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    section h3 {
+      font-size: 18px;
+      margin: 18px 0 8px;
+      color: #111827;
+    }
+
+    section p {
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #374151;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .card {
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      padding: 16px;
+      background: #f9fafb;
+    }
+
+    .card h4 {
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: #4b5563;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+
+    table thead {
+      background: #f3f4f6;
+    }
+
+    table th,
+    table td {
+      padding: 8px 10px;
+      border: 1px solid #e5e7eb;
+      text-align: left;
+    }
+
+    table th {
+      font-weight: 600;
+      color: #111827;
+    }
+
+    table tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    .code-block {
+      background: #0b1120;
+      color: #e5e7eb;
+      padding: 14px 16px;
+      border-radius: 8px;
+      font-family: "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+
+    .code-block code {
+      white-space: pre;
+    }
+
+    .columns-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .list {
+      margin-top: 8px;
+      margin-left: 18px;
+      font-size: 14px;
+      color: #374151;
+    }
+
+    .list li {
+      margin-bottom: 6px;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .hero-text {
+      flex: 1 1 280px;
+    }
+
+    .hero-visual {
+      flex: 1 1 260px;
+      min-height: 180px;
+      border-radius: 12px;
+      background: radial-gradient(circle at top left, #3b82f6, #111827);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #fbbf24;
+      opacity: 0.9;
+    }
+
+    .hero-dot.dot1 {
+      top: 24px;
+      left: 30px;
+    }
+
+    .hero-dot.dot2 {
+      bottom: 30px;
+      right: 40px;
+    }
+
+    .hero-dot.dot3 {
+      top: 50%;
+      left: 60%;
+    }
+
+    .hero-visual-inner {
+      position: absolute;
+      inset: 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(249, 250, 251, 0.3);
+      background: rgba(15, 23, 42, 0.4);
+      padding: 12px;
+      color: #e5e7eb;
+      font-size: 12px;
+    }
+
+    .hero-visual-inner h4 {
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .hero-visual-inner ul {
+      margin-left: 16px;
+      margin-top: 4px;
+    }
+
+    .hero-visual-inner li {
+      margin-bottom: 4px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .gallery-item {
+      border-radius: 10px;
+      background: #111827;
+      color: #e5e7eb;
+      padding: 10px;
+      font-size: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-item span {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .gallery-item small {
+      opacity: 0.8;
+    }
+
+    .gallery-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.4), transparent);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      font-size: 13px;
+      font-family: inherit;
+    }
+
+    .form-group textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: #f9fafb;
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #9ca3af;
+      color: #374151;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: #ecfeff;
+      color: #0f766e;
+      margin-left: 6px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 16px 18px;
+      }
+
+      main {
+        padding: 0 14px 30px;
+      }
+
+      section {
+        padding: 18px 16px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Large HTML Demo Page</h1>
+    <p>A single file with many sections, components, and layouts you can tweak or extend.</p>
+    <nav>
+      <a href="#intro">Intro</a>
+      <a href="#features">Features</a>
+      <a href="#cards">Cards</a>
+      <a href="#table">Table</a>
+      <a href="#code">Code</a>
+      <a href="#layout">Layout</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#forms">Forms</a>
+      <a href="#long-text">Long Text</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Intro Section -->
+    <section id="intro">
+      <h2>Intro section</h2>
+      <div class="hero">
+        <div class="hero-text">
+          <p>
+            This HTML file is intentionally large and structured. You can use it as a playground,
+            a template, or a starting point for a more complex project. It includes navigation,
+            cards, tables, forms, and multiple layout patterns.
+          </p>
+          <p>
+            Feel free to remove sections you don’t need, rename components, or wire them up to
+            JavaScript later. The goal is to give you a rich, but still readable, base.
+          </p>
+          <div>
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS-only</span>
+            <span class="tag">Responsive</span>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-dot dot1"></div>
+          <div class="hero-dot dot2"></div>
+          <div class="hero-dot dot3"></div>
+          <div class="hero-visual-inner">
+            <h4>Page structure overview</h4>
+            <ul>
+              <li>Sticky header with navigation</li>
+              <li>Multiple content sections</li>
+              <li>Cards, tables, forms, and more</li>
+              <li>Responsive grid layouts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+      <h2>Feature overview</h2>
+      <p>
+        Below is a high-level overview of what this page demonstrates. Each feature is implemented
+        with simple, modern HTML and CSS—no frameworks, no external dependencies.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h4>Semantic sections</h4>
+          <p>
+            The page uses semantic tags like <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>,
+            and <code>&lt;section&gt;</code> to keep the structure clear and accessible.
+          </p>
+        </div>
+        <div class="card">
+          <h4>Responsive grids</h4>
+          <p>
+            CSS grid is used for cards, galleries, and multi-column layouts. It adapts to different
+            screen sizes without extra media queries.
+          </p>
+        </div>
+        <div class="card">
+          <h4>Reusable components</h4>
+          <p>
+            Cards, buttons, tags, and form groups are styled in a reusable way so you can copy them
+            into other projects easily.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top: 18px;">
+        <div class="card">
+          <h4>Typography</h4>
+          <p>
+            The typography is kept simple and legible, using system fonts and modest sizes to avoid
+            visual noise.
+          </p>
+        </div>
+        <div class="card">
+          <h4>Tables</h4>
+          <p>
+            A styled table section shows how to present structured data with alternating row colors
+            and clear headers.
+          </p>
+        </div>
+        <div class="card">
+          <h4>Forms</h4>
+          <p>
+            The form section includes text inputs, selects, textareas, and button groups, ready to
+            be connected to your backend or JavaScript.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section id="cards">
+      <h2>Cards and tags</h2>
+      <p>
+        This section demonstrates a larger set of cards. You can imagine these representing
+        projects, articles, or modules in an application.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h4>Project Alpha <span class="badge">Active</span></h4>
+          <p>
+            A foundational project focused on building core components and establishing design
+            patterns that other modules can reuse.
+          </p>
+          <ul class="list">
+            <li>Core UI library</li>
+            <li>Accessibility baseline</li>
+            <li>Documentation starter</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Project Beta <span class="badge">Planning</span></h4>
+          <p>
+            A research-heavy initiative exploring new interaction models, performance optimizations,
+            and user feedback loops.
+          </p>
+          <ul class="list">
+            <li>User interviews</li>
+            <li>Prototype testing</li>
+            <li>Performance benchmarks</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Project Gamma <span class="badge">Backlog</span></h4>
+          <p>
+            A long-term idea bank for experimental features that may or may not ship, but keep
+            creativity alive.
+          </p>
+          <ul class="list">
+            <li>Experimental layouts</li>
+            <li>Micro-animations</li>
+            <li>Advanced theming</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table Section -->
+    <section id="table">
+      <h2>Data table example</h2>
+      <p>
+        Here is a simple table representing a fictional roadmap. You can replace the content with
+        real data, or expand the columns and rows as needed.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Status</th>
+            <th>Owner</th>
+            <th>ETA</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Navigation redesign</td>
+            <td>In progress</td>
+            <td>Design team</td>
+            <td>Q1</td>
+            <td>Focus on clarity and mobile usability.</td>
+          </tr>
+          <tr>
+            <td>Performance audit</td>
+            <td>Planned</td>
+            <td>Engineering</td>
+            <td>Q2</td>
+            <td>Measure and improve load times and responsiveness.</td>
+          </tr>
+          <tr>
+            <td>Accessibility review</td>
+            <td>Completed</td>
+            <td>UX</td>
+            <td>Q4 (last year)</td>
+            <td>Baseline WCAG compliance achieved.</td>
+          </tr>
+          <tr>
+            <td>Content refresh</td>
+            <td>In progress</td>
+            <td>Content team</td>
+            <td>Q3</td>
+            <td>Update copy and visuals to match new brand.</td>
+          </tr>
+          <tr>
+            <td>Internationalization</td>
+            <td>Backlog</td>
+            <td>Localization</td>
+            <td>TBD</td>
+            <td>Requires language strategy and translation pipeline.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Code Section -->
+    <section id="code">
+      <h2>Code block example</h2>
+      <p>
+        This section shows how you might present code snippets inside a styled block. You can
+        replace this with your own HTML, CSS, or JavaScript examples.
+      </p>
+
+      <div class="code-block">
+        <code>
+&lt;!-- Basic card component --&gt;
+&lt;div class="card"&gt;
+  &lt;h4&gt;Card title&lt;/h4&gt;
+  &lt;p&gt;
+    This is a reusable card component. You can drop it into any grid or layout.
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Simple button group --&gt;
+&lt;div class="btn-row"&gt;
+  &lt;button class="btn btn-primary"&gt;Save&lt;/button&gt;
+  &lt;button class="btn btn-secondary"&gt;Cancel&lt;/button&gt;
+&lt;/div&gt;
+        </code>
+      </div>
+    </section>
+
+    <!-- Layout Section -->
+    <section id="layout">
+      <h2>Two-column layout</h2>
+      <p>
+        This section uses a two-column grid to separate conceptual content from implementation
+        details. It’s a common pattern for documentation or dashboards.
+      </p>
+
+      <div class="columns-2">
+        <div>
+          <h3>Conceptual overview</h3>
+          <p>
+            When designing a page with many sections, it helps to think in terms of reusable
+            patterns. Cards, tables, and forms are all patterns that can be combined in different
+            ways depending on the context.
+          </p>
+          <p>
+            A large HTML file like this can serve as a living style guide. As you refine your
+            components, you can keep them here and copy them into new pages when needed.
+          </p>
+          <ul class="list">
+            <li>Identify common patterns</li>
+            <li>Keep styles consistent</li>
+            <li>Document usage with examples</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Implementation notes</h3>
+          <p>
+            The CSS in this file is intentionally compact but expressive. You can split it into
+            separate files, convert it to a preprocessor, or integrate it into a component system.
+          </p>
+          <p>
+            If you add JavaScript, consider keeping behavior modular—attach scripts to specific
+            sections or components rather than the entire page at once.
+          </p>
+          <ul class="list">
+            <li>Use classes for reusable styles</li>
+            <li>Keep selectors simple and predictable</li>
+            <li>Refactor into modules as the project grows</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+      <h2>Text-based gallery</h2>
+      <p>
+        Instead of images, this gallery uses text blocks to represent different “tiles.” You can
+        swap these for real images or icons later.
+      </p>
+
+      <div class="gallery">
+        <div class="gallery-item">
+          <span>Tile A</span>
+          <small>Represents a feature, article, or dataset.</small>
+        </div>
+        <div class="gallery-item">
+          <span>Tile B</span>
+          <small>Could be a quick link to a report or dashboard.</small>
+        </div>
+        <div class="gallery-item">
+          <span>Tile C</span>
+          <small>Maybe a shortcut to a frequently used tool.</small>
+        </div>
+        <div class="gallery-item">
+          <span>Tile D</span>
+          <small>Placeholder for anything you want to highlight.</small>
+        </div>
+        <div class="gallery-item">
+          <span>Tile E</span>
+          <small>Another slot for content or navigation.</small>
+        </div>
+        <div class="gallery-item">
+          <span>Tile F</span>
+          <small>Use this to experiment with layout variations.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Forms Section -->
+    <section id="forms">
+      <h2>Form section</h2>
+      <p>
+        This form is not wired to any backend—it’s just HTML and CSS. You can hook it up to your
+        own endpoints or JavaScript handlers.
+      </p>
+
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" type="text" placeholder="Enter your name" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role">
+            <option value="">Select a role</option>
+            <option value="designer">Designer</option>
+            <option value="developer">Developer</option>
+            <option value="pm">Product manager</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Write a short message..."></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn btn-secondary">Reset</button>
+          <button type="button" class="btn btn-outline">Preview</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Long Text Section -->
+    <section id="long-text">
+      <h2>Long text content</h2>
+      <p>
+        Sometimes you just need a lot of text to see how a layout behaves. This section is here
+        for that purpose. You can replace it with real documentation, an article, or any content
+        that needs more vertical space.
+      </p>
+      <p>
+        As you scroll through a long section, pay attention to how the header behaves, how the
+        spacing feels, and whether the typography remains comfortable to read. Small adjustments
+        to line height, font size, and margins can make a big difference in perceived quality.
+      </p>
+      <p>
+        You might also experiment with subheadings, blockquotes, or callout boxes. Those elements
+        can help break up dense content and guide the reader’s attention to what matters most.
+      </p>
+      <p>
+        In a real project, this section could be a changelog, a knowledge base article, or a
+        narrative walkthrough of a feature. The key is that the layout should support both short
+        and long content gracefully.
+      </p>
+      <p>
+        If you decide to turn this page into a template, consider which sections are optional and
+        which are core. Optional sections can be toggled on or off depending on the page’s purpose,
+        while core sections remain consistent across the site.
+      </p>
+      <p>
+        Finally, remember that a large HTML file is just a starting point. Over time, you’ll
+        likely split it into smaller components, partials, or templates. That’s a good thing—it
+        means the design is evolving and becoming more maintainable.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Large HTML demo page &mdash; customize, trim, or extend it however you like.
+  </footer>
+</body>
+</html>
