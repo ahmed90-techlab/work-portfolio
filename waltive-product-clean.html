@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Waltive • Product — H6200F</title>
+<style>
+  :root{
+    --bg:#f6fbf8;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --accent:#dff6e8; /* light green table background */
+    --accent-strong:#34a853; /* green accents */
+    --primary:#0f1724;
+    --radius:10px;
+    --max-width:1100px;
+    --gap:18px;
+    --shadow: 0 8px 20px rgba(15,23,42,0.06);
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+  }
+
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:var(--bg);
+    color:var(--primary);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+  }
+
+  .container{
+    max-width:var(--max-width);
+    margin:28px auto;
+    padding:20px;
+  }
+
+  header.site-header{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:18px;
+  }
+
+  .brand {
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+
+  .logo {
+    width:56px;
+    height:56px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#2dd4bf,#34a853);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-weight:700;
+    font-size:18px;
+    box-shadow:var(--shadow);
+  }
+
+  .brand h1{
+    font-size:18px;
+    margin:0;
+  }
+
+  .brand p{margin:0;font-size:13px;color:var(--muted)}
+
+  /* layout */
+  .product-grid{
+    display:grid;
+    grid-template-columns: 1fr 380px;
+    gap:var(--gap);
+    align-items:start;
+  }
+
+  @media (max-width:980px){
+    .product-grid{grid-template-columns:1fr; padding-bottom:8px}
+    .sticky-side{position:static}
+  }
+
+  /* hero card */
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:18px;
+    box-shadow:var(--shadow);
+  }
+
+  .hero{
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+  }
+
+  .hero-media{
+    width:420px;
+    min-width:180px;
+    border-radius:8px;
+    overflow:hidden;
+    background:linear-gradient(180deg,#eefaf0,#dff6e8);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:12px;
+  }
+
+  .hero-media img{
+    max-width:100%;
+    height:auto;
+    display:block;
+    border-radius:6px;
+  }
+
+  .hero-body{
+    flex:1;
+    min-width:0;
+  }
+
+  .product-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:8px;
+  }
+
+  .product-title h2{margin:0;font-size:20px}
+  .product-sku{font-size:12px;color:var(--muted)}
+
+  .tagline{margin:8px 0;color:#374151}
+
+  .highlights{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:10px;
+  }
+
+  .pill{
+    background:#ecfdf5;
+    color:var(--accent-strong);
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:13px;
+    border:1px solid rgba(52,168,83,0.08);
+  }
+
+  /* quick specs */
+  .quick-specs{
+    display:flex;
+    gap:12px;
+    margin-top:12px;
+    flex-wrap:wrap;
+  }
+
+  .spec{
+    background:#f8faf8;
+    border-radius:8px;
+    padding:8px 10px;
+    font-size:13px;
+    color:#111827;
+    border:1px solid rgba(15,23,42,0.03);
+  }
+
+  /* side panel */
+  .sticky-side{
+    position:sticky;
+    top:22px;
+  }
+
+  .price-block{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .price{
+    font-size:20px;
+    font-weight:700;
+    color:var(--primary);
+  }
+
+  .cta-row{
+    display:flex;
+    gap:10px;
+    margin-top:8px;
+  }
+
+  .btn{
+    padding:10px 14px;
+    border-radius:999px;
+    border:0;
+    cursor:pointer;
+    font-weight:600;
+    font-size:14px;
+  }
+
+  .btn-primary{
+    background:var(--accent-strong);
+    color:white;
+  }
+
+  .btn-ghost{
+    background:transparent;
+    border:1px solid rgba(15,23,42,0.06);
+    color:var(--primary);
+  }
+
+  /* specs table */
+  .specs{
+    margin-top:18px;
+  }
+
+  .specs table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+  }
+
+  .specs th{
+    text-align:left;
+    padding:10px;
+    background:var(--accent);
+    color:var(--primary);
+    font-weight:700;
+    border-top-left-radius:8px;
+    border-top-right-radius:8px;
+  }
+
+  .specs td{
+    padding:10px;
+    border-bottom:1px solid rgba(15,23,42,0.04);
+    color:#374151;
+  }
+
+  .swatches{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+    flex-wrap:wrap;
+  }
+
+  .swatch{
+    width:64px;
+    height:64px;
+    border-radius:8px;
+    overflow:hidden;
+    border:1px solid rgba(15,23,42,0.06);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    color:#fff;
+    text-shadow:0 1px 0 rgba(0,0,0,0.2);
+  }
+
+  .swatch-label{font-size:12px;color:#374151;margin-top:6px;text-align:center}
+
+  /* shared sections */
+  .section{
+    margin-top:var(--gap);
+  }
+
+  .section h3{margin:0 0 8px 0;font-size:16px}
+  .section p{margin:0;color:#374151;font-size:14px}
+
+  .downloads{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+    flex-wrap:wrap;
+  }
+
+  .download-link{
+    background:#f8fff8;
+    border:1px solid rgba(52,168,83,0.08);
+    padding:8px 10px;
+    border-radius:8px;
+    font-size:13px;
+    color:var(--accent-strong);
+    text-decoration:none;
+  }
+
+  .related{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:12px;
+    margin-top:12px;
+  }
+
+  .related .tile{
+    background:#fff;
+    border-radius:8px;
+    padding:10px;
+    border:1px solid rgba(15,23,42,0.03);
+  }
+
+  footer{
+    margin-top:28px;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+  }
+
+  /* accessibility helpers */
+  .sr-only{
+    position:absolute;
+    left:-9999px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+  }
+
+  /* small code block */
+  pre.code{
+    background:#0b1220;
+    color:#e6f7ea;
+    padding:10px;
+    border-radius:8px;
+    font-family:var(--mono);
+    font-size:13px;
+    overflow:auto;
+  }
+</style>
+</head>
+<body>
+  <div class="container" role="main">
+    <header class="site-header" aria-label="Waltive product header">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">W</div>
+        <div>
+          <h1>Waltive Product</h1>
+          <p>Factory-direct SPC &amp; WPC wall panels</p>
+        </div>
+      </div>
+      <div style="margin-left:auto;font-size:13px;color:var(--muted)">
+        <span class="sr-only">Current product</span>
+        H6200F
+      </div>
+    </header>
+
+    <article class="product-grid" aria-labelledby="product-title">
+      <!-- Left column: main product content -->
+      <section class="card" aria-labelledby="product-title">
+        <div class="hero">
+          <div class="hero-media" aria-hidden="true">
+            <!-- Replace src with your product image URL -->
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='100%25' height='100%25' fill='%23eaf8ef'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' fill='%2334a853'%3EProduct Image Placeholder%3C/text%3E%3C/svg%3E"
+                 alt="Waltive H6200F product image"
+                 data-refid="img-hero-1" />
+          </div>
+
+          <div class="hero-body">
+            <div class="product-title">
+              <h2 id="product-title">Waltive H6200F — SPC Wall Panel</h2>
+              <div class="product-sku">SKU: <strong>H6200F</strong></div>
+            </div>
+
+            <div class="tagline">Premium SPC wall panel engineered for durability and modern interiors.</div>
+
+            <div class="highlights" aria-hidden="false">
+              <div class="pill">Waterproof</div>
+              <div class="pill">Scratch resistant</div>
+              <div class="pill">Click-lock install</div>
+              <div class="pill">Low maintenance</div>
+              <div class="pill">Commercial grade</div>
+            </div>
+
+            <div class="quick-specs" role="list" aria-label="Quick specifications">
+              <div class="spec" role="listitem"><strong>Thickness</strong><div style="font-size:13px;color:#475569">4.5 mm</div></div>
+              <div class="spec" role="listitem"><strong>Finish</strong><div style="font-size:13px;color:#475569">Matte wood texture</div></div>
+              <div class="spec" role="listitem"><strong>Installation</strong><div style="font-size:13px;color:#475569">Click-lock / Adhesive</div></div>
+            </div>
+
+            <div class="section specs" aria-labelledby="specs-heading">
+              <h3 id="specs-heading">Technical specifications</h3>
+              <table aria-describedby="specs-desc">
+                <thead>
+                  <tr><th colspan="2">Product details</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td style="width:40%">Material</td><td>SPC (Stone Plastic Composite)</td></tr>
+                  <tr><td>Dimensions</td><td>1220 × 180 × 4.5 mm (custom lengths available)</td></tr>
+                  <tr><td>Surface</td><td>Matte wood texture; anti-scratch coating</td></tr>
+                  <tr><td>Color code</td><td>H6200F</td></tr>
+                  <tr><td>Waterproof</td><td>Yes</td></tr>
+                  <tr><td>Fire rating</td><td>Class B (confirm per region)</td></tr>
+                  <tr><td>Warranty</td><td>5 years (manufacturer)</td></tr>
+                </tbody>
+              </table>
+              <div id="specs-desc" class="sr-only">Table lists material, dimensions, surface, color code, waterproofing, fire rating and warranty.</div>
+            </div>
+
+            <div class="section" aria-labelledby="desc-heading">
+              <h3 id="desc-heading">Product description</h3>
+              <p>
+                The Waltive H6200F SPC wall panel combines structural strength with modern aesthetics.
+                Designed for both residential and commercial interiors, it delivers a seamless finish,
+                excellent durability, and minimal maintenance. Its waterproof core and scratch‑resistant
+                surface make it suitable for high‑traffic areas and humid environments.
+              </p>
+            </div>
+
+            <div class="section" aria-labelledby="swatches-heading">
+              <h3 id="swatches-heading">Color &amp; texture options</h3>
+              <div class="swatches" role="list">
+                <!-- Replace background colors or images with real swatch images -->
+                <div style="text-align:center">
+                  <div class="swatch" style="background:linear-gradient(180deg,#b7e6c9,#34a853)" role="listitem" aria-label="Green Oak">
+                    <span style="font-weight:700">GO</span>
+                  </div>
+                  <div class="swatch-label">Green Oak<br><small style="color:#6b7280">Code: H6200F-GO</small></div>
+                </div>
+
+                <div style="text-align:center">
+                  <div class="swatch" style="background:linear-gradient(180deg,#f7e7d6,#c0843c)" role="listitem" aria-label="Warm Teak">
+                    <span style="font-weight:700">WT</span>
+                  </div>
+                  <div class="swatch-label">Warm Teak<br><small style="color:#6b7280">Code: H6200F-WT</small></div>
+                </div>
+
+                <div style="text-align:center">
+                  <div class="swatch" style="background:linear-gradient(180deg,#eef2ff,#6366f1)" role="listitem" aria-label="Cool Ash">
+                    <span style="font-weight:700">CA</span>
+                  </div>
+                  <div class="swatch-label">Cool Ash<br><small style="color:#6b7280">Code: H6200F-CA</small></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="section" aria-labelledby="apps-heading">
+              <h3 id="apps-heading">Recommended applications</h3>
+              <p>
+                Living rooms, feature walls, offices, retail displays, and hospitality interiors.
+                For wet areas, confirm installation method and edge sealing.
+              </p>
+            </div>
+
+            <div class="section" aria-labelledby="install-heading">
+              <h3 id="install-heading">Installation &amp; maintenance</h3>
+              <p>
+                Quick click‑lock installation or adhesive fixing. Wipe clean with a damp cloth.
+                Avoid abrasive cleaners and prolonged exposure to direct heat sources.
+                For full instructions, download the installation guide below.
+              </p>
+            </div>
+
+            <div class="section" aria-labelledby="downloads-heading">
+              <h3 id="downloads-heading">Downloads</h3>
+              <div class="downloads">
+                <a class="download-link" href="#" download>Product Spec (PDF)</a>
+                <a class="download-link" href="#" download>Installation Guide</a>
+                <a class="download-link" href="#" download>Warranty</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Related products -->
+        <div class="section" aria-labelledby="related-heading">
+          <h3 id="related-heading">Related products</h3>
+          <div class="related" role="list">
+            <div class="tile" role="listitem">
+              <strong>H6201F</strong>
+              <div style="color:var(--muted);font-size:13px">Lighter oak finish</div>
+            </div>
+            <div class="tile" role="listitem">
+              <strong>H6300M</strong>
+              <div style="color:var(--muted);font-size:13px">Textured matte</div>
+            </div>
+            <div class="tile" role="listitem">
+              <strong>W5200</strong>
+              <div style="color:var(--muted);font-size:13px">WPC alternative</div>
+            </div>
+            <div class="tile" role="listitem">
+              <strong>H6400</strong>
+              <div style="color:var(--muted);font-size:13px">Premium grain</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right column: purchase / quick info -->
+      <aside class="sticky-side">
+        <div class="card price-block" aria-labelledby="buy-heading">
+          <div id="buy-heading" style="font-size:13px;color:var(--muted)">Order &amp; availability</div>
+          <div class="price" aria-hidden="false">$XX.XX / panel</div>
+          <div style="font-size:13px;color:#374151">MOQ: 50 panels • Lead time: 2–4 weeks</div>
+
+          <div class="cta-row" role="group" aria-label="Purchase actions">
+            <button class="btn btn-primary" type="button">Request Quote</button>
+            <button class="btn btn-ghost" type="button">Download Spec</button>
+          </div>
+
+          <div style="margin-top:12px;font-size:13px;color:var(--muted)">
+            <strong>Contact</strong>
+            <div style="margin-top:6px">sales@waltive.example</div>
+            <div style="margin-top:6px">+1 (555) 123-4567</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin:0 0 8px 0">Quick facts</h3>
+          <ul style="margin:0;padding-left:18px;color:#374151">
+            <li>Waterproof core</li>
+            <li>Low VOC</li>
+            <li>Easy maintenance</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin:0 0 8px 0">Downloads</h3>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a class="download-link" href="#" download>Catalog (PDF)</a>
+            <a class="download-link" href="#" download>Cutting &amp; Layout Guide</a>
+          </div>
+        </div>
+
+      </aside>
+    </article>
+
+    <footer>
+      © Waltive • All rights reserved. For technical questions contact sales@waltive.example
+    </footer>
+  </div>
+</body>
+</html>
